@@ -1,0 +1,6 @@
+﻿13.1. 2014
+~3h käytetty projektin aloittamiseen. GitHub säädetty kuntoon, netbeans-projekti luotu,
+aihetta pyöritelty päässä, määrittelydokumenttia väsätty, hampaita kiristelty.
+
+16.1. 
+~1h hiottu vähän asioita, laitettu hommat valmiiksi ensimmäistä dedistä varten. Also paljon projektinteon ulkopuolista harjoittelua tässä välipäivinä, mutta niitä ei nyt merkitä tähän koska olen laiska mies eivätkä oikeastaan suoraan vaikuta.
