@@ -1,4 +1,4 @@
-package tasoloikka;
+package Main;
 
 /**
  * Hello world!

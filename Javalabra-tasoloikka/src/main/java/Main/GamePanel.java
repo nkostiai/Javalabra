@@ -1,6 +1,6 @@
 
 
-package tasoloikka;
+package Main;
 
 import javax.swing.JPanel;
 
