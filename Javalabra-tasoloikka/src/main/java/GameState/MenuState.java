@@ -59,9 +59,6 @@ public class MenuState extends GameState {
     public void draw(Graphics2D g) {
 
         //draw background
-        if (g == null) {
-            System.out.println("G IS NULL!!!");
-        }
         bg.draw(g);
 
         //draw the title text

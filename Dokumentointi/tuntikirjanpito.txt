@@ -1,6 +1,14 @@
 ﻿13.1. 2014
-~3h käytetty projektin aloittamiseen. GitHub säädetty kuntoon, netbeans-projekti luotu,
+~3h 
+käytetty projektin aloittamiseen. GitHub säädetty kuntoon, netbeans-projekti luotu,
 aihetta pyöritelty päässä, määrittelydokumenttia väsätty, hampaita kiristelty.
 
 16.1. 
-~1h hiottu vähän asioita, laitettu hommat valmiiksi ensimmäistä dedistä varten. Also paljon projektinteon ulkopuolista harjoittelua tässä välipäivinä, mutta niitä ei nyt merkitä tähän koska olen laiska mies eivätkä oikeastaan suoraan vaikuta.
+~1h 
+hiottu vähän asioita, laitettu hommat valmiiksi ensimmäistä dedistä varten. Also paljon projektinteon ulkopuolista harjoittelua tässä välipäivinä, mutta niitä ei nyt merkitä tähän koska olen laiska mies eivätkä oikeastaan suoraan vaikuta.
+
+20.1.
+4h 
+aloitettu projektin rakentaminen. Rakennettu pelin päälooppi ja aloitettu pelin työstäminen aloitusmenusta. (En oikein keksinyt miten lähestyä tasohyppelypeliä puhtaasti pelilogiikan kannalta, joten samalla väsätty jonkun verran käyttöliittymää) 
+
+Tällä hetkellä aloitusmenu käynnistyy, valikko toimii ja pelin pystyy lopettamaan valitsemalla "Quit". "Start":n valitseminen ei tee mitään.
