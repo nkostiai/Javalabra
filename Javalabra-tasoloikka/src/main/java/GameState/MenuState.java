@@ -34,14 +34,12 @@ public class MenuState extends GameState {
 
         try {
             bg = new Background("/Backgrounds/menubackground.PNG", 1);
-            bg.setVector(-0.5, 0);
-
-            titleColor = Color.BLACK;
-            titleFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[45], Font.PLAIN, 60);
-            regularFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[34], Font.PLAIN, 30);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        
+        init();
     }
 
     public void select() {
@@ -52,7 +50,11 @@ public class MenuState extends GameState {
 
     @Override
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        bg.setVector(-0.5, 0);
+
+        titleColor = Color.BLACK;
+        titleFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[45], Font.PLAIN, 60);
+        regularFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[24], Font.PLAIN, 30);
     }
 
     @Override

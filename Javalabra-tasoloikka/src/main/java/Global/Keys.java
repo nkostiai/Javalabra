@@ -1,11 +1,11 @@
-//Tämä luokka hoitaa näppäinten painalllusten rekisteröinnin ja käsittelyn
+//Tämä luokka hoitaa näppäinten painallusten rekisteröinnin ja käsittelyn
 package Global;
 
 import java.awt.event.KeyEvent;
 
 public class Keys {
 
-    public static final int NumberOfKeys = 16;
+    public static final int NumberOfKeys = 10;
 
     public static boolean[] keyState = new boolean[NumberOfKeys];
     public static boolean[] prevKeyState = new boolean[NumberOfKeys];
@@ -55,5 +55,8 @@ public class Keys {
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
     }
-
+    
+    public static int numberOfKeys(){
+        return NumberOfKeys;
+    }
 }

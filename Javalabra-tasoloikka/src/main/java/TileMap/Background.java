@@ -25,6 +25,7 @@ public class Background {
     //image dimensions
     private int width;
     private int height;
+    
     public Background(String s, double ms){
         
         //set coordinates

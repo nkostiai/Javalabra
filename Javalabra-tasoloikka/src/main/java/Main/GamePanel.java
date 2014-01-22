@@ -15,12 +15,12 @@ import java.awt.event.*;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener{
     
-    //thread
+    //thread variables
     private Thread thread;
     private boolean running;
     private long targetTime = 1000 / C.FPS;
     
-    //image
+    //image variables
     private BufferedImage image;
     private Graphics2D g;
     

@@ -3,7 +3,7 @@ package Main;
 import javax.swing.JFrame;
 
 /**
- * Tässä luokassa pidetään oikeastaan vaan main-metodia, jonka hommana on käynnistää koko hommma.
+ * 
  *  
  */
 public class Game 

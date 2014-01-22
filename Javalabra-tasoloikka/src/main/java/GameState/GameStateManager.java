@@ -19,6 +19,7 @@ public class GameStateManager {
         
         currentState = State.MENUSTATE.getStateNumber();
         gameStates[currentState] = new MenuState(this);
+        gameStates[State.LEVEL1STATE.getStateNumber()] = new Level1State();
         
     }
     
@@ -32,6 +33,14 @@ public void setState(int state){
         currentState = state;
         gameStates[currentState].init();
     }
+}
+
+public int getCurrentStateNumber(){
+    return this.currentState;
+}
+
+public GameState getCurrentGameState(){
+    return gameStates[currentState];
 }
 
 public void update(){
