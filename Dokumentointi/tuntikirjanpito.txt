@@ -19,3 +19,14 @@ käyttöliittymää)
 
 Tällä hetkellä aloitusmenu käynnistyy, valikko toimii ja pelin pystyy lopettamaan 
 valitsemalla "Quit". "Start":n valitseminen ei tee mitään.
+
+22.1
+2h
+väsätty hieman testejä, pit-raportti ei suostu generoitumaan joten sitä yritelty selvittää.
+
+1h
+Pit-raportit toimii. Jiihaa.
+
+23.1
+1h 
+Pari testiä lisää ja laitettu repo deadlinekuntoon.

@@ -49,13 +49,42 @@ public class KeysTest {
     }
     
     @Test
-    public void nappaintenPainallusRekisteroityyOikein(){
+    public void enterinPainallusRekisteroityyOikein(){
         Keys.setKeyPressStatus(KeyEvent.VK_ENTER, true);
         assertTrue(Keys.isPressed(Keys.ENTER));
     }
+    @Test
+    public void nuoltenPainallusRekisteroityyOikein(){
+        asetaNappain(KeyEvent.VK_DOWN, true);
+        asetaNappain(KeyEvent.VK_UP, true);
+        asetaNappain(KeyEvent.VK_LEFT, true);
+        asetaNappain(KeyEvent.VK_RIGHT, true);
+        assertTrue(Keys.isPressed(Keys.UP));
+        assertTrue(Keys.isPressed(Keys.UP));
+        assertTrue(Keys.isPressed(Keys.LEFT));
+        assertTrue(Keys.isPressed(Keys.RIGHT));
+    }
     
     @Test
-    public void nappaintenPainallusPoistuuOikein(){
+    public void kirjaintenPainallusRekisteroityyOikein(){
+        asetaNappain(KeyEvent.VK_W, true);
+        asetaNappain(KeyEvent.VK_E, true);
+        asetaNappain(KeyEvent.VK_R, true);
+        asetaNappain(KeyEvent.VK_F, true);
+        assertTrue(Keys.isPressed(Keys.BUTTON1));
+        assertTrue(Keys.isPressed(Keys.BUTTON2));
+        assertTrue(Keys.isPressed(Keys.BUTTON3));
+        assertTrue(Keys.isPressed(Keys.BUTTON4));
+    }
+    
+    @Test
+    public void escapenPainallusRekisteroityyOikein(){
+        asetaNappain(KeyEvent.VK_ESCAPE, true);
+        assertTrue(Keys.isPressed(Keys.ESCAPE));
+    }
+    
+    @Test
+    public void enterinPainallusPoistuuOikein(){
         Keys.setKeyPressStatus(KeyEvent.VK_ENTER, true);
         Keys.setKeyPressStatus(KeyEvent.VK_ENTER, false);
         assertFalse(Keys.isPressed(Keys.ENTER));
@@ -68,4 +97,8 @@ public class KeysTest {
         assertFalse(Keys.isPressed(Keys.ENTER));
     }
     
+    
+    public void asetaNappain(int nappain, boolean paalle){
+        Keys.setKeyPressStatus(nappain, paalle);
+    }
 }
