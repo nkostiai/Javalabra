@@ -67,10 +67,10 @@ public class KeysTest {
     
     @Test
     public void kirjaintenPainallusRekisteroityyOikein(){
-        asetaNappain(KeyEvent.VK_W, true);
-        asetaNappain(KeyEvent.VK_E, true);
-        asetaNappain(KeyEvent.VK_R, true);
-        asetaNappain(KeyEvent.VK_F, true);
+        asetaNappain(KeyEvent.VK_C, true);
+        asetaNappain(KeyEvent.VK_D, true);
+        asetaNappain(KeyEvent.VK_X, true);
+        asetaNappain(KeyEvent.VK_Z, true);
         assertTrue(Keys.isPressed(Keys.BUTTON1));
         assertTrue(Keys.isPressed(Keys.BUTTON2));
         assertTrue(Keys.isPressed(Keys.BUTTON3));

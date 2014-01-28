@@ -1,11 +1,12 @@
 
 package Global;
 //Tässä luokassa pidetään globaaleja vakioita
+//C as in constants
 public class C {
     
     
     //dimensions
-    public static final int WINDOWWIDTH = 620;
+    public static final int WINDOWWIDTH = 640;
     public static final int WINDOWHEIGHT = 480;
     
     //middlepoints

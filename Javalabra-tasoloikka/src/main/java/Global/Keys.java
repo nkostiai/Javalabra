@@ -31,13 +31,13 @@ public class Keys {
             keyState[DOWN] = b;
         } else if (i == KeyEvent.VK_RIGHT) {
             keyState[RIGHT] = b;
-        } else if (i == KeyEvent.VK_W) {
+        } else if (i == KeyEvent.VK_C) {
             keyState[BUTTON1] = b;
-        } else if (i == KeyEvent.VK_E) {
+        } else if (i == KeyEvent.VK_D) {
             keyState[BUTTON2] = b;
-        } else if (i == KeyEvent.VK_R) {
+        } else if (i == KeyEvent.VK_X) {
             keyState[BUTTON3] = b;
-        } else if (i == KeyEvent.VK_F) {
+        } else if (i == KeyEvent.VK_Z) {
             keyState[BUTTON4] = b;
         } else if (i == KeyEvent.VK_ENTER) {
             keyState[ENTER] = b;

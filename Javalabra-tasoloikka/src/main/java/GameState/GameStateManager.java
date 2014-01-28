@@ -18,8 +18,8 @@ public class GameStateManager {
         gameStates = new GameState[State.MENUSTATE.getTotalNumberofStates()];
         
         currentState = State.MENUSTATE.getStateNumber();
-        gameStates[currentState] = new MenuState(this);
-        gameStates[State.LEVEL1STATE.getStateNumber()] = new Level1State();
+        gameStates[State.MENUSTATE.getStateNumber()] = new MenuState(this);
+        gameStates[State.LEVEL1STATE.getStateNumber()] = new Level1State(this);
         
     }
     
