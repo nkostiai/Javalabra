@@ -74,6 +74,10 @@
                         <param> Global.* </param>
                         <param> Entity.* </param>
                     </targetClasses>
+                    <excludedMethods>
+                        <param>draw</param>
+                        <param>update</param>
+                    </excludedMethods>
                 </configuration>
             </plugin>
         </plugins>

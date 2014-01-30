@@ -11,20 +11,7 @@ public class Player extends MapObject {
     private int HP;
     private int maximumHP;
     private int MP;
-    private int maximumMP;
-
-    private boolean dead;
-    private boolean flinching;
-    private long flinchTime;
-
-    private boolean firing;
-    private int firingCost;
-    private int firingDamage;
-
-    private boolean meleeAttacking;
-    private int meleeDamage;
-    private int meleeRange;
-    
+    private int maximumMP;   
     private boolean gliding;
     
 
@@ -39,8 +26,6 @@ public class Player extends MapObject {
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
     private static final int GLIDING = 4;
-    private static final int FIRINGATTACK = 5;
-    private static final int MELEEATTACK = 6;
 
     public Player(TileMap tm) {
         super(tm);
@@ -62,11 +47,6 @@ public class Player extends MapObject {
         HP = maximumHP = 5;
         MP = maximumMP = 2500;
 
-        firingCost = 200;
-        firingDamage = 5;
-
-        meleeDamage = 8;
-        meleeRange = 40;
 
         //load sprites
         try {
@@ -105,6 +85,7 @@ public class Player extends MapObject {
     public int getHealth(){
         return HP;
     }
+
     public int getMaxHealth(){
         return maximumHP;
     }
@@ -116,12 +97,7 @@ public class Player extends MapObject {
         return maximumMP;
     }
     
-    public void setFiring(){
-        firing = true;
-    }
-    public void setMelee(){
-        meleeAttacking = true;
-    }
+
     public void setGliding(boolean b){
         gliding = b;
     }
@@ -155,14 +131,7 @@ public class Player extends MapObject {
 				}
 			}
 		}
-		
-
-		if(
-		(currentAction == MELEEATTACK || currentAction == FIRINGATTACK) &&
-		!(jumping || falling)) {
-			dx = 0;
-		}
-		
+			
 		// jumping
 		if(jumping && !falling) {
 			dy = jumpHeight;
@@ -190,15 +159,8 @@ public class Player extends MapObject {
         getNextPosition();
         checkTileMapCollision();
         setPosition(xTemporary, yTemporary);
-        
-        //set animation
-        if(meleeAttacking){
-            setAnimation(MELEEATTACK, 50, 60);
-            }
-        else if(firing){
-            setAnimation(FIRINGATTACK, 100, 30);
-        }
-        else if(dy > 0){
+         
+        if(dy > 0){
             if(gliding){
                 setAnimation(GLIDING, 100, 30);
             }
@@ -219,10 +181,9 @@ public class Player extends MapObject {
         animation.update();
         //set direction
         
-        if(currentAction != MELEEATTACK && currentAction != FIRINGATTACK){
             if(right) facesRight = true;
             if(left) facesRight = false;
-        }
+        
         
         }
         
@@ -230,12 +191,6 @@ public class Player extends MapObject {
     public void draw(Graphics2D g){
         
         setMapPosition();
-        if(flinching){
-            long elapsed = System.nanoTime() - flinchTime / 1000000;
-            if(elapsed / 100 % 2 == 0){
-                return;
-            }
-        }
         if(facesRight){
             g.drawImage(animation.getImage(), (int) (x + xMapPosition - width /2), (int)( y + yMapPosition - height /2), null);
         }

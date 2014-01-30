@@ -1,5 +1,6 @@
 Javalabra by NikG
 =========
 
-Ohjelmoinnin harjoitustyö
-Jonkinnäköstä tasohyppelyä tässä olis tarkoitus väsätä
+Deadline 3:
+Pelihahmo liikkuu maailmassa! Jiihaa.
+Testaus on kans vaikeeta. Kokonaisrivikattavuus on jotain 50% paikkeilla, mutta monissa luokissa on piirtämiseen liittyviä metodeita, joita on paha lähtä testaamaan :(
