@@ -1,0 +1,103 @@
+-?13.1. 2014
+
+-~3h 
+
+-kaytetty projektin aloittamiseen. GitHub saadetty kuntoon, netbeans-projekti luotu,
+
+-aihetta pyoritelty paassa, maarittelydokumenttia vasatty, hampaita kiristelty.
+
+-
+
+-16.1. 
+
+-~1h 
+
+-hiottu vahan asioita, laitettu hommat valmiiksi ensimmaista dedista varten. Also
+
+-paljon projektinteon ulkopuolista harjoittelua tassa valipaivina, mutta niita ei 
+
+-nyt merkita tahan koska olen laiska mies eivatka oikeastaan suoraan vaikuta.
+
+-
+
+-20.1.
+
+-4h 
+
+-aloitettu projektin rakentaminen. Rakennettu pelin paalooppi ja aloitettu pelin 
+
+-tyostaminen aloitusmenusta. (En oikein keksinyt miten lahestya tasohyppelypelia 
+
+-puhtaasti pelilogiikan kannalta, joten samalla vasatty jonkun verran 
+
+-kayttoliittymaa) 
+
+-
+
+-
+
+-Talla hetkella aloitusmenu kaynnistyy, valikko toimii ja pelin pystyy lopettamaan 
+
+-valitsemalla "Quit". "Start":n valitseminen ei tee mitaan.
+
+-
+
+-22.1
+
+-2h
+
+-vasatty hieman testeja, pit-raportti ei suostu generoitumaan joten sita yritelty selvittaa.
+
+-
+
+-1h
+
+-Pit-raportit toimii. Jiihaa.
+
+-
+
+-23.1
+
+-1h 
+
+-Pari testia lisaa ja laitettu repo deadlinekuntoon.
+
+-
+
+-24.1 
+
+-2h
+
+-Jatkettu projektia eteenpain, aloitettu ohjelmoimaan objekteja pelimaailmaan
+
+-
+
+-26.1
+
+-3h 
+
+-Aloitettu pelaajahahmon ohjelmointi, hieman testeja kirjoitettu
+
+-
+
+-28.1
+
+-3h
+
+-Pelaajahahmoa jatkettu, testeja kirjoiteltu lisaa.
+
+-
+
+-29.1
+
+-1h 
+
+-Kirjoiteltu testeja.
+
+-
+
+-30.1
+
+-2h
+
+-Kirjoiteltu testeja ja paranneltu luokkakaaviota
