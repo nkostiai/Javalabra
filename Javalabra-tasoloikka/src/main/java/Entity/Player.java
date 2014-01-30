@@ -26,8 +26,10 @@ public class Player extends MapObject {
     private int meleeRange;
     
     private boolean gliding;
+    
 
     private ArrayList<BufferedImage[]> sprites;
+    private int amountOfActions;
     private final int[] numFrames = {
         2, 8, 1, 2, 4, 2, 5
     };
@@ -45,7 +47,7 @@ public class Player extends MapObject {
 
         width = 33;
         height = 65;
-        collisionWidth = 32;
+        collisionWidth = 30;
         collisionHeight = 50;
 
         movingSpeed = 1.0;
@@ -70,7 +72,8 @@ public class Player extends MapObject {
         try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/playertileset.gif"));
             sprites = new ArrayList<BufferedImage[]>();
-            for (int i = 0; i < 7; i++) {
+            amountOfActions = spritesheet.getHeight()/(height-1);
+            for (int i = 0; i < amountOfActions; i++) {
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
                 for (int j = 0; j < numFrames[i]; j++) {
@@ -91,6 +94,14 @@ public class Player extends MapObject {
 
     }
 
+    public ArrayList<BufferedImage[]> getSprites(){
+    return sprites;
+}
+    public int getAmountOfActions(){
+        return amountOfActions;
+    }
+    
+    
     public int getHealth(){
         return HP;
     }
@@ -226,10 +237,10 @@ public class Player extends MapObject {
             }
         }
         if(facesRight){
-            g.drawImage(animation.getImage(), (int) (x + xMapPosition -width /2), (int)( y + yMapPosition - height /2), null);
+            g.drawImage(animation.getImage(), (int) (x + xMapPosition - width /2), (int)( y + yMapPosition - height /2), null);
         }
         else{
-            g.drawImage(animation.getImage(), (int)(x + xMapPosition - width /2 + width), (int)(y + yMapPosition - height /2), -width, height, null);
+            g.drawImage(animation.getImage(), (int)(x + xMapPosition - width /2 + width+3), (int)(y + yMapPosition - height /2), -width-3, height, null);
         }
         
     }

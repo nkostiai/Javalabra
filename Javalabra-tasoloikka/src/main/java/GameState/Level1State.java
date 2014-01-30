@@ -4,7 +4,7 @@ package GameState;
 
 import Entity.Player;
 import Global.C;
-import Global.Keys;
+import Global.KeyboardController;
 import TileMap.Background;
 import TileMap.TileMap;
 import java.awt.Color;
@@ -59,16 +59,16 @@ public class Level1State extends GameState{
     @Override
     public void handleInput() {
         
-        player.setUp(Keys.keyState[Keys.UP]);
-	player.setLeft(Keys.keyState[Keys.LEFT]);
-	player.setDown(Keys.keyState[Keys.DOWN]);
-	player.setRight(Keys.keyState[Keys.RIGHT]);
-	player.setJumping(Keys.keyState[Keys.BUTTON1]);
-	player.setGliding(Keys.keyState[Keys.BUTTON2]);
-//       if(Keys.isPressed(Keys.BUTTON3)){
+        player.setUp(KeyboardController.keyState[KeyboardController.UP]);
+	player.setLeft(KeyboardController.keyState[KeyboardController.LEFT]);
+	player.setDown(KeyboardController.keyState[KeyboardController.DOWN]);
+	player.setRight(KeyboardController.keyState[KeyboardController.RIGHT]);
+	player.setJumping(KeyboardController.keyState[KeyboardController.BUTTON1]);
+	player.setGliding(KeyboardController.keyState[KeyboardController.BUTTON2]);
+//       if(KeyboardController.isPressed(KeyboardController.BUTTON3)){
 //           player.setMelee();
 //       }
-//       if(Keys.isPressed(Keys.BUTTON4)){
+//       if(KeyboardController.isPressed(KeyboardController.BUTTON4)){
 //           player.setFiring();
 //       }
        

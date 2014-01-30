@@ -3,7 +3,7 @@ package Global;
 
 import java.awt.event.KeyEvent;
 
-public class Keys {
+public class KeyboardController {
 
     public static final int NumberOfKeys = 10;
 

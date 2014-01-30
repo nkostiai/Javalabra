@@ -6,7 +6,7 @@
 package GameState;
 
 import Global.C;
-import Global.Keys;
+import Global.KeyboardController;
 import TileMap.Background;
 import java.awt.Color;
 import java.awt.Font;
@@ -93,16 +93,16 @@ public class MenuState extends GameState {
 
     @Override
     public void handleInput() {
-        if (Keys.isPressed(Keys.ENTER)) {
+        if (KeyboardController.isPressed(KeyboardController.ENTER)) {
             select();
         }
-        if (Keys.isPressed(Keys.UP)) {
+        if (KeyboardController.isPressed(KeyboardController.UP)) {
             currentChoice--;
             if (currentChoice < 0) {
                 currentChoice = options.length - 1;
             }
         }
-        if (Keys.isPressed(Keys.DOWN)) {
+        if (KeyboardController.isPressed(KeyboardController.DOWN)) {
             currentChoice++;
             if (currentChoice > options.length - 1) {
                 currentChoice = 0;

@@ -50,4 +50,26 @@ public class PlayerTest {
         assertEquals(100, testPlayer.getY());
     }
     
+    @Test
+    public void testaaEttaKonstruktoriLaittaaKuvanOikein(){
+        assertNotNull(testPlayer.getSprites());
+    }
+    
+    @Test
+    public void testaaEttaKonstruktoriLaskeeKuvanPituudenOikein(){
+        assertEquals(7, testPlayer.getAmountOfActions());
+    }
+    
+//    @Test
+//    public void testaaCalculateCollisionWhenNoSolidBlocksAround(){
+//        testPlayer.calculateCollision(100, 100);
+//        assertFalse(testPlayer.bottomLeft);
+//        assertFalse(testPlayer.bottomRight);
+//        assertFalse(testPlayer.bottomMiddle);
+//        assertFalse(testPlayer.topLeft);
+//        assertFalse(testPlayer.topRight);
+//        assertFalse(testPlayer.topMiddle);
+//        
+//    }
+    
 }

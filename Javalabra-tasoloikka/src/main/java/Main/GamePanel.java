@@ -104,7 +104,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private void update(){
         
         gsm.update();
-        Keys.update();
+        KeyboardController.update();
         
         
     }
@@ -131,12 +131,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        Keys.setKeyPressStatus(e.getKeyCode(), true);
+        KeyboardController.setKeyPressStatus(e.getKeyCode(), true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        Keys.setKeyPressStatus(e.getKeyCode(), false);
+        KeyboardController.setKeyPressStatus(e.getKeyCode(), false);
     }
     
 }

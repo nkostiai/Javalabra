@@ -18,10 +18,10 @@ import static org.junit.Assert.*;
  *
  * @author Admin
  */
-public class KeysTest {
+public class KeyboardControllerTest {
 
     
-    public KeysTest() {
+    public KeyboardControllerTest() {
     }
     
     @BeforeClass
@@ -43,15 +43,15 @@ public class KeysTest {
 
     @Test
     public void oletuksenaMitaanNappaintaEiPaineta() {
-        for(int i = 0; i < Keys.numberOfKeys(); i++){
-            assertFalse(Keys.isPressed(i));
+        for(int i = 0; i < KeyboardController.numberOfKeys(); i++){
+            assertFalse(KeyboardController.isPressed(i));
         }
     }
     
     @Test
     public void enterinPainallusRekisteroityyOikein(){
-        Keys.setKeyPressStatus(KeyEvent.VK_ENTER, true);
-        assertTrue(Keys.isPressed(Keys.ENTER));
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
+        assertTrue(KeyboardController.isPressed(KeyboardController.ENTER));
     }
     @Test
     public void nuoltenPainallusRekisteroityyOikein(){
@@ -59,10 +59,10 @@ public class KeysTest {
         asetaNappain(KeyEvent.VK_UP, true);
         asetaNappain(KeyEvent.VK_LEFT, true);
         asetaNappain(KeyEvent.VK_RIGHT, true);
-        assertTrue(Keys.isPressed(Keys.UP));
-        assertTrue(Keys.isPressed(Keys.UP));
-        assertTrue(Keys.isPressed(Keys.LEFT));
-        assertTrue(Keys.isPressed(Keys.RIGHT));
+        assertTrue(KeyboardController.isPressed(KeyboardController.UP));
+        assertTrue(KeyboardController.isPressed(KeyboardController.UP));
+        assertTrue(KeyboardController.isPressed(KeyboardController.LEFT));
+        assertTrue(KeyboardController.isPressed(KeyboardController.RIGHT));
     }
     
     @Test
@@ -71,41 +71,41 @@ public class KeysTest {
         asetaNappain(KeyEvent.VK_D, true);
         asetaNappain(KeyEvent.VK_X, true);
         asetaNappain(KeyEvent.VK_Z, true);
-        assertTrue(Keys.isPressed(Keys.BUTTON1));
-        assertTrue(Keys.isPressed(Keys.BUTTON2));
-        assertTrue(Keys.isPressed(Keys.BUTTON3));
-        assertTrue(Keys.isPressed(Keys.BUTTON4));
+        assertTrue(KeyboardController.isPressed(KeyboardController.BUTTON1));
+        assertTrue(KeyboardController.isPressed(KeyboardController.BUTTON2));
+        assertTrue(KeyboardController.isPressed(KeyboardController.BUTTON3));
+        assertTrue(KeyboardController.isPressed(KeyboardController.BUTTON4));
     }
     
     @Test
     public void escapenPainallusRekisteroityyOikein(){
         asetaNappain(KeyEvent.VK_ESCAPE, true);
-        assertTrue(Keys.isPressed(Keys.ESCAPE));
+        assertTrue(KeyboardController.isPressed(KeyboardController.ESCAPE));
     }
     
     @Test
     public void enterinPainallusPoistuuOikein(){
-        Keys.setKeyPressStatus(KeyEvent.VK_ENTER, true);
-        Keys.setKeyPressStatus(KeyEvent.VK_ENTER, false);
-        assertFalse(Keys.isPressed(Keys.ENTER));
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, false);
+        assertFalse(KeyboardController.isPressed(KeyboardController.ENTER));
     }
     
     @Test
     public void nappaimetRekisteroityyMyosPreviousStateen(){
-        Keys.setKeyPressStatus(KeyEvent.VK_ENTER, true);
-        Keys.update();
-        assertFalse(Keys.isPressed(Keys.ENTER));
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
+        KeyboardController.update();
+        assertFalse(KeyboardController.isPressed(KeyboardController.ENTER));
     }
 
     @Test
     public void escinPainallusPoistuuOikein(){
-        Keys.setKeyPressStatus(KeyEvent.VK_ESCAPE, true);
-        Keys.setKeyPressStatus(KeyEvent.VK_ESCAPE, false);
-        assertFalse(Keys.isPressed(Keys.ESCAPE));
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ESCAPE, true);
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_ESCAPE, false);
+        assertFalse(KeyboardController.isPressed(KeyboardController.ESCAPE));
     }
     
     
     public void asetaNappain(int nappain, boolean paalle){
-        Keys.setKeyPressStatus(nappain, paalle);
+        KeyboardController.setKeyPressStatus(nappain, paalle);
     }
 }
