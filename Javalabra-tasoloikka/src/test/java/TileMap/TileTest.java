@@ -50,8 +50,21 @@ public class TileTest {
     }
 
     @Test
-    public void testSomeMethod() {
-        fail("The test case is a prototype.");
+    public void testaaEttäKonstruktoriLaittaaKuvanOikein() {
+        assertNotNull(testTile.getImage());
+    }
+    
+    @Test
+    public void testaaEttäKonstruktoriLaittaaTyypinOikein(){
+        assertEquals(Tile.NONSOLID, testTile.getType());
+    }
+    
+    @Test
+    public void testaaEtteiKonstruktoriEiAnnaLaittaaTyyppejaJoitaEiOle(){
+        Tile tiili = new Tile(testimage, 54);
+        assertEquals(Tile.NONSOLID, tiili.getType());
+        Tile tiili2 = new Tile(testimage, -45);
+        assertEquals(Tile.NONSOLID, tiili.getType());
     }
     
 }

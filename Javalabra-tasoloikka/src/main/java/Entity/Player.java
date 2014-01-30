@@ -43,18 +43,18 @@ public class Player extends MapObject {
     public Player(TileMap tm) {
         super(tm);
 
-        width = 30;
-        height = 30;
-        collisionWidth = 15;
-        collisionHeight = 20;
+        width = 33;
+        height = 65;
+        collisionWidth = 32;
+        collisionHeight = 50;
 
-        movingSpeed = 0.4;
-        maximumSpeed = 1.7;
-        deceleration = 0.6;
-        fallingSpeed = 0.20;
-        maximumFallingSpeed = 4.0;
-        jumpHeight = -5.8;
-        stopJumpingSpeed = 0.3;
+        movingSpeed = 1.0;
+        maximumSpeed = 2.3;
+        deceleration = 0.8;
+        fallingSpeed = 0.70;
+        maximumFallingSpeed = 5.0;
+        jumpHeight = -12;
+        stopJumpingSpeed = 0.5;
 
         facesRight = true;
         HP = maximumHP = 5;
@@ -68,17 +68,15 @@ public class Player extends MapObject {
 
         //load sprites
         try {
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/playersprites.gif"));
+            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/playertileset.gif"));
             sprites = new ArrayList<BufferedImage[]>();
             for (int i = 0; i < 7; i++) {
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
                 for (int j = 0; j < numFrames[i]; j++) {
-                    if (i != 6) {
+                    
                         bi[j] = spritesheet.getSubimage(j * width, i * height, width, height);
-                    } else {
-                        bi[j] = spritesheet.getSubimage(j * width * 2, i * height, width * 2, height);
-                    }
+                    
                 }
                 sprites.add(bi);
             }
@@ -147,7 +145,7 @@ public class Player extends MapObject {
 			}
 		}
 		
-		// cannot move while attacking, except in air
+
 		if(
 		(currentAction == MELEEATTACK || currentAction == FIRINGATTACK) &&
 		!(jumping || falling)) {

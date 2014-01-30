@@ -25,10 +25,20 @@ public class Animation {
     }
     
     public void setDelay(long delay){
-        this.delay = delay;
+        if(delay >= -1){
+            this.delay = delay;
+        }
     }
     public void setFrame(int i){
-        currentFrame = i;
+        if(i < 0){
+            currentFrame = 0;
+        }
+        else if(i >= frames.length){
+            currentFrame = frames.length -1;
+        }
+        else{
+            currentFrame = i;
+        }
     }
     
     public void update(){
@@ -59,6 +69,9 @@ public class Animation {
     public boolean hasPlayedOnce(){
         return playedOnce;
     }
-    
+    public long getDelay(){
+        
+        return delay;
+    }
     
 }

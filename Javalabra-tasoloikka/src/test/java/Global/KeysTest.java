@@ -96,6 +96,13 @@ public class KeysTest {
         Keys.update();
         assertFalse(Keys.isPressed(Keys.ENTER));
     }
+
+    @Test
+    public void escinPainallusPoistuuOikein(){
+        Keys.setKeyPressStatus(KeyEvent.VK_ESCAPE, true);
+        Keys.setKeyPressStatus(KeyEvent.VK_ESCAPE, false);
+        assertFalse(Keys.isPressed(Keys.ESCAPE));
+    }
     
     
     public void asetaNappain(int nappain, boolean paalle){
