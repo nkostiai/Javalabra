@@ -106,18 +106,64 @@ public class PlayerTest {
         assertTrue(testPlayer.rightMiddle);
     }
     
+    @Test
     public void testaaSetVector(){
         testPlayer.setVector(50, 50);
         testPlayer.setPosition(100, 100);
         testPlayer.update();
-        assertEquals(150, testPlayer.getX());
+        assertEquals(149, testPlayer.getX());
         assertEquals(150, testPlayer.getY());
     }
-    
+    @Test
     public void testaaSetAnimation(){
         testPlayer.setAnimation(2, 400, 32);
         assertEquals(400, testPlayer.animation.getDelay());
-        assertEquals(32, testPlayer.animation.getImage().getWidth());
+        assertEquals(33, testPlayer.animation.getImage().getWidth());
+    }
+    @Test
+    public void testaaUpdateLaittaaOikeinPutoamisen(){
+        testPlayer.setPosition(100, 100);
+        testPlayer.setVector(0, 5.0);
+        testPlayer.update();
+        assertTrue(testPlayer.falling);
+        assertEquals(3, testPlayer.getAnimation());
+    }
+    @Test
+    public void testaaUpdateLaittaaOikeinHyppaamisen(){
+        testPlayer.setPosition(100, 100);
+        testPlayer.setVector(0, -5.0);
+        testPlayer.setJumping(true);
+        testPlayer.update();
+        
+        assertTrue(testPlayer.jumping);
+        assertEquals(2, testPlayer.getAnimation());
+    }
+    @Test
+    public void testaaUpdateLaittaaKavelemisenOikein(){
+        
+        testPlayer.setRight(true);
+        testPlayer.setVector(50, 0);
+        testPlayer.update();
+        assertEquals(1, testPlayer.getAnimation());
+    }
+    @Test
+    public void testaaUpdateLaittaaKavelemisenVasemmalleOikein(){
+
+        testPlayer.setLeft(true);
+        testPlayer.setVector(-50, 0);
+        testPlayer.update();
+        assertEquals(1, testPlayer.getAnimation());
+    
     }
     
+    @Test
+    public void testaaHyppayksenLoppua(){
+        testPlayer.setPosition(320, 320);
+        testPlayer.setJumping(true);
+        testPlayer.setVector(0, -15);
+        for(int i = 0; i < 10; i++){
+            testPlayer.update();
+        }
+        assertTrue(testPlayer.dy >-1);
+    }
 }

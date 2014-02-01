@@ -211,4 +211,8 @@ public class Player extends MapObject {
         }
     }
     
+    public int getAnimation(){
+        return currentAction;
+    }
+    
 }

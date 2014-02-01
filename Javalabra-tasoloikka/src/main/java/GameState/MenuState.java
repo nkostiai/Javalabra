@@ -19,8 +19,8 @@ import java.awt.GraphicsEnvironment;
  */
 public class MenuState extends GameState {
 
-    private Background bg;
-
+    private Background bg;          
+    
     private int currentChoice;
     private String[] options = {"Start", "Quit"};
 
@@ -109,5 +109,13 @@ public class MenuState extends GameState {
             }
         }
     }
+    
+    public Background getBG(){
+        return bg;
+    }
+    public int getCurrentChoice(){
+        return currentChoice;
+    }
+    
 
 }
