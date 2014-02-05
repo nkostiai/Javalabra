@@ -1,11 +1,18 @@
 
 package TileMap;
 
-import Global.C;
+import Global.GlobalConstants;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-
+/**
+*
+* @author nkostiai
+*
+*Background -luokka kuvaa taustakuvaa, joka piirretään gamestateissa ekana. Taustakuvalle voi antaa erilaisia ominaisuuksia,
+* kuten liikkeen tai parallax -tyyppisen skrollauksen.
+*
+*/
 public class Background {
     
     //the background image
@@ -48,8 +55,8 @@ public class Background {
     }
     
     public void setPosition(double x, double y){
-        this.x = (x*moveScale) % C.WINDOWWIDTH;
-        this.y = (y*moveScale) % C.WINDOWHEIGHT;
+        this.x = (x*moveScale) % GlobalConstants.WINDOWWIDTH;
+        this.y = (y*moveScale) % GlobalConstants.WINDOWHEIGHT;
     }
     
     public void setVector(double dx, double dy){

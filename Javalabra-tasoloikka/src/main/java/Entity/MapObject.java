@@ -1,17 +1,22 @@
 package Entity;
 
-import Global.C;
+import Entity.Properties.*;
+import Global.GlobalConstants;
 import TileMap.Tile;
 import TileMap.TileMap;
 import java.awt.Rectangle;
-
+/**
+*
+* @author nkostiai
+*
+* Toimii abstraktina superluokkana kaikille pelikartalla sijaitseville objekteille.
+* Objekteille kuuluu erilaisia ominaisuuksia, kuten sijainti, liikkeen nopeus ja yhteentörmäystiedot.
+*
+*/
 public abstract class MapObject {
 
     //tile variables
-    protected TileMap tileMap;
-    protected int tileSize;
-    protected double xMapPosition;
-    protected double yMapPosition;
+    protected TileVariables tileVariables;
 
     //position and vector
     protected double x;
@@ -23,25 +28,7 @@ public abstract class MapObject {
     protected int width;
     protected int height;
     //collision dimensions
-    protected int collisionWidth;
-    protected int collisionHeight;
-
-    //other
-    protected int currentRow;
-    protected int currentColumn;
-    protected double xDestination;
-    protected double yDestination;
-    protected double xTemporary;
-    protected double yTemporary;
-    //collision booleans
-    protected boolean topLeft;
-    protected boolean topMiddle;
-    protected boolean topRight;
-    protected boolean bottomLeft;
-    protected boolean bottomMiddle;
-    protected boolean bottomRight;
-    protected boolean rightMiddle;
-    protected boolean leftMiddle;
+    protected CollisionData collisionData;
 
     //animations
     protected Animation animation;
@@ -58,112 +45,153 @@ public abstract class MapObject {
     protected boolean falling;
 
     //physics
-    protected double movingSpeed;
-    protected double maximumSpeed;
-    protected double deceleration;
-    protected double fallingSpeed;
-    protected double maximumFallingSpeed;
-    protected double jumpHeight;
-    protected double stopJumpingSpeed;
+    protected PhysicsAttributes physicsAttributes;
 
     //constructor
     public MapObject(TileMap tm) {
-        tileMap = tm;
-        tileSize = tm.getTileSize();
+        tileVariables = new TileVariables();
+        tileVariables.setTileMap(tm);
+        tileVariables.setTileSize(tm.getTileSize());
+        physicsAttributes = new PhysicsAttributes();
+        collisionData = new CollisionData();
     }
 
+/**
+*
+*
+* @return Palauttaa nykyisen olion collisionboksiin perustuvan Rectangle-tyyppisen olion.
+*
+*/
     public Rectangle getCollisionBox() {
-        return new Rectangle((int) x - collisionWidth, (int) y - collisionHeight, collisionWidth, collisionHeight);
+        return new Rectangle((int) x - collisionData.getCollisionWidth(), (int) y - collisionData.getCollisionHeight(), collisionData.getCollisionWidth(), collisionData.getCollisionHeight());
     }
 
     public boolean intersects(MapObject other) {
+        
         return getCollisionBox().intersects(other.getCollisionBox());
     }
 
     public void calculateCollision(double x, double y) {
 
-        int leftTile = (int) (x - collisionWidth / 2) / tileSize;
-        int rightTile = (int) (x + collisionWidth / 2 - 1) / tileSize;
-        int topTile = (int) (y - collisionHeight / 2) / tileSize;
-        int bottomTile = (int) (y + collisionHeight / 2 - 1) / tileSize;
+        int leftTile = (int) (x - collisionData.getCollisionWidth() / 2) / tileVariables.getTileSize();
+        int rightTile = (int) (x + collisionData.getCollisionWidth() / 2 - 1) / tileVariables.getTileSize();
+        int topTile = (int) (y - collisionData.getCollisionHeight() / 2) / tileVariables.getTileSize();
+        int bottomTile = (int) (y + collisionData.getCollisionHeight() / 2 - 1) / tileVariables.getTileSize();
 
         //corners
-        int topLeftType = tileMap.getType(topTile, leftTile);
-        int topRightType = tileMap.getType(topTile, rightTile);
-        int bottomLeftType = tileMap.getType(bottomTile, leftTile);
-        int bottomRightType = tileMap.getType(bottomTile, rightTile);
+        int topLeftType = tileVariables.getTileMap().getType(topTile, leftTile);
+        int topRightType = tileVariables.getTileMap().getType(topTile, rightTile);
+        int bottomLeftType = tileVariables.getTileMap().getType(bottomTile, leftTile);
+        int bottomRightType = tileVariables.getTileMap().getType(bottomTile, rightTile);
         //sides
-        int topMiddleType = tileMap.getType(topTile, leftTile + ((rightTile - leftTile) / 2));
-        int bottomMiddleType = tileMap.getType(bottomTile, leftTile + ((rightTile - leftTile) / 2));
-        int rightMiddleType = tileMap.getType(topTile + ((bottomTile - topTile) / 2), rightTile);
-        int leftMiddleType = tileMap.getType(topTile + ((bottomTile - topTile) / 2), leftTile);
+        int topMiddleType = tileVariables.getTileMap().getType(topTile, leftTile + ((rightTile - leftTile) / 2));
+        int bottomMiddleType = tileVariables.getTileMap().getType(bottomTile, leftTile + ((rightTile - leftTile) / 2));
+        int rightMiddleType = tileVariables.getTileMap().getType(topTile + ((bottomTile - topTile) / 2), rightTile);
+        int leftMiddleType = tileVariables.getTileMap().getType(topTile + ((bottomTile - topTile) / 2), leftTile);
 
-        topLeft = topLeftType == Tile.SOLID;
-        topRight = topRightType == Tile.SOLID;
-        topMiddle = topMiddleType == Tile.SOLID;
-        bottomLeft = bottomLeftType == Tile.SOLID;
-        bottomRight = bottomRightType == Tile.SOLID;
-        bottomMiddle = bottomMiddleType == Tile.SOLID;
-        rightMiddle = rightMiddleType == Tile.SOLID;
-        leftMiddle = leftMiddleType == Tile.SOLID;
+        collisionData.setTopLeft(topLeftType == Tile.SOLID);
+        collisionData.setTopRight(topRightType == Tile.SOLID);
+        collisionData.setTopMiddle(topMiddleType == Tile.SOLID);
+        collisionData.setBottomLeft(bottomLeftType == Tile.SOLID);
+        collisionData.setBottomRight(bottomRightType == Tile.SOLID);
+        collisionData.setBottomMiddle(bottomMiddleType == Tile.SOLID);
+        collisionData.setRightMiddle(rightMiddleType == Tile.SOLID);
+        collisionData.setLeftMiddle(leftMiddleType == Tile.SOLID);
 
+    }
+    
+    public void death(){
+        setPosition(100, 100);
     }
 
     public void checkTileMapCollision() {
+        
+        collisionData.setcurrentColumn((int) x / tileVariables.getTileSize());
+        collisionData.setcurrentRow((int) y / tileVariables.getTileSize());
+        //set destination coordinates
+        setDestination();
+        //check collisions
+        checkCollisions();
+        //check if we ran out of a cliff
+        checkIfShouldSetFalling();
+      
+        
+    }
+    
+    public void setDestination(){
+        collisionData.setxDestination(x + dx);
+        collisionData.setyDestination(y + dy);
 
-        currentColumn = (int) x / tileSize;
-        currentRow = (int) y / tileSize;
-
-        xDestination = x + dx;
-        yDestination = y + dy;
-
-        xTemporary = x;
-        yTemporary = y;
-
-        calculateCollision(x, yDestination);
-        if (dy < 0) {
-            if (topLeft || topRight || topMiddle) {
-                dy = 0;
-                yTemporary = currentRow * tileSize + collisionHeight / 2;
-            } else {
-                yTemporary += dy;
-            }
-        }
-        if (dy > 0) {
-            if (bottomLeft || bottomMiddle || bottomRight) {
-                dy = 0;
-                falling = false;
-                yTemporary = (currentRow + 1) * tileSize - collisionHeight / 2;
-            } else {
-                yTemporary += dy;
-            }
-        }
-
-        calculateCollision(xDestination, y);
-        if (dx < 0) {
-            if (topLeft || bottomLeft || leftMiddle) {
-                dx = 0;
-                xTemporary = currentColumn * tileSize + collisionWidth / 2;
-            } else {
-                xTemporary += dx;
-            }
-        }
-        if (dx > 0) {
-            if (topRight || rightMiddle || bottomRight) {
-                dx = 0;
-                xTemporary = (currentColumn + 1) * tileSize - collisionWidth / 2;
-            } else {
-                xTemporary += dx;
-            }
-        }
+        collisionData.setxTemporary(x);
+        collisionData.setyTemporary(y);
+    }
+    public void checkCollisions(){
+        //check horizontal collision
+        calculateCollision(x, collisionData.getyDestination());
+        checkUpwardsCollision();
+        checkDownwardsCollision();
+        
+        //check vertical collision
+        calculateCollision(collisionData.getxDestination(), y);
+        checkLeftSideCollision();
+        checkRightSideCollision();
+        
+    }
+    
+    public void checkIfShouldSetFalling(){
         if (!falling) {
-            calculateCollision(x, yDestination + 1);
-            if (!bottomLeft && !bottomRight && !bottomMiddle) {
+            calculateCollision(x, collisionData.getyDestination() + 1);
+            if (!collisionData.getBottomLeft() && !collisionData.getBottomRight() && !collisionData.getBottomMiddle()) {
                 falling = true;
             }
         }
     }
-
+    
+    public void checkUpwardsCollision(){
+        if (dy < 0) {
+            if (collisionData.getTopLeft() || collisionData.getTopRight() || collisionData.getTopMiddle()) {
+                dy = 0;
+                collisionData.setyTemporary(1.0*( collisionData.getcurrentRow() * tileVariables.getTileSize() + collisionData.getCollisionHeight() / 2));
+            } else {
+                collisionData.setyTemporary(collisionData.getyTemporary() + dy);
+            }
+        }
+    }
+    
+    public void checkDownwardsCollision(){
+        if (dy > 0) {
+            if (collisionData.getBottomLeft() || collisionData.getBottomMiddle() || collisionData.getBottomRight()) {
+                dy = 0;
+                falling = false;
+                collisionData.setyTemporary(1.0*((collisionData.getcurrentRow() + 1) * tileVariables.getTileSize() - collisionData.getCollisionHeight() / 2));
+            } else {
+                collisionData.setyTemporary(collisionData.getyTemporary() + dy);
+            }
+        }
+    }
+    
+    public void checkLeftSideCollision(){
+        if (dx < 0) {
+            if (collisionData.getTopLeft() || collisionData.getBottomLeft() || collisionData.getLeftMiddle()) {
+                dx = 0;
+                collisionData.setxTemporary(1.0 * (collisionData.getcurrentColumn() * tileVariables.getTileSize() + collisionData.getCollisionWidth() / 2));
+            } else {
+                collisionData.setxTemporary(collisionData.getxTemporary() + dx);
+            }
+        }
+    }
+    
+    public void checkRightSideCollision(){
+        if (dx > 0) {
+            if (collisionData.getTopRight() || collisionData.getRightMiddle() || collisionData.getBottomRight()) {
+                dx = 0;
+                collisionData.setxTemporary((1.0*((collisionData.getcurrentColumn()) + 1) * tileVariables.getTileSize() - collisionData.getCollisionWidth() / 2));
+            } else {
+                collisionData.setxTemporary(collisionData.getxTemporary() + dx);
+            }
+        }
+    }
+    
     public int getX() {
         return (int) x;
     }
@@ -179,13 +207,33 @@ public abstract class MapObject {
     public int getHeight() {
         return height;
     }
-
+    
+    public boolean getLeft(){
+        return left;
+    }
+    
+    public boolean getRight(){
+        return right;
+    }
+    
+    public boolean getUp(){
+        return up;
+    }
+    
+    public boolean getDown(){
+        return down;
+    }
+    
+    public boolean getJumping(){
+        return jumping;
+    }
+    
     public int getCollisionHeight() {
-        return collisionHeight;
+        return collisionData.getCollisionHeight();
     }
 
     public int getCollisionWidth() {
-        return collisionWidth;
+        return collisionData.getCollisionWidth();
     }
 
     public void setPosition(double x, double y) {
@@ -199,8 +247,8 @@ public abstract class MapObject {
     }
 
     public void setMapPosition() {
-        xMapPosition = tileMap.getx();
-        yMapPosition = tileMap.gety();
+        tileVariables.setXMapPosition(tileVariables.getTileMap().getx());
+        tileVariables.setYMapPosition(tileVariables.getTileMap().gety());
     }
 
     public void setLeft(boolean b) {
@@ -224,7 +272,7 @@ public abstract class MapObject {
     }
 
     public boolean notOnScreen() {
-        return x + xMapPosition + width < 0 || x + xMapPosition - width > C.WINDOWWIDTH || y + yMapPosition + height < 0 || y + yMapPosition - height > C.WINDOWHEIGHT;
+        return x + tileVariables.getXMapPosition() + width < 0 || x + tileVariables.getXMapPosition() - width > GlobalConstants.WINDOWWIDTH || y + tileVariables.getYMapPosition() + height < 0 || y + tileVariables.getYMapPosition() - height > GlobalConstants.WINDOWHEIGHT;
     }
 
 }

@@ -2,7 +2,15 @@
 package GameState;
 
 import java.awt.Graphics2D;
-
+/**
+*
+* @author nkostiai
+*
+* Abstracti superluokka joka määrittelee kaikkien GameState -luokan perivien luokkien välttämättömät metodit.
+* Jokaisella GameStatella tulee myös olla viittaus pelin GameStateManageriin.
+*
+*
+*/
 public abstract class GameState {
     
     protected GameStateManager gsm;

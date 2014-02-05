@@ -1,8 +1,16 @@
-//Tämä luokka hoitaa näppäinten painallusten rekisteröinnin ja käsittelyn
+
 package Global;
 
 import java.awt.event.KeyEvent;
-
+/**
+*
+* @author nkostiai
+* 
+* KeyboardController -luokka on globaali luokka, joka hoitaa näppäinpainallusten rekisteröinnin ja välittämisen
+* pelin muihin osiin.
+*
+*
+*/
 public class KeyboardController {
 
     public static final int NumberOfKeys = 10;
@@ -10,39 +18,28 @@ public class KeyboardController {
     public static boolean[] keyState = new boolean[NumberOfKeys];
     public static boolean[] prevKeyState = new boolean[NumberOfKeys];
     
-    //Tämän voisi ehkä hoitaa enumeilla..
-    public static int UP = 0;
-    public static int LEFT = 1;
-    public static int DOWN = 2;
-    public static int RIGHT = 3;
-    public static int BUTTON1 = 4;
-    public static int BUTTON2 = 5;
-    public static int BUTTON3 = 6;
-    public static int BUTTON4 = 7;
-    public static int ENTER = 8;
-    public static int ESCAPE = 9;
 
     public static void setKeyPressStatus(int i, boolean b) {
         if (i == KeyEvent.VK_UP) {
-            keyState[UP] = b;
+            keyState[Buttons.UP.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_LEFT) {
-            keyState[LEFT] = b;
+            keyState[Buttons.LEFT.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_DOWN) {
-            keyState[DOWN] = b;
+            keyState[Buttons.DOWN.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_RIGHT) {
-            keyState[RIGHT] = b;
+            keyState[Buttons.RIGHT.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_C) {
-            keyState[BUTTON1] = b;
+            keyState[Buttons.BUTTON1.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_D) {
-            keyState[BUTTON2] = b;
+            keyState[Buttons.BUTTON2.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_X) {
-            keyState[BUTTON3] = b;
+            keyState[Buttons.BUTTON3.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_Z) {
-            keyState[BUTTON4] = b;
+            keyState[Buttons.BUTTON4.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_ENTER) {
-            keyState[ENTER] = b;
+            keyState[Buttons.ENTER.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_ESCAPE) {
-            keyState[ESCAPE] = b;
+            keyState[Buttons.ESCAPE.getIDNumber()] = b;
         }
     }
 

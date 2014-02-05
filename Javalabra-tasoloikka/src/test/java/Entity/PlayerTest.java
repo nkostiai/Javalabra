@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import Entity.Properties.*;
 
 /**
  *
@@ -46,7 +47,27 @@ public class PlayerTest {
         assertEquals(2500, testPlayer.getMana());
     }
     
-
+    @Test
+    public void testaaEttaKonstruktoriLaittaaDimensiotOikein(){
+        assertEquals(33, testPlayer.getWidth());
+        assertEquals(65, testPlayer.getHeight());
+        assertEquals(30, testPlayer.getCollisionWidth());
+        assertEquals(50, testPlayer.getCollisionHeight());
+    }
+    
+    @Test
+    public void testaaEtteiKaukanaOlevatMapObjektitOsuToisiinsa(){
+        Player playerTwo = new Player(tilemap);
+        playerTwo.setPosition(300, 300);
+        assertFalse(playerTwo.intersects(testPlayer));
+    }
+    
+    @Test public void testaaEttaPaallekkainOlevatOsuvatToisiinsa(){
+        Player playerTwo = new Player(tilemap);
+        playerTwo.setPosition(300, 300);
+        testPlayer.setPosition(300, 300);
+        assertTrue(playerTwo.intersects(testPlayer));
+    }
     
     @Test
     public void testaaJumping(){
@@ -83,27 +104,27 @@ public class PlayerTest {
     @Test
     public void testaaCalculateCollisionWhenNoSolidBlocksAround(){
         testPlayer.calculateCollision(100, 100);
-        assertFalse(testPlayer.bottomLeft);
-        assertFalse(testPlayer.bottomRight);
-        assertFalse(testPlayer.bottomMiddle);
-        assertFalse(testPlayer.topLeft);
-        assertFalse(testPlayer.topRight);
-        assertFalse(testPlayer.topMiddle);
-        assertFalse(testPlayer.leftMiddle);
-        assertFalse(testPlayer.rightMiddle);
+        assertFalse(testPlayer.collisionData.getBottomLeft());
+        assertFalse(testPlayer.collisionData.getBottomRight());
+        assertFalse(testPlayer.collisionData.getBottomMiddle());
+        assertFalse(testPlayer.collisionData.getTopLeft());
+        assertFalse(testPlayer.collisionData.getTopRight());
+        assertFalse(testPlayer.collisionData.getTopMiddle());
+        assertFalse(testPlayer.collisionData.getLeftMiddle());
+        assertFalse(testPlayer.collisionData.getRightMiddle());
         
     }
     
     public void testaaCalculateCollisionWhenSurroundedBySolidBlocks(){
         testPlayer.calculateCollision(384, 96);
-        assertTrue(testPlayer.bottomLeft);
-        assertTrue(testPlayer.bottomRight);
-        assertTrue(testPlayer.bottomMiddle);
-        assertTrue(testPlayer.topLeft);
-        assertTrue(testPlayer.topRight);
-        assertTrue(testPlayer.topMiddle);
-        assertTrue(testPlayer.leftMiddle);
-        assertTrue(testPlayer.rightMiddle);
+        assertTrue(testPlayer.collisionData.getBottomLeft());
+        assertTrue(testPlayer.collisionData.getBottomRight());
+        assertTrue(testPlayer.collisionData.getBottomMiddle());
+        assertTrue(testPlayer.collisionData.getTopLeft());
+        assertTrue(testPlayer.collisionData.getTopRight());
+        assertTrue(testPlayer.collisionData.getTopMiddle());
+        assertTrue(testPlayer.collisionData.getLeftMiddle());
+        assertTrue(testPlayer.collisionData.getRightMiddle());
     }
     
     @Test

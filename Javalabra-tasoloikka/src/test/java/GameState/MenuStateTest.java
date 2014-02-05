@@ -58,4 +58,21 @@ public class MenuStateTest {
         assertEquals(0, testitaso.getCurrentChoice());
     }
     
+    @Test
+    public void konstruktoriAsettaaTaustaKuvan(){
+        assertNotNull(testitaso.getBG());
+    }
+    
+    @Test
+    public void konstruktoriAsettaaGameStateManagerin(){
+        assertNotNull(testitaso.gsm);
+    }
+    
+    @Test
+    public void testaaSelectKunValintaEka(){
+        testitaso.select();
+        assertEquals(1, testitaso.gsm.getCurrentStateNumber());
+    }
+    
+    
 }

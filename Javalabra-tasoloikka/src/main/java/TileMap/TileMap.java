@@ -1,12 +1,20 @@
 package TileMap;
 
-import Global.C;
+import Global.GlobalConstants;
 import java.awt.*;
 import java.awt.image.*;
 
 import java.io.*;
 import javax.imageio.ImageIO;
-
+/**
+*
+* @author nkostiai
+*
+* TileMap kuvaa aina tiettyä pelitason kenttää. TileMapin säilyttää kartan kaksiulotteisessa Tile[][] -taulukossa, johon
+* arvot luetaan resurssikansiossa olevasta .map -tiedostosta.
+*
+*
+*/
 public class TileMap {
 
     // coordinates
@@ -45,8 +53,8 @@ public class TileMap {
 
     public TileMap(int tileSize) {
         this.tileSize = tileSize;
-        numberOfRowsToDraw = C.WINDOWHEIGHT / tileSize + 4;
-        numberOfColumnsToDraw = C.WINDOWWIDTH / tileSize + 4;
+        numberOfRowsToDraw = GlobalConstants.WINDOWHEIGHT / tileSize + 4;
+        numberOfColumnsToDraw = GlobalConstants.WINDOWWIDTH / tileSize + 4;
     }
     
     
@@ -83,9 +91,9 @@ public class TileMap {
             width = numberofColumns * tileSize;
             height = numberOfRows * tileSize;
             
-            xmin = C.WINDOWWIDTH - width;
+            xmin = GlobalConstants.WINDOWWIDTH - width;
             xmax = 0;
-            ymin = C.WINDOWHEIGHT - height;
+            ymin = GlobalConstants.WINDOWHEIGHT - height;
             ymax = 0;
             
             String regex = "\\s+";
@@ -131,10 +139,18 @@ public class TileMap {
     }
     
     public int getType(int row, int col){
+        if(row < 0 || col < 0 || row>map.length || col > map[0].length){
+            return Tile.NONSOLID;
+        }
         int rc = map[row][col];
         int r = rc / numberOfTilesPerRow;
         int c = rc % numberOfTilesPerRow;
+        if(r < 0 || c < 0 || r>tiles.length || c > tiles[0].length){
+            return Tile.NONSOLID;
+        }
+        else{
         return tiles[r][c].getType();
+        }
     }
     
     public void setPosition(double x, double y){

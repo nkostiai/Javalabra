@@ -3,18 +3,28 @@
 package Entity;
 
 import java.awt.image.BufferedImage;
-
+/**
+*
+* @author nkostiai
+*
+* Luokan instanssi säilyttää aina yhden animaation framet ja 
+* delayn. Luokka myös hoitaa nykyisen framen ylläpitämisen ja pitää
+* kirjaa onko animaatio pyörähtänyt jo kertaalleen.
+*
+*
+*/
 public class Animation {
+    //frames
     private BufferedImage[] frames;
     private int currentFrame;
     
+    //delay
     private long startTime;
     private long delay;
     private boolean playedOnce;
     
-    public void Animation(){
-        playedOnce = false;
-        
+    public Animation(){
+        playedOnce = false;  
     }
     
     public void setFrames(BufferedImage[] frames){
@@ -43,9 +53,12 @@ public class Animation {
     
     public void update(){
         
-        if(delay == -1){
-            return;
+        if(delay != -1){
+            updateCurrentFrame();
         }
+    }
+    
+    public void updateCurrentFrame(){
         long elapsed = (System.nanoTime() - startTime) / 1000000;
         if(elapsed > delay){
             currentFrame++;
@@ -55,8 +68,6 @@ public class Animation {
             currentFrame = 0;
             playedOnce = true;
         }
-        
-        
     }
     
     public int getFrame(){

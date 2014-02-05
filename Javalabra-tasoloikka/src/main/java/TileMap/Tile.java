@@ -4,7 +4,15 @@ package TileMap;
 
 import java.awt.image.BufferedImage;
 
-
+/**
+*
+* @author nkostiai
+*
+* Tile -luokan instanssi kuvaa yhtä 32x32 kokoista osaa peliruudulta. Jokaisella Tilellä on jokin kuva, joka kyseisen tilen koordinaatteihin
+* piiretään. Jokaisella Tilellä on myös tyyppi, joka kertoo tuleeko pelaajan törmätä kyseiseen tileen vai ei.
+*
+*
+*/
 public class Tile {
     
     private BufferedImage image;

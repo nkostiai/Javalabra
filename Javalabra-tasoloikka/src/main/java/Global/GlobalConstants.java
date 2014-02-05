@@ -1,8 +1,15 @@
 
 package Global;
-//Tässä luokassa pidetään globaaleja vakioita
-//C as in constants
-public class C {
+/**
+*
+* @author nkostiai
+* 
+* GlobalConstants on globaali luokka, jossa säilytetään koko ohjelman läpi samana pysyviä muuttujia. 
+* Tällaisia ovat esimerkiksi peliruudun koko ja FPS.
+*
+*
+*/
+public class GlobalConstants {
     
     
     //dimensions

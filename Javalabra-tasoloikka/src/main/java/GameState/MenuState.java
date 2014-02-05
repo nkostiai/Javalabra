@@ -1,22 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GameState;
 
-import Global.C;
+import Global.Buttons;
+import Global.GlobalConstants;
 import Global.KeyboardController;
 import TileMap.Background;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
-
 /**
- *
- * @author Admin
- */
+*
+* @author nkostiai
+*
+* Menustate kuvaa pelin aloitusmenua. Menussa pystyy aloittamaan uuden pelin
+* tai vaihtoehtoisesti poistumaan pelistä kokonaan.
+*
+*
+*/
 public class MenuState extends GameState {
 
     private Background bg;          
@@ -70,7 +71,7 @@ public class MenuState extends GameState {
         //draw the title text
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("Tasohyppely", C.MIDDLEX - 170, C.MIDDLEY / 2);
+        g.drawString("Tasohyppely", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2);
 
         //draw menu options
         g.setFont(regularFont);
@@ -81,7 +82,7 @@ public class MenuState extends GameState {
             } else {
                 g.setColor(Color.BLACK);
             }
-            g.drawString(options[i], C.MIDDLEX - 30, C.MIDDLEY + i * 30);
+            g.drawString(options[i], GlobalConstants.MIDDLEX - 30, GlobalConstants.MIDDLEY + i * 30);
         }
     }
 
@@ -93,16 +94,16 @@ public class MenuState extends GameState {
 
     @Override
     public void handleInput() {
-        if (KeyboardController.isPressed(KeyboardController.ENTER)) {
+        if (KeyboardController.isPressed(Buttons.ENTER.getIDNumber())) {
             select();
         }
-        if (KeyboardController.isPressed(KeyboardController.UP)) {
+        if (KeyboardController.isPressed(Buttons.UP.getIDNumber())) {
             currentChoice--;
             if (currentChoice < 0) {
                 currentChoice = options.length - 1;
             }
         }
-        if (KeyboardController.isPressed(KeyboardController.DOWN)) {
+        if (KeyboardController.isPressed(Buttons.DOWN.getIDNumber())) {
             currentChoice++;
             if (currentChoice > options.length - 1) {
                 currentChoice = 0;

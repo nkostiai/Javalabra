@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     //thread variables
     private Thread thread;
     private boolean running;
-    private long targetTime = 1000 / C.FPS;
+    private long targetTime = 1000 / GlobalConstants.FPS;
     
     //image variables
     private BufferedImage image;
@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     public GamePanel(){
         
         super();
-        setPreferredSize(new Dimension(C.WINDOWWIDTH, C.WINDOWHEIGHT));
+        setPreferredSize(new Dimension(GlobalConstants.WINDOWWIDTH, GlobalConstants.WINDOWHEIGHT));
         setFocusable(true);
         requestFocus();
 
@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     
     private void init(){
         //set up drawing
-        image = new BufferedImage(C.WINDOWWIDTH, C.WINDOWHEIGHT, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(GlobalConstants.WINDOWWIDTH, GlobalConstants.WINDOWHEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
                 
         //set running
