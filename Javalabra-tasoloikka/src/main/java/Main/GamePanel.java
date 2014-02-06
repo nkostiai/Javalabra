@@ -12,7 +12,11 @@ import javax.swing.JPanel;
 import java.awt.event.*;
 
 
-
+/**
+ * 
+ * JPanel -luokan ja Runnablen perivä pääluokka, joka hoitaa varsinaisen peliloopin sekä lopullisen piirtämisen.
+ *  
+ */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
     
     //thread variables

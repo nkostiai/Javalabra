@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 /**
  * 
+ * Main-metodin sisältävä luokka
  *  
  */
 public class Game 

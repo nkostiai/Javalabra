@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 *
 * @author nkostiai
 *
-* Abstracti superluokka joka määrittelee kaikkien GameState -luokan perivien luokkien välttämättömät metodit.
+* Abstracti yliluokka joka määrittelee kaikkien GameState -luokan perivien luokkien välttämättömät metodit.
 * Jokaisella GameStatella tulee myös olla viittaus pelin GameStateManageriin.
 *
 *
