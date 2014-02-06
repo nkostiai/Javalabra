@@ -2,7 +2,15 @@
 
 package Entity.Properties;
 
-
+/**
+*
+* @author nkostiai
+*
+* Ominaisuusluokka, joka kuvaa MapObject -superluokan fysiikan simuloimiseen 
+* tarkoitettuja ominaisuuksia, kuten hahmon liikkumisnopeus, maksiminopeus ja 
+* hyppäämiskorkeus.
+*
+*/
 public class PhysicsAttributes {
     private double movingSpeed;
     private double maximumSpeed;

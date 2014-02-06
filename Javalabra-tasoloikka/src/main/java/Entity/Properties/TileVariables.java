@@ -4,7 +4,14 @@ package Entity.Properties;
 
 import TileMap.TileMap;
 
-
+/**
+*
+* @author nkostiai
+*
+* TileVariables säilyttää jokaisen MapObject -luokan perivän instanssin tarvitsemia
+* tietoja nykyisestä TileMapista.
+*
+*/
 public class TileVariables {
     private TileMap tileMap;
     private int tileSize;

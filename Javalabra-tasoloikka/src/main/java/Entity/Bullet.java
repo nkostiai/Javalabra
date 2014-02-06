@@ -4,7 +4,15 @@ import TileMap.TileMap;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-
+/**
+*
+* @author nkostiai
+*
+* MapObject -luokan perivä luokka, joka kuvaa pelissä ruudulla lentäviä ammuksia.
+* Ammukset voivat lentää 8-suuntaisesti vaihtelevalla nopeudella. Ammukset eivät myös lennä
+* kiinteiden kohteiden läpi, vaan katoavat osuessaan niihin.
+*
+*/
 public class Bullet extends MapObject {
 
     private boolean hasHitSomething;

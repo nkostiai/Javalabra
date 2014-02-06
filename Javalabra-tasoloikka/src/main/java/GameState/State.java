@@ -7,9 +7,14 @@
 package GameState;
 
 /**
- *
- * @author Admin
- */
+*
+* @author nkostiai
+*
+* State -enumit kuvaavat pelin eri GameStateja. Jokaisella statella on oma
+* tunnistenumeronsa, jonka avulla GameStateManager hoitaa nykyisen pelitilanteen
+* vaihtamisen.
+*
+*/
 public enum State {
     MENUSTATE(0), LEVEL1STATE(1);
     

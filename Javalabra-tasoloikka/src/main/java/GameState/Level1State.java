@@ -81,8 +81,10 @@ public class Level1State extends GameState{
 
     handleInput();
     
+    
     player.update();
-
+    bg.update();
+    
     tileMap.setPosition(GlobalConstants.MIDDLEX - player.getX(), GlobalConstants.MIDDLEY - player.getY());
     }
 

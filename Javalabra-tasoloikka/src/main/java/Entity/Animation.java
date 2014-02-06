@@ -27,6 +27,15 @@ public class Animation {
         playedOnce = false;  
     }
     
+    /**
+*
+* @author nkostiai
+*
+* Metodi asettaa parametrinä saadun kuvataulukon animaation frameiksi.
+* 
+* @Param frames BufferedImage -taulukko, joka sisältää nykyisen animaation framet.
+*
+*/
     public void setFrames(BufferedImage[] frames){
         this.frames = frames;
         currentFrame = 0;

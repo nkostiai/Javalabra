@@ -2,7 +2,14 @@
 
 package Entity.Properties;
 
-
+/**
+*
+* @author nkostiai
+*
+* Ominaisuusluokka, jossa säilytetään MapObject -superluokan yhteentörmäyksen
+* tunnistamiseen liittyviä ominaisuuksia.
+*
+*/
 public class CollisionData {
     //collision dimensions
     private int collisionWidth;

@@ -7,9 +7,12 @@
 package Entity;
 
 /**
- *
- * @author Admin
- */
+*
+* @author nkostiai
+*
+* Direction -enumit säilyttävät 8 suuntaa ja niille olennaiset vektorikertoimet
+*
+*/
 public enum Direction {
     UP(0, -1), DOWN(0, 1), LEFT(-1, 0), RIGHT(1, 0), TOPLEFT(-0.71, -0.71), TOPRIGHT(0.71, -0.71), BOTTOMLEFT(-0.71, 0.71), BOTTOMRIGHT(0.71, 0.71);
     private double dy;
