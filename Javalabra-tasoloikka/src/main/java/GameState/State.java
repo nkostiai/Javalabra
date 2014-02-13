@@ -18,8 +18,8 @@ package GameState;
 public enum State {
     MENUSTATE(0), LEVEL1STATE(1);
     
-    private int number;
-    private int totalNumberofStates;
+    private final int number;
+    private final int totalNumberofStates;
     
     private State(int number){
         this.number = number;

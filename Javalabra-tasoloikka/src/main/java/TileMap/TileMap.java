@@ -139,7 +139,7 @@ public class TileMap {
     }
     
     public int getType(int row, int col){
-        if(row < 0 || col < 0 || row>map.length || col > map[0].length){
+        if(row < 0 || col < 0 || row>=map.length || col >= map[0].length){
             return Tile.NONSOLID;
         }
         int rc = map[row][col];

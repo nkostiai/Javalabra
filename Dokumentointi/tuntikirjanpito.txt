@@ -8,6 +8,8 @@
 
 -
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -16.1. 
 
 -~1h 
@@ -55,6 +57,9 @@
 -Pari testia lisaa ja laitettu repo deadlinekuntoon.
 
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 -24.1 
 -2h
 -Jatkettu projektia eteenpain, aloitettu ohjelmoimaan objekteja pelimaailmaan
@@ -78,6 +83,7 @@
 -2h
 -Kirjoiteltu testeja ja paranneltu luokkakaaviota
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -2.2
 -1h 
@@ -94,3 +100,20 @@
 5.2
 -4h
 -Koodia refaktoroitu rankalla kadella, luotu apuluokkia ja monsterimetoideta pilkottu osiin. Myos rivikattavuus nostettu deadlinen vaatimalle tasolle.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12.2
+-5h
+-Talla viikolla paasin aloittamaan javalabran tyoskentelya vasta keskiviikkona, toivottavasti ehdin sen verran vakertaa etta deadlinevaatimukset tayttyvat.
+-Peliin ohjelmoitu vihollisia ja vihollisille liiketta ja aarimmaisen alkeellinen tekoaly (kaantyvat jos tormaavat seinaan).
+-Muutaman testin kirjoitin ja refaktoroin myos koodia lisaa. Piirtelin samalla viela jarettoman hienon spriten vihollisille.
+-Paintilla vasasin myos ruman sekvenssikaavion pelaajan liikuttamisesta.
+
+13.2
+-4h
+- Koodia hieman refaktoroitu ja putsattu. Lisaksi vaannetty testeja hampaat irvessa. numeraalisesti ei deadlinen kattavuuteen paasty mutta ei siita kaukanakaan olla. Suurimmat ongelmat
+tulevat esimerkiksi piirtamiseen ja suoritusaikaan liittyva koodi, jota ei ole mielekasta oikeen yksikkotestein testata. Loppua testikattavuutta tullaan sitten kompensoimaan kattavalla ihmistestaamisella.
+-Javadocia on myos nyt kunnolla aloitettu. Kaikki luokat on javadociin kuvattu ja parista luokasta on kaikki metodit dokumentoitu. Deadline iskee vastaan ennen kuin loppuja ehtii dokumentoimaan (klo. kirjoitushetkella 21:52) mutta pitaisi nyt viimeiseen valideadlineen kelvata.
+-Paivitan viela ennen pushausta hieman luokkakaaviota ja siistin samalla myos tuntikirjanpitoa!!

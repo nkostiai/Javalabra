@@ -23,7 +23,7 @@ public class MenuState extends GameState {
     private Background bg;          
     
     private int currentChoice;
-    private String[] options = {"Start", "Quit"};
+    private final String[] options = {"Start", "Quit"};
 
     private Color titleColor;
     private Font titleFont;
@@ -36,7 +36,6 @@ public class MenuState extends GameState {
         try {
             bg = new Background("/Backgrounds/menubackground.PNG", 1);
         } catch (Exception e) {
-            e.printStackTrace();
         }
         
         
@@ -54,7 +53,7 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void init() {
+    public final void init() {
         bg.setVector(-0.5, 0);
 
         titleColor = Color.BLACK;

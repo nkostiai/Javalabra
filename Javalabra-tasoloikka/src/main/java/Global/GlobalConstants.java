@@ -4,7 +4,7 @@ package Global;
 *
 * @author nkostiai
 * 
-* GlobalConstants on globaali luokka, jossa säilytetään koko ohjelman läpi samana pysyviä muuttujia. 
+* GlobalConstants on globaali apuluokka, jossa säilytetään koko ohjelman läpi samana pysyviä muuttujia. 
 * Tällaisia ovat esimerkiksi peliruudun koko ja FPS.
 *
 *

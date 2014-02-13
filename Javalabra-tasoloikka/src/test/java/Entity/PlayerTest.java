@@ -147,7 +147,7 @@ public class PlayerTest {
         testPlayer.setVector(0, 5.0);
         testPlayer.update();
         assertTrue(testPlayer.falling);
-        assertEquals(3, testPlayer.getAnimation());
+        assertEquals(3, testPlayer.getAnimationAction());
     }
     @Test
     public void testaaUpdateLaittaaOikeinHyppaamisen(){
@@ -157,7 +157,7 @@ public class PlayerTest {
         testPlayer.update();
         
         assertTrue(testPlayer.jumping);
-        assertEquals(2, testPlayer.getAnimation());
+        assertEquals(2, testPlayer.getAnimationAction());
     }
     @Test
     public void testaaUpdateLaittaaKavelemisenOikein(){
@@ -165,7 +165,7 @@ public class PlayerTest {
         testPlayer.setRight(true);
         testPlayer.setVector(50, 0);
         testPlayer.update();
-        assertEquals(1, testPlayer.getAnimation());
+        assertEquals(1, testPlayer.getAnimationAction());
     }
     @Test
     public void testaaUpdateLaittaaKavelemisenVasemmalleOikein(){
@@ -173,7 +173,7 @@ public class PlayerTest {
         testPlayer.setLeft(true);
         testPlayer.setVector(-50, 0);
         testPlayer.update();
-        assertEquals(1, testPlayer.getAnimation());
+        assertEquals(1, testPlayer.getAnimationAction());
     
     }
     

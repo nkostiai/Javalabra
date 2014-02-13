@@ -75,8 +75,9 @@
                         <param> Entity.* </param>
                     </targetClasses>
                     <excludedMethods>
-                        <param>draw</param>
+                        <param>draw*</param>
                         <param>update</param>
+                        <param>setSpritesheet</param>
                     </excludedMethods>
                 </configuration>
             </plugin>

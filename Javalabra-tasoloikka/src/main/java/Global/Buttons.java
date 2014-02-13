@@ -18,8 +18,8 @@ import java.awt.event.KeyEvent;
 public enum Buttons {
     UP(KeyEvent.VK_UP, 0), DOWN(KeyEvent.VK_DOWN, 1), LEFT(KeyEvent.VK_LEFT, 2), RIGHT(KeyEvent.VK_RIGHT, 3), ENTER(KeyEvent.VK_ENTER, 4), ESCAPE(KeyEvent.VK_ESCAPE, 5), BUTTON1(KeyEvent.VK_C, 6), BUTTON2(KeyEvent.VK_D, 7), BUTTON3(KeyEvent.VK_X, 8), BUTTON4(KeyEvent.VK_Z, 9);
     
-    private int keyEventNumber;
-    private int idNumber;
+    private final int keyEventNumber;
+    private final int idNumber;
     
     private Buttons(int keyEventNumber, int idNumber){
         this.keyEventNumber = keyEventNumber;

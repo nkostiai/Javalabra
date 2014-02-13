@@ -23,6 +23,8 @@ public class Bullet extends MapObject {
         //set tilemap
         super(tm);
         
+        facesRight = true;
+        
         //set vector
         setMovingVector(direction);
 
@@ -40,18 +42,27 @@ public class Bullet extends MapObject {
     }
     
     public void setDimensions(){
-        width = 6;
-        height = 6;
-        collisionData.setCollisionWidth(6);
-        collisionData.setCollisionHeight(6);
+        width = 15;
+        height = 10;
+        collisionData.setCollisionWidth(10);
+        collisionData.setCollisionHeight(10);
     }
     
     public void loadBulletSprite() {
         try {
-            sprite = ImageIO.read(getClass().getResourceAsStream("/Sprites/bullet1.png"));
+            sprite = ImageIO.read(getClass().getResourceAsStream("/Sprites/bullet1.gif"));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setAnimation();
+    }
+    
+    private void setAnimation(){
+        animation = new Animation();
+        BufferedImage[] frames = new BufferedImage[1];
+        frames[0] = sprite;
+        animation.setFrames(frames);
+        animation.setDelay(400);
     }
 
     public void setHasHitSomething() {
@@ -85,16 +96,19 @@ public class Bullet extends MapObject {
             setHasHitSomething();
         }
         
+        animation.update();
+        
     }
     
     
+    @Override
     public void draw(Graphics2D g) {
         
         //set the position
         setMapPosition();
         
         //draw the bullet
-        g.drawImage(sprite, (int) (x + tileVariables.getXMapPosition() - width / 2 + width), (int) (y + tileVariables.getYMapPosition() - height / 2), width, height, null);
+        super.draw(g);
 
     }
 

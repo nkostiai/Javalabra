@@ -36,18 +36,18 @@ public class BulletTest {
     @Test
     public void testaaKonstruktori(){
         testbullet = new Bullet(tilemap, Direction.RIGHT);
-        assertEquals(6, testbullet.width, 2);
-        assertEquals(6, testbullet.height, 2);
-        assertEquals(0, testbullet.dy, 2);
-        assertEquals(7, testbullet.dx, 2);
+        assertEquals(15, testbullet.width, 0);
+        assertEquals(10, testbullet.height, 0);
+        assertEquals(0, testbullet.dy, 0);
+        assertEquals(7, testbullet.dx, 0);
     }
     
     @Test
     public void testaaVektorinAsetus(){
         testbullet = new Bullet(tilemap, Direction.LEFT);
         testbullet.setMovingVector(Direction.TOPRIGHT);
-        assertEquals(7*0.71, testbullet.dx, 5);
-        assertEquals(-7*0.71, testbullet.dy, 5);
+        assertEquals(7*0.71, testbullet.dx, 0);
+        assertEquals(-7*0.71, testbullet.dy, 0);
     }
     
     @Test
@@ -71,6 +71,13 @@ public class BulletTest {
         assertTrue(testbullet.hasHitSomething());
         
     }
-    
-    
+
+    @Test
+    public void testaaUpdatenvaikutus() {
+        testbullet = new Bullet(tilemap, Direction.LEFT);
+        testbullet.update();
+        testbullet.setMovingVector(Direction.NULL);
+        testbullet.update();
+        assertTrue(testbullet.shouldBeRemoved());
+    }
 }

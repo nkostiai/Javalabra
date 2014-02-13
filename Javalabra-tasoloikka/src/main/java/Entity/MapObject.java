@@ -4,50 +4,120 @@ import Entity.Properties.*;
 import Global.GlobalConstants;
 import TileMap.Tile;
 import TileMap.TileMap;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+
 /**
-*
-* @author nkostiai
-*
-* Toimii abstraktina superluokkana kaikille pelikartalla sijaitseville objekteille.
-* Objekteille kuuluu erilaisia ominaisuuksia, kuten sijainti, liikkeen nopeus ja yhteentörmäystiedot.
-*
+ *
+ * @author nkostiai
+ * 
+* Toimii abstraktina superluokkana kaikille pelikartalla sijaitseville
+ * objekteille. Objekteille kuuluu erilaisia ominaisuuksia, kuten sijainti,
+ * liikkeen nopeus ja yhteentörmäystiedot.
+ * 
 */
 public abstract class MapObject {
 
-    //tile variables
+    /**
+     * Jokaisen mapobjektin tileMapiin liittyvät attribuutit
+     */
     protected TileVariables tileVariables;
 
-    //position and vector
+    /**
+     * objektin x-koordinaatti kartalla
+     */
     protected double x;
+    
+    /**
+     * objektin y-koordinaatti kartalla
+     */
     protected double y;
+    
+    /**
+     * objektin x-suuntainen liikkumisnopeus
+     */
     protected double dx;
+    
+    /**
+     * objektin y-suuntainen liikkumisnopeus
+     */
     protected double dy;
 
-    //dimensions
+    /**
+     * objektin piirtoleveys
+     */
     protected int width;
+    
+    /**
+     * objektin piirtokorkeus
+     */
     protected int height;
-    //collision dimensions
+   
+    /**
+     * objektin yhteentörmäyksiin liittyvät attribuutit
+     */
     protected CollisionData collisionData;
 
-    //animations
+    /**
+     * objektin animaation
+     */
     protected Animation animation;
+    
+    /**
+     * objektin tämänhetkisen tilan kuvaus integerinä
+     */
     protected int currentAction;
+    
+    /**
+     * objektin edellisen tilan kuvaus integerinä
+     */
     protected int previousAction;
+    
+    /**
+     * objektin orientaatio
+     */
     protected boolean facesRight;
 
-    //actions
+    /**
+     * kertoo onko objekti liikkumassa vasemmalle
+     */
     protected boolean left;
+    
+    /**
+     * kertoo onko objekti liikkumassa oikealle
+     */
     protected boolean right;
+    
+    /**
+     * kertoo onko objekti liikkumassa ylös
+     */
     protected boolean up;
+    
+    /**
+     * kertoo onko objekti liikkumassa alas
+     */
     protected boolean down;
+    
+    /**
+     * kertoo onko objekti tällä hetkellä hyppäämässä
+     */
     protected boolean jumping;
+    
+    /**
+     * kertoo onko objekti tällä hetkellä putoamassa
+     */
     protected boolean falling;
 
-    //physics
+    /**
+     * säilöö objektin fysiikkaan liittyvät attribuutit
+     */
     protected PhysicsAttributes physicsAttributes;
 
-    //constructor
+    /**
+     * Konstruktori
+     * 
+     * @param tm TileMap -tyypin kartta, johon objekti asetetaan.
+     */
     public MapObject(TileMap tm) {
         tileVariables = new TileVariables();
         tileVariables.setTileMap(tm);
@@ -56,21 +126,30 @@ public abstract class MapObject {
         collisionData = new CollisionData();
     }
 
-/**
-*
-*
-* @return Palauttaa nykyisen olion collisionboksiin perustuvan Rectangle-tyyppisen olion.
-*
-*/
+    /**
+     *
+     * @return Palauttaa nykyisen olion collisionboksiin perustuvan
+     * Rectangle-tyyppisen olion.
+     *     
+    */
     public Rectangle getCollisionBox() {
         return new Rectangle((int) x - collisionData.getCollisionWidth(), (int) y - collisionData.getCollisionHeight(), collisionData.getCollisionWidth(), collisionData.getCollisionHeight());
     }
-
+    
+    
+    /**
+     * @param other verrattava objekti
+     * 
+     * @return palauttaa totuusarvona osuvatko verratut objektit toisiinsa
+     */
     public boolean intersects(MapObject other) {
-        
+
         return getCollisionBox().intersects(other.getCollisionBox());
     }
-
+    
+    /**
+     * laskee objektin kaikki yhteentörmäykset ja asettaa ne collisiondata -booleaneihin
+     */
     public void calculateCollision(double x, double y) {
 
         int leftTile = (int) (x - collisionData.getCollisionWidth() / 2) / tileVariables.getTileSize();
@@ -100,12 +179,18 @@ public abstract class MapObject {
 
     }
     
-    public void death(){
+    /**
+     * objektin kuolema
+     */
+    public void death() {
         setPosition(100, 100);
     }
 
+    /**
+     * Tarkistaa yhteentörmäykset kartan kanssa ja asettaa sen mukaisesti objektin uuden sijainnin
+     */
     public void checkTileMapCollision() {
-        
+
         collisionData.setcurrentColumn((int) x / tileVariables.getTileSize());
         collisionData.setcurrentRow((int) y / tileVariables.getTileSize());
         //set destination coordinates
@@ -114,31 +199,40 @@ public abstract class MapObject {
         checkCollisions();
         //check if we ran out of a cliff
         checkIfShouldSetFalling();
-      
-        
+
     }
     
-    public void setDestination(){
+    /**
+     * Asettaa sijainnin, johon objekti yrittää seuraavaksi mennä
+     */
+    public void setDestination() {
         collisionData.setxDestination(x + dx);
         collisionData.setyDestination(y + dy);
 
         collisionData.setxTemporary(x);
         collisionData.setyTemporary(y);
     }
-    public void checkCollisions(){
+    
+    /**
+     * tarkistaa objektin yhteentörmäykset
+     */
+    public void checkCollisions() {
         //check horizontal collision
         calculateCollision(x, collisionData.getyDestination());
         checkUpwardsCollision();
         checkDownwardsCollision();
-        
+
         //check vertical collision
         calculateCollision(collisionData.getxDestination(), y);
         checkLeftSideCollision();
         checkRightSideCollision();
-        
+
     }
     
-    public void checkIfShouldSetFalling(){
+    /**
+     * Tarkistaa juostiinko alas kielekkeeltä ja pitäisikö aloittaa putoaminen
+     */
+    public void checkIfShouldSetFalling() {
         if (!falling) {
             calculateCollision(x, collisionData.getyDestination() + 1);
             if (!collisionData.getBottomLeft() && !collisionData.getBottomRight() && !collisionData.getBottomMiddle()) {
@@ -147,30 +241,39 @@ public abstract class MapObject {
         }
     }
     
-    public void checkUpwardsCollision(){
+    /**
+     * Tarkistaa yhteentörmäykset katon kanssa
+     */
+    public void checkUpwardsCollision() {
         if (dy < 0) {
             if (collisionData.getTopLeft() || collisionData.getTopRight() || collisionData.getTopMiddle()) {
                 dy = 0;
-                collisionData.setyTemporary(1.0*( collisionData.getcurrentRow() * tileVariables.getTileSize() + collisionData.getCollisionHeight() / 2));
+                collisionData.setyTemporary(1.0 * (collisionData.getcurrentRow() * tileVariables.getTileSize() + collisionData.getCollisionHeight() / 2));
             } else {
                 collisionData.setyTemporary(collisionData.getyTemporary() + dy);
             }
         }
     }
     
-    public void checkDownwardsCollision(){
+    /**
+     * Tarkistaa yhteentörmäykset lattian kanssa
+     */
+    public void checkDownwardsCollision() {
         if (dy > 0) {
             if (collisionData.getBottomLeft() || collisionData.getBottomMiddle() || collisionData.getBottomRight()) {
                 dy = 0;
                 falling = false;
-                collisionData.setyTemporary(1.0*((collisionData.getcurrentRow() + 1) * tileVariables.getTileSize() - collisionData.getCollisionHeight() / 2));
+                collisionData.setyTemporary(1.0 * ((collisionData.getcurrentRow() + 1) * tileVariables.getTileSize() - collisionData.getCollisionHeight() / 2));
             } else {
                 collisionData.setyTemporary(collisionData.getyTemporary() + dy);
             }
         }
     }
     
-    public void checkLeftSideCollision(){
+    /**
+     * Tarkistaa yhteentörmäykset vasemman seinän kanssa
+     */
+    public void checkLeftSideCollision() {
         if (dx < 0) {
             if (collisionData.getTopLeft() || collisionData.getBottomLeft() || collisionData.getLeftMiddle()) {
                 dx = 0;
@@ -181,17 +284,20 @@ public abstract class MapObject {
         }
     }
     
-    public void checkRightSideCollision(){
+    /**
+     * Tarkistaa yhteentörmäykset oikean seinän kanssa
+     */
+    public void checkRightSideCollision() {
         if (dx > 0) {
             if (collisionData.getTopRight() || collisionData.getRightMiddle() || collisionData.getBottomRight()) {
                 dx = 0;
-                collisionData.setxTemporary((1.0*((collisionData.getcurrentColumn()) + 1) * tileVariables.getTileSize() - collisionData.getCollisionWidth() / 2));
+                collisionData.setxTemporary((1.0 * ((collisionData.getcurrentColumn()) + 1) * tileVariables.getTileSize() - collisionData.getCollisionWidth() / 2));
             } else {
                 collisionData.setxTemporary(collisionData.getxTemporary() + dx);
             }
         }
     }
-    
+
     public int getX() {
         return (int) x;
     }
@@ -207,27 +313,27 @@ public abstract class MapObject {
     public int getHeight() {
         return height;
     }
-    
-    public boolean getLeft(){
+
+    public boolean getLeft() {
         return left;
     }
-    
-    public boolean getRight(){
+
+    public boolean getRight() {
         return right;
     }
-    
-    public boolean getUp(){
+
+    public boolean getUp() {
         return up;
     }
-    
-    public boolean getDown(){
+
+    public boolean getDown() {
         return down;
     }
-    
-    public boolean getJumping(){
+
+    public boolean getJumping() {
         return jumping;
     }
-    
+
     public int getCollisionHeight() {
         return collisionData.getCollisionHeight();
     }
@@ -270,9 +376,85 @@ public abstract class MapObject {
     public void setJumping(boolean b) {
         jumping = b;
     }
-
+    
+    /**
+     * Palauttaa booleanina onko objekti ruudun ulkopuolella
+     */
     public boolean notOnScreen() {
         return x + tileVariables.getXMapPosition() + width < 0 || x + tileVariables.getXMapPosition() - width > GlobalConstants.WINDOWWIDTH || y + tileVariables.getYMapPosition() + height < 0 || y + tileVariables.getYMapPosition() - height > GlobalConstants.WINDOWHEIGHT;
+    }
+    
+    /**
+     * Asettaa seuraavan framen liikkeen
+     */
+    public void getNextPosition() {
+        if (left) {
+            setLeftAcceleration();
+        } else if (right) {
+            setRightAcceleration();
+        } else {
+            if (dx > 0) {
+                setLeftDeceleration();
+            } else if (dx < 0) {
+                setRightDeceleration();
+            }
+        }
+    }
+    
+   
+    private void setLeftAcceleration() {
+        dx -= physicsAttributes.getMovingSpeed();
+        if (dx < -physicsAttributes.getMaximumSpeed()) {
+            dx = -physicsAttributes.getMaximumSpeed();
+        }
+    }
+
+    private void setRightAcceleration() {
+        dx += physicsAttributes.getMovingSpeed();
+        if (dx > physicsAttributes.getMaximumSpeed()) {
+            dx = physicsAttributes.getMaximumSpeed();
+        }
+    }
+
+    private void setLeftDeceleration() {
+        dx -= physicsAttributes.getDeceleration();
+        if (dx < 0) {
+            dx = 0;
+        }
+    }
+
+    private void setRightDeceleration() {
+        dx += physicsAttributes.getDeceleration();
+        if (dx > 0) {
+            dx = 0;
+        }
+    }
+    
+    /**
+     * Piirtää objektin
+     */
+    public void draw(Graphics2D g) {
+        if (facesRight) {
+            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2), (int) (y + tileVariables.getYMapPosition() - height / 2), width, height, null);
+        } else {
+            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2 + width), (int) (y + tileVariables.getYMapPosition() - height / 2), -width, height, null);
+        }
+    }
+
+    public CollisionData getCollisionDate() {
+        return this.collisionData;
+    }
+
+    public PhysicsAttributes getPhysicsAttributes() {
+        return this.physicsAttributes;
+    }
+
+    public TileVariables getTileVariables() {
+        return this.tileVariables;
+    }
+
+    public Animation getAnimation() {
+        return this.animation;
     }
 
 }

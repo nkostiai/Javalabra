@@ -1,5 +1,7 @@
 package Entity;
 
+import Entity.Properties.LivingEntityAttributes;
+import Entity.Properties.PhysicsAttributes;
 import TileMap.TileMap;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -17,20 +19,45 @@ import java.awt.image.BufferedImage;
  * 
 *
  */
-public class Player extends MapObject {
-
-    private int HP;
-    private int maximumHP;
-    private int MP;
-    private int maximumMP;
+public final class Player extends MapObject {
+    /**
+     * Pelaajan elämäattribuutit
+     */
+    private LivingEntityAttributes livingAttributes;
+    
+    /**
+     * Kertoo liitääkö pelaaja parhaillaan
+     */
     private boolean gliding;
+    
+    /**
+     * Kertoo laukooko pelaaja ammuksia parhaillaan
+     */
     private boolean firing;
 
+    /**
+     * Pelaajan luotien vaatima MP
+     */
     private int bulletCost;
+    
+    /**
+     * Pelaajan luodit
+     */
     private ArrayList<Bullet> bullets;
-
+    
+    /**
+     * Pelaajan sprite -grafiikka
+     */
     private ArrayList<BufferedImage[]> sprites;
+    
+    /**
+     * Pelaajan erilaistent tilojen määrä
+     */
     private int amountOfActions;
+    
+    /**
+     * Pelaajan animaatioiden framejen lukumäärä
+     */
     private final int[] numFrames = {
         2, 8, 1, 2, 4, 2, 5
     };
@@ -45,18 +72,17 @@ public class Player extends MapObject {
     public Player(TileMap tm) {
         super(tm);
 
-        width = 33;
-        height = 65;
-        collisionData.setCollisionWidth(30);
-        collisionData.setCollisionHeight(50);
-        
+        //set dimensions
+        setDimensions();
+
+        //initialize attributes
         initializePhysicsAttributes();
-        
+        initializeLivingEntityAttributes();
 
+        //set player orientation
         facesRight = true;
-        HP = maximumHP = 5;
-        MP = maximumMP = 2500;
 
+        //set playerbulletdata
         bullets = new ArrayList<>();
         bulletCost = 400;
 
@@ -69,11 +95,25 @@ public class Player extends MapObject {
 
         }
 
+        //initialize animation
         initializeAnimation();
 
     }
     
-    public void initializePhysicsAttributes(){
+    /**
+     * Asettaa pelaajan dimensiot
+     */
+    private void setDimensions() {
+        width = 33;
+        height = 65;
+        collisionData.setCollisionWidth(30);
+        collisionData.setCollisionHeight(50);
+    }
+    
+    /**
+     * Initialisoi pelaajan fysiikkaan liittyvät attribuutit
+     */
+    private void initializePhysicsAttributes() {
         physicsAttributes.setMovingSpeed(1.2);
         physicsAttributes.setMaximumSpeed(3.3);
         physicsAttributes.setDeceleration(0.4);
@@ -82,10 +122,22 @@ public class Player extends MapObject {
         physicsAttributes.setInitialJumpSpeed(-20);
         physicsAttributes.setStopJumpingSpeed(0.5);
     }
+    /**
+     * Initialisoi pelaajan elämään ja manaan liittyvät attribuutit
+     */
+    private void initializeLivingEntityAttributes() {
+        livingAttributes = new LivingEntityAttributes();
+        livingAttributes.setHP(5);
+        livingAttributes.setMP(2500);
+        livingAttributes.setMaxHP(5);
+        livingAttributes.setMaxMP(2500);
+    }
     
-
-    public void setSpriteImages(BufferedImage spritesheet) {
-        sprites = new ArrayList<BufferedImage[]>();
+    /**
+     * Asettaa pelajaan spriten
+     */
+    private void setSpriteImages(BufferedImage spritesheet) {
+        sprites = new ArrayList<>();
         amountOfActions = spritesheet.getHeight() / (height - 1);
         for (int i = 0; i < amountOfActions; i++) {
             BufferedImage[] bi = new BufferedImage[numFrames[i]];
@@ -98,8 +150,11 @@ public class Player extends MapObject {
             sprites.add(bi);
         }
     }
-
-    public void initializeAnimation() {
+    
+    /**
+     * Initialisoi pelaajan animaation
+     */
+    private void initializeAnimation() {
         animation = new Animation();
         currentAction = IDLE;
         animation.setFrames(sprites.get(IDLE));
@@ -115,19 +170,19 @@ public class Player extends MapObject {
     }
 
     public int getHealth() {
-        return HP;
+        return livingAttributes.getHP();
     }
 
     public int getMaxHealth() {
-        return maximumHP;
+        return livingAttributes.getMaxHP();
     }
 
     public int getMana() {
-        return MP;
+        return livingAttributes.getMP();
     }
 
     public int getMaximumMana() {
-        return maximumMP;
+        return livingAttributes.getMaxMP();
     }
 
     public void setGliding(boolean b) {
@@ -139,61 +194,53 @@ public class Player extends MapObject {
 
     }
 
-    private void getNextPosition() {
+    @Override
+    public void getNextPosition() {
 
         // movement
-        if (left) {
-            dx -= physicsAttributes.getMovingSpeed();
-            if (dx < -physicsAttributes.getMaximumSpeed()) {
-                dx = -physicsAttributes.getMaximumSpeed();
-            }
-        } else if (right) {
-            dx += physicsAttributes.getMovingSpeed();
-            if (dx > physicsAttributes.getMaximumSpeed()) {
-                dx = physicsAttributes.getMaximumSpeed();
-            }
-        } else {
-            if (dx > 0) {
-                dx -= physicsAttributes.getDeceleration();
-                if (dx < 0) {
-                    dx = 0;
-                }
-            } else if (dx < 0) {
-                dx += physicsAttributes.getDeceleration();
-                if (dx > 0) {
-                    dx = 0;
-                }
-            }
-        }
+        super.getNextPosition();
 
         // jumping
+        getNextJumpingPosition();
+
+        // falling
+        if (falling) {
+            getNextFallingPosition();
+        }
+
+    }
+
+    private void getNextFallingPosition() {
+        
+        setFallingSpeed();
+        
+        if (dy > 0) {
+            jumping = false;
+        }
+        
+        if (dy < 0 && !jumping) {
+            dy += physicsAttributes.getStopJumpingSpeed();
+        }
+
+        if (dy > physicsAttributes.getMaximumFallingSpeed()) {
+            dy = physicsAttributes.getMaximumFallingSpeed();
+        }
+        
+    }
+    
+    private void setFallingSpeed(){
+        if (dy > 0 && gliding) {
+            dy += physicsAttributes.getFallingSpeed() * 0.1;
+        } else {
+            dy += physicsAttributes.getFallingSpeed();
+        }
+    }
+
+    private void getNextJumpingPosition() {
         if (jumping && !falling) {
             dy = physicsAttributes.getInitialJumpSpeed();
             falling = true;
         }
-
-        // falling
-        if (falling) {
-
-            if (dy > 0 && gliding) {
-                dy += physicsAttributes.getFallingSpeed() * 0.1;
-            } else {
-                dy += physicsAttributes.getFallingSpeed();
-            }
-
-            if (dy > 0) {
-                jumping = false;
-            }
-            if (dy < 0 && !jumping) {
-                dy += physicsAttributes.getStopJumpingSpeed();
-            }
-
-            if (dy > physicsAttributes.getMaximumFallingSpeed()) {
-                dy = physicsAttributes.getMaximumFallingSpeed();
-            }
-
-        }
-
     }
 
     public void update() {
@@ -201,12 +248,9 @@ public class Player extends MapObject {
         //update position
         getNextPosition();
 
- 
         checkTileMapCollision();
 
-
         setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());
-
 
         //check if we've played the firing animation once
         checkIfFiringAnimationHasPlayed();
@@ -246,10 +290,7 @@ public class Player extends MapObject {
     }
 
     public void regenerateMP() {
-        MP += 2;
-        if (MP > maximumMP) {
-            MP = maximumMP;
-        }
+        livingAttributes.regenerateMP(1);
     }
 
     public void setCurrentActionAnimation() {
@@ -276,8 +317,8 @@ public class Player extends MapObject {
 
     public void updateBulletFiring() {
         if (firing && currentAction != FIRING) {
-            if (MP > bulletCost) {
-                MP -= bulletCost;
+            if (livingAttributes.getMP() > bulletCost) {
+                livingAttributes.depleteMP(bulletCost);
                 Bullet bullet;
                 if (facesRight) {
                     bullet = new Bullet(tileVariables.getTileMap(), Direction.RIGHT);
@@ -302,6 +343,7 @@ public class Player extends MapObject {
         }
     }
 
+    @Override
     public void draw(Graphics2D g) {
 
         //set position of tilemap
@@ -310,18 +352,20 @@ public class Player extends MapObject {
         drawPlayer(g);
         //draw player's bullets
         drawBullets(g);
+        //draw player stats
 
     }
-
-    public void drawPlayer(Graphics2D g) {
-        if (facesRight) {
-            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2), (int) (y + tileVariables.getYMapPosition() - height / 2), null);
-        } else {
-            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2 + width + 3), (int) (y + tileVariables.getYMapPosition() - height / 2), -width - 3, height, null);
-        }
+    /**
+     * Piirtää pelaajan
+     */
+    private void drawPlayer(Graphics2D g) {
+        super.draw(g);
     }
-
-    public void drawBullets(Graphics2D g) {
+    
+    /**
+     * Piirtää pelaajan luodit
+     */
+    private void drawBullets(Graphics2D g) {
         for (Bullet bullet : bullets) {
             bullet.draw(g);
         }
@@ -336,8 +380,12 @@ public class Player extends MapObject {
         }
     }
 
-    public int getAnimation() {
+    public int getAnimationAction() {
         return currentAction;
+    }
+
+    public LivingEntityAttributes getAttributes() {
+        return this.livingAttributes;
     }
 
 }
