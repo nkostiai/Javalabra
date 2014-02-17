@@ -6,6 +6,7 @@
 
 package Entity;
 
+import Global.GlobalConstants;
 import java.awt.image.BufferedImage;
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class AnimationTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         testAnimation = new Animation();
         testAnimation.setFrames(kuvataulu);
     }

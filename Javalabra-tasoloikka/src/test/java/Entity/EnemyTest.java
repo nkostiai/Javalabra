@@ -7,6 +7,7 @@
 package Entity;
 
 import Entity.Enemies.Enemy1;
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import org.junit.After;
 import org.junit.Before;
@@ -25,6 +26,7 @@ public class EnemyTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         tileMap = new TileMap(32);
         testEnemy = new Enemy1(tileMap);
         

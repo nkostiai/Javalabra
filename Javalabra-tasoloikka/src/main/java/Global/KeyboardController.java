@@ -21,25 +21,25 @@ public class KeyboardController {
 
     public static void setKeyPressStatus(int i, boolean b) {
         if (i == KeyEvent.VK_UP) {
-            keyState[Buttons.UP.getIDNumber()] = b;
+            keyState[KeyConfig.UP.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_LEFT) {
-            keyState[Buttons.LEFT.getIDNumber()] = b;
+            keyState[KeyConfig.LEFT.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_DOWN) {
-            keyState[Buttons.DOWN.getIDNumber()] = b;
+            keyState[KeyConfig.DOWN.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_RIGHT) {
-            keyState[Buttons.RIGHT.getIDNumber()] = b;
+            keyState[KeyConfig.RIGHT.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_C) {
-            keyState[Buttons.BUTTON1.getIDNumber()] = b;
+            keyState[KeyConfig.BUTTON1.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_D) {
-            keyState[Buttons.BUTTON2.getIDNumber()] = b;
+            keyState[KeyConfig.BUTTON2.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_X) {
-            keyState[Buttons.BUTTON3.getIDNumber()] = b;
+            keyState[KeyConfig.BUTTON3.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_Z) {
-            keyState[Buttons.BUTTON4.getIDNumber()] = b;
+            keyState[KeyConfig.BUTTON4.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_ENTER) {
-            keyState[Buttons.ENTER.getIDNumber()] = b;
+            keyState[KeyConfig.ENTER.getIDNumber()] = b;
         } else if (i == KeyEvent.VK_ESCAPE) {
-            keyState[Buttons.ESCAPE.getIDNumber()] = b;
+            keyState[KeyConfig.ESCAPE.getIDNumber()] = b;
         }
     }
 

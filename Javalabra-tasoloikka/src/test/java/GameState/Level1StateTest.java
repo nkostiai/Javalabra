@@ -6,7 +6,9 @@
 
 package GameState;
 
+import Global.GlobalConstants;
 import Global.KeyboardController;
+import Global.MusicPlayer;
 import java.awt.event.KeyEvent;
 import org.junit.After;
 import org.junit.Before;
@@ -18,12 +20,15 @@ public class Level1StateTest {
     GameStateManager gsm;
     
     public Level1StateTest() {
+        MusicPlayer.mute();
+        GlobalConstants.setUp();
+        gsm = new GameStateManager();
+        testileveli = new Level1State(gsm);
     }
     
     @Before
     public void setUp() {
-        gsm = new GameStateManager();
-        testileveli = new Level1State(gsm);
+        
     }
     
     @After

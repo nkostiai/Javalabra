@@ -2,6 +2,7 @@
 
 package Main;
 
+import Drawer.Drawer;
 import GameState.GameStateManager;
 import Global.*;
 import java.awt.Dimension;
@@ -10,6 +11,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import java.awt.event.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 
 /**
@@ -22,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     //thread variables
     private Thread thread;
     private boolean running;
-    private long targetTime = 1000 / GlobalConstants.FPS;
+    private final long targetTime = 1000 / GlobalConstants.FPS;
     
     //image variables
     private BufferedImage image;
@@ -31,6 +36,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     //game state manager
     private GameStateManager gsm;
     
+    //drawer
+    private Drawer drawer;
     
     public GamePanel(){
         
@@ -56,13 +63,31 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         //set up drawing
         image = new BufferedImage(GlobalConstants.WINDOWWIDTH, GlobalConstants.WINDOWHEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
-                
+        //loading screen
+        drawLoadingScreen();
+        
         //set running
         running = true;
+        
+         //create graphicsloader
+        GlobalConstants.setUp();
         
         //create a new game state manager
         gsm = new GameStateManager();
         
+         //create a new drawer
+        drawer = new Drawer(g, gsm);
+
+       
+    }
+    
+    private void drawLoadingScreen(){
+        try {
+            g.drawImage(ImageIO.read(getClass().getResourceAsStream("/Backgrounds/loadingscreen.png")), 0, 0, null);
+        } catch (IOException ex) {
+            GlobalConstants.error("FATAL ERROR");
+        }
+        drawToScreen();
     }
     
     
@@ -97,8 +122,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
             try{
                 Thread.sleep(wait);
             }
-            catch(Exception e){
-                
+            catch(InterruptedException e){
+                GlobalConstants.error("An unexpected error occured with thread. Terminating.");
             }
         }
         
@@ -115,7 +140,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     
     private void draw(){
         
-        gsm.draw(g);
+        drawer.draw();
         
     }
     

@@ -33,7 +33,7 @@ public class Background {
     private int width;
     private int height;
     
-    public Background(String s, double ms){
+    public Background(String pathToImage, double ms){
         
         //set coordinates
         this.x = 0;
@@ -41,7 +41,7 @@ public class Background {
         
         //load image
         try{
-            image = ImageIO.read(getClass().getResourceAsStream(s));
+            image = ImageIO.read(getClass().getResourceAsStream(pathToImage));
             width = image.getWidth();
             height = image.getHeight();
         }
@@ -65,6 +65,11 @@ public class Background {
     }
     
     public void update() {
+         moveVertically();
+         moveHorizontally(); 
+    }
+    
+    private void moveVertically(){
         x += xMovementSpeed;
         while (x <= -width) {
             x += width;
@@ -72,29 +77,15 @@ public class Background {
         while (x >= width) {
             x -= width;
         }
+    }
+    
+    private void moveHorizontally(){
         y += yMovementSpeed;
         while (y <= -height) {
             y += height;
         }
         while (y >= height) {
             y -= height;
-        }
-    }
-
-    public void draw(Graphics2D g){
-        
-        g.drawImage(image, (int)x, (int)y, null);
-        if(x < 0){
-            g.drawImage(image, (int)x + image.getWidth() , (int) y, null);
-        }
-        if(x > 0){
-            g.drawImage(image, (int)x - image.getWidth(), (int)y, null);
-        }
-        if(y < 0){
-            g.drawImage(image, (int)x, (int)y + image.getHeight(), null);
-        }
-        if(y > 0){
-            g.drawImage(image, (int)x, (int)y - image.getHeight(), null);
         }
     }
     

@@ -4,8 +4,9 @@ import Entity.Properties.*;
 import Global.GlobalConstants;
 import TileMap.Tile;
 import TileMap.TileMap;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,7 +18,9 @@ import java.awt.Rectangle;
  * 
 */
 public abstract class MapObject {
-
+    
+     protected ArrayList<BufferedImage[]> sprites;
+    
     /**
      * Jokaisen mapobjektin tileMapiin liittyvät attribuutit
      */
@@ -107,7 +110,17 @@ public abstract class MapObject {
      * kertoo onko objekti tällä hetkellä putoamassa
      */
     protected boolean falling;
-
+    
+    /**
+     * kertoo onko objekti välkkymässä
+     */
+    protected boolean flinching;
+    
+    /**
+     * kertoo milloin välkkyminen aloitettiin
+     */
+    protected int flinchTimer;
+    
     /**
      * säilöö objektin fysiikkaan liittyvät attribuutit
      */
@@ -192,7 +205,7 @@ public abstract class MapObject {
     public void checkTileMapCollision() {
 
         collisionData.setcurrentColumn((int) x / tileVariables.getTileSize());
-        collisionData.setcurrentRow((int) y / tileVariables.getTileSize());
+        collisionData.setcurrentRow((int) (y+3) / tileVariables.getTileSize());
         //set destination coordinates
         setDestination();
         //check collisions
@@ -263,7 +276,8 @@ public abstract class MapObject {
             if (collisionData.getBottomLeft() || collisionData.getBottomMiddle() || collisionData.getBottomRight()) {
                 dy = 0;
                 falling = false;
-                collisionData.setyTemporary(1.0 * ((collisionData.getcurrentRow() + 1) * tileVariables.getTileSize() - collisionData.getCollisionHeight() / 2));
+        
+                collisionData.setyTemporary(1.0 * ((collisionData.getcurrentRow()+1) * tileVariables.getTileSize() - collisionData.getCollisionHeight() / 2));
             } else {
                 collisionData.setyTemporary(collisionData.getyTemporary() + dy);
             }
@@ -429,18 +443,12 @@ public abstract class MapObject {
             dx = 0;
         }
     }
-    
-    /**
-     * Piirtää objektin
-     */
-    public void draw(Graphics2D g) {
-        if (facesRight) {
-            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2), (int) (y + tileVariables.getYMapPosition() - height / 2), width, height, null);
-        } else {
-            g.drawImage(animation.getImage(), (int) (x + tileVariables.getXMapPosition() - width / 2 + width), (int) (y + tileVariables.getYMapPosition() - height / 2), -width, height, null);
-        }
-    }
 
+    
+    public boolean getIfFacesRight(){
+        return facesRight;
+    }
+    
     public CollisionData getCollisionDate() {
         return this.collisionData;
     }
@@ -455,6 +463,14 @@ public abstract class MapObject {
 
     public Animation getAnimation() {
         return this.animation;
+    }
+    
+    public boolean isFlinching(){
+        return flinching;
+    }
+    
+    public int getFlinchTimer(){
+        return flinchTimer;
     }
 
 }

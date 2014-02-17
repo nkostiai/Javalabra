@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import Entity.Properties.*;
+import Global.GlobalConstants;
 
 /**
  *
@@ -25,6 +26,7 @@ public class PlayerTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         tilemap = new TileMap(32);
         tilemap.loadMap("/Maps/level1map.map");
         tilemap.loadTiles("/Tilesets/tileset.png");
@@ -38,21 +40,21 @@ public class PlayerTest {
     @Test
     public void testaaEttaKonstruktoriLaittaaOikeitaArvoja() {
         assertEquals(5, testPlayer.getHealth());
-        assertEquals(2500, testPlayer.getMana());
+        assertEquals(3000, testPlayer.getMana());
     }
     
     @Test
     public void testaaEttaKonstruktoriAsettaaOikeatMaksimit(){
         assertEquals(5, testPlayer.getMaxHealth());
-        assertEquals(2500, testPlayer.getMana());
+        assertEquals(6000, testPlayer.getMaximumMana());
     }
     
     @Test
     public void testaaEttaKonstruktoriLaittaaDimensiotOikein(){
-        assertEquals(33, testPlayer.getWidth());
-        assertEquals(65, testPlayer.getHeight());
+        assertEquals(32, testPlayer.getWidth());
+        assertEquals(64, testPlayer.getHeight());
         assertEquals(30, testPlayer.getCollisionWidth());
-        assertEquals(50, testPlayer.getCollisionHeight());
+        assertEquals(57, testPlayer.getCollisionHeight());
     }
     
     @Test
@@ -96,10 +98,6 @@ public class PlayerTest {
         assertNotNull(testPlayer.getSprites());
     }
     
-    @Test
-    public void testaaEttaKonstruktoriLaskeeKuvanPituudenOikein(){
-        assertEquals(7, testPlayer.getAmountOfActions());
-    }
     
     @Test
     public void testaaCalculateCollisionWhenNoSolidBlocksAround(){
@@ -139,7 +137,7 @@ public class PlayerTest {
     public void testaaSetAnimation(){
         testPlayer.setAnimation(2, 400, 32);
         assertEquals(400, testPlayer.animation.getDelay());
-        assertEquals(33, testPlayer.animation.getImage().getWidth());
+        assertEquals(32, testPlayer.animation.getImage().getWidth());
     }
     @Test
     public void testaaUpdateLaittaaOikeinPutoamisen(){

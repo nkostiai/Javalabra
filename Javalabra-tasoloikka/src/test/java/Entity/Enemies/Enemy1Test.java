@@ -6,6 +6,7 @@
 
 package Entity.Enemies;
 
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ public class Enemy1Test {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         tileMap = new TileMap(32);
         testEnemy = new Enemy1(tileMap);
         
@@ -42,8 +44,8 @@ public class Enemy1Test {
     
     @Test
     public void testaaCollisionDatanInitialisaatio(){
-        assertEquals(37, testEnemy.getCollisionDate().getCollisionWidth());
-        assertEquals(39, testEnemy.getCollisionDate().getCollisionHeight());
+        assertEquals(35, testEnemy.getCollisionDate().getCollisionWidth());
+        assertEquals(35, testEnemy.getCollisionDate().getCollisionHeight());
     }
     
     @Test
@@ -81,8 +83,8 @@ public class Enemy1Test {
     public void testaaFysiikkaAttribuutteja(){
         assertEquals(0.6, testEnemy.getPhysicsAttributes().getMovingSpeed(), 0);
         assertEquals(0.7, testEnemy.getPhysicsAttributes().getMaximumSpeed(), 0);
-        assertEquals(0.5, testEnemy.getPhysicsAttributes().getFallingSpeed(), 0);
-        assertEquals(20.0, testEnemy.getPhysicsAttributes().getMaximumFallingSpeed(), 0);
+        assertEquals(0.3, testEnemy.getPhysicsAttributes().getFallingSpeed(), 0);
+        assertEquals(2.0, testEnemy.getPhysicsAttributes().getMaximumFallingSpeed(), 0);
         
     }
     

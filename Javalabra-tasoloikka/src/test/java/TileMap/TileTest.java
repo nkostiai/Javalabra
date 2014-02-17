@@ -6,6 +6,7 @@
 
 package TileMap;
 
+import Global.GlobalConstants;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -41,6 +42,7 @@ public class TileTest {
     
     @Before
     public void setUp() throws IOException {
+        GlobalConstants.setUp();
         testimage = ImageIO.read(getClass().getResourceAsStream("/Test/testpicture.png"));
         testTile = new Tile(testimage, Tile.NONSOLID);
     }

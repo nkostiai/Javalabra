@@ -1,13 +1,12 @@
 
 package GameState;
 
-import Global.Buttons;
-import Global.GlobalConstants;
+import Global.KeyConfig;
 import Global.KeyboardController;
+import Global.MusicPlayer;
 import TileMap.Background;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 /**
 *
@@ -19,7 +18,7 @@ import java.awt.GraphicsEnvironment;
 *
 */
 public class MenuState extends GameState {
-
+    
     private Background bg;          
     
     private int currentChoice;
@@ -32,6 +31,7 @@ public class MenuState extends GameState {
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
+        type = StateType.MENUSTATE;
 
         try {
             bg = new Background("/Backgrounds/menubackground.PNG", 1);
@@ -57,33 +57,12 @@ public class MenuState extends GameState {
         bg.setVector(-0.5, 0);
 
         titleColor = Color.BLACK;
-        titleFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[45], Font.PLAIN, 60);
-        regularFont = new Font(GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames()[24], Font.PLAIN, 30);
+        titleFont = new Font("Impact", Font.PLAIN, 40);
+        regularFont = new Font("Comic Sans MS", Font.PLAIN, 30);
+        MusicPlayer.load("/Music/menumusic.mp3", "menu");
+	MusicPlayer.loop("menu", 600, MusicPlayer.getFrames("menu") - 2200);
     }
-
-    @Override
-    public void draw(Graphics2D g) {
-
-        //draw background
-        bg.draw(g);
-
-        //draw the title text
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("Tasohyppely", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2);
-
-        //draw menu options
-        g.setFont(regularFont);
-
-        for (int i = 0; i < options.length; i++) {
-            if (i == currentChoice) {
-                g.setColor(Color.RED);
-            } else {
-                g.setColor(Color.BLACK);
-            }
-            g.drawString(options[i], GlobalConstants.MIDDLEX - 30, GlobalConstants.MIDDLEY + i * 30);
-        }
-    }
+    
 
     @Override
     public void update() {
@@ -93,16 +72,16 @@ public class MenuState extends GameState {
 
     @Override
     public void handleInput() {
-        if (KeyboardController.isPressed(Buttons.ENTER.getIDNumber())) {
+        if (KeyboardController.isPressed(KeyConfig.ENTER.getIDNumber())) {
             select();
         }
-        if (KeyboardController.isPressed(Buttons.UP.getIDNumber())) {
+        if (KeyboardController.isPressed(KeyConfig.UP.getIDNumber())) {
             currentChoice--;
             if (currentChoice < 0) {
                 currentChoice = options.length - 1;
             }
         }
-        if (KeyboardController.isPressed(Buttons.DOWN.getIDNumber())) {
+        if (KeyboardController.isPressed(KeyConfig.DOWN.getIDNumber())) {
             currentChoice++;
             if (currentChoice > options.length - 1) {
                 currentChoice = 0;
@@ -117,5 +96,16 @@ public class MenuState extends GameState {
         return currentChoice;
     }
     
-
+    public Color getTitleColor(){
+        return titleColor;
+    }
+    public Font getTitleFont(){
+        return titleFont;
+    }
+    public Font getRegularFont(){
+        return regularFont;
+    }
+    public String[] getOptions(){
+        return options;
+    }
 }

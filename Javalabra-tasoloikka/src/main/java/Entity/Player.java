@@ -1,7 +1,9 @@
 package Entity;
 
+import Entity.Properties.HUD;
 import Entity.Properties.LivingEntityAttributes;
 import Entity.Properties.PhysicsAttributes;
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -20,47 +22,57 @@ import java.awt.image.BufferedImage;
 *
  */
 public final class Player extends MapObject {
+
     /**
      * Pelaajan elämäattribuutit
      */
     private LivingEntityAttributes livingAttributes;
-    
+
     /**
      * Kertoo liitääkö pelaaja parhaillaan
      */
     private boolean gliding;
-    
+
     /**
      * Kertoo laukooko pelaaja ammuksia parhaillaan
      */
     private boolean firing;
-
+    
+    /**
+     * Kertoo onko pelaaja kuollut
+     */
+    private boolean dead;
+    
     /**
      * Pelaajan luotien vaatima MP
      */
     private int bulletCost;
     
+    
     /**
      * Pelaajan luodit
      */
     private ArrayList<Bullet> bullets;
-    
+    /**
+     * pelaajan luotien tekemä vahinko
+     */
+    private int bulletDamage;
+
     /**
      * Pelaajan sprite -grafiikka
      */
     private ArrayList<BufferedImage[]> sprites;
-    
-    /**
-     * Pelaajan erilaistent tilojen määrä
-     */
-    private int amountOfActions;
-    
+
     /**
      * Pelaajan animaatioiden framejen lukumäärä
      */
     private final int[] numFrames = {
         2, 8, 1, 2, 4, 2, 5
     };
+    /**
+     * Pelaajan HUD
+     */
+    private HUD hud;
 
     private static final int IDLE = 0;
     private static final int WALKING = 1;
@@ -71,6 +83,8 @@ public final class Player extends MapObject {
 
     public Player(TileMap tm) {
         super(tm);
+        sprites = GlobalConstants.graphicsLoader.getSprites("player");
+        hud = new HUD(this);
 
         //set dimensions
         setDimensions();
@@ -83,74 +97,56 @@ public final class Player extends MapObject {
         facesRight = true;
 
         //set playerbulletdata
-        bullets = new ArrayList<>();
-        bulletCost = 400;
-
-        //load sprites
-        try {
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/playertileset.gif"));
-            setSpriteImages(spritesheet);
-
-        } catch (Exception e) {
-
-        }
+        setBullets();
 
         //initialize animation
         initializeAnimation();
 
     }
-    
+
     /**
      * Asettaa pelaajan dimensiot
      */
     private void setDimensions() {
-        width = 33;
-        height = 65;
+        width = 32;
+        height = 64;
         collisionData.setCollisionWidth(30);
-        collisionData.setCollisionHeight(50);
+        collisionData.setCollisionHeight(57);
     }
-    
+
+    /**
+     * alustaa luodit ja niiden ominaisuudet
+     */
+    private void setBullets() {
+        bullets = new ArrayList<>();
+        bulletCost = 400;
+        bulletDamage = 5;
+    }
+
     /**
      * Initialisoi pelaajan fysiikkaan liittyvät attribuutit
      */
     private void initializePhysicsAttributes() {
         physicsAttributes.setMovingSpeed(1.2);
-        physicsAttributes.setMaximumSpeed(3.3);
+        physicsAttributes.setMaximumSpeed(3.0);
         physicsAttributes.setDeceleration(0.4);
-        physicsAttributes.setFallingSpeed(0.60);
-        physicsAttributes.setMaximumFallingSpeed(5.0);
-        physicsAttributes.setInitialJumpSpeed(-20);
+        physicsAttributes.setFallingSpeed(0.5);
+        physicsAttributes.setMaximumFallingSpeed(8.0);
+        physicsAttributes.setInitialJumpSpeed(-10);
         physicsAttributes.setStopJumpingSpeed(0.5);
     }
+
     /**
      * Initialisoi pelaajan elämään ja manaan liittyvät attribuutit
      */
     private void initializeLivingEntityAttributes() {
         livingAttributes = new LivingEntityAttributes();
         livingAttributes.setHP(5);
-        livingAttributes.setMP(2500);
+        livingAttributes.setMP(3000);
         livingAttributes.setMaxHP(5);
-        livingAttributes.setMaxMP(2500);
+        livingAttributes.setMaxMP(6000);
     }
-    
-    /**
-     * Asettaa pelajaan spriten
-     */
-    private void setSpriteImages(BufferedImage spritesheet) {
-        sprites = new ArrayList<>();
-        amountOfActions = spritesheet.getHeight() / (height - 1);
-        for (int i = 0; i < amountOfActions; i++) {
-            BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
-            for (int j = 0; j < numFrames[i]; j++) {
-
-                bi[j] = spritesheet.getSubimage(j * width, i * height, width, height);
-
-            }
-            sprites.add(bi);
-        }
-    }
-    
     /**
      * Initialisoi pelaajan animaation
      */
@@ -161,12 +157,41 @@ public final class Player extends MapObject {
         animation.setDelay(400);
     }
 
-    public ArrayList<BufferedImage[]> getSprites() {
-        return sprites;
+    public void checkBullets(ArrayList<Enemy> enemies) {
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                if (bullets.get(i).intersects(enemies.get(j))) {
+                    enemies.get(j).getsHit(bulletDamage);
+                    bullets.get(i).setHasHitSomething();
+                    break;
+                }
+            }
+        }
     }
 
-    public int getAmountOfActions() {
-        return amountOfActions;
+    public void checkEnemyCollision(ArrayList<Enemy> enemies) {
+
+        for (int j = 0; j < enemies.size(); j++) {
+            if (intersects(enemies.get(j))){
+                
+            }
+        }
+
+    }
+    
+    public void getHit(int damage){
+        if(!flinching){
+            livingAttributes.depleteHP(damage);
+            flinching = true;
+                flinchTimer =0;
+            if(getHealth() < 1){
+                dead = true;
+            }
+        }
+    }
+    
+    public ArrayList<BufferedImage[]> getSprites() {
+        return sprites;
     }
 
     public int getHealth() {
@@ -211,13 +236,13 @@ public final class Player extends MapObject {
     }
 
     private void getNextFallingPosition() {
-        
+
         setFallingSpeed();
-        
+
         if (dy > 0) {
             jumping = false;
         }
-        
+
         if (dy < 0 && !jumping) {
             dy += physicsAttributes.getStopJumpingSpeed();
         }
@@ -225,10 +250,10 @@ public final class Player extends MapObject {
         if (dy > physicsAttributes.getMaximumFallingSpeed()) {
             dy = physicsAttributes.getMaximumFallingSpeed();
         }
-        
+
     }
-    
-    private void setFallingSpeed(){
+
+    private void setFallingSpeed() {
         if (dy > 0 && gliding) {
             dy += physicsAttributes.getFallingSpeed() * 0.1;
         } else {
@@ -267,11 +292,29 @@ public final class Player extends MapObject {
         //update animations
         setCurrentActionAnimation();
         animation.update();
+
         //set direction
         setDirection();
+        
+        //check flinching
+        checkFlinching();
+        
 
     }
+    
 
+    
+    private void checkFlinching(){
+        if(flinching){
+            flinchTimer++;
+            if (flinchTimer > 100){
+                flinching = false;
+            }
+        }
+    }
+    
+
+    
     public void checkIfFiringAnimationHasPlayed() {
         if (currentAction == FIRING) {
             if (animation.hasPlayedOnce()) {
@@ -290,28 +333,28 @@ public final class Player extends MapObject {
     }
 
     public void regenerateMP() {
-        livingAttributes.regenerateMP(1);
+        livingAttributes.regenerateMP(4);
     }
 
     public void setCurrentActionAnimation() {
         if (firing) {
-            setAnimation(FIRING, 50, 30);
+            setAnimation(FIRING, 50, 32);
         } else if (dy > 0) {
             checkDownwardsMovementAction();
         } else if (dy < 0) {
-            setAnimation(JUMPING, -1, 30);
+            setAnimation(JUMPING, -1, 32);
         } else if (left || right) {
-            setAnimation(WALKING, 40, 30);
+            setAnimation(WALKING, 150, 32);
         } else {
-            setAnimation(IDLE, 400, 30);
+            setAnimation(IDLE, 400, 32);
         }
     }
 
     public void checkDownwardsMovementAction() {
         if (gliding) {
-            setAnimation(GLIDING, 100, 30);
+            setAnimation(GLIDING, 100, 32);
         } else {
-            setAnimation(FALLING, 100, 30);
+            setAnimation(FALLING, 100, 32);
         }
     }
 
@@ -343,32 +386,8 @@ public final class Player extends MapObject {
         }
     }
 
-    @Override
-    public void draw(Graphics2D g) {
-
-        //set position of tilemap
-        setMapPosition();
-        //draw the player
-        drawPlayer(g);
-        //draw player's bullets
-        drawBullets(g);
-        //draw player stats
-
-    }
-    /**
-     * Piirtää pelaajan
-     */
-    private void drawPlayer(Graphics2D g) {
-        super.draw(g);
-    }
-    
-    /**
-     * Piirtää pelaajan luodit
-     */
-    private void drawBullets(Graphics2D g) {
-        for (Bullet bullet : bullets) {
-            bullet.draw(g);
-        }
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
     }
 
     public void setAnimation(int action, int delay, int givenwidth) {
@@ -388,4 +407,11 @@ public final class Player extends MapObject {
         return this.livingAttributes;
     }
 
+    public HUD getHUD() {
+        return hud;
+    }
+    
+    public boolean isDead(){
+        return dead;
+    }
 }

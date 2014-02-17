@@ -1,6 +1,7 @@
 
 package TileMap;
 
+import Global.GlobalConstants;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -12,6 +13,7 @@ public class BackgroundTest {
     
     @Before
     public void setUp(){
+        GlobalConstants.setUp();
         testBackground = new Background(testiKuva, 10);
         testBackground.setVector(10, 10);
     }

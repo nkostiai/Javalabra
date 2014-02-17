@@ -6,6 +6,8 @@
 
 package GameState;
 
+import Global.GlobalConstants;
+import Global.MusicPlayer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,11 +22,14 @@ public class GameStateManagerTest {
     GameStateManager testattava;
     
     public GameStateManagerTest() {
+        GlobalConstants.setUp();
+        MusicPlayer.mute();
+        testattava = new GameStateManager();
     }
     
     @Before
     public void setUp() {
-        testattava = new GameStateManager();
+        
     }
     
     @After

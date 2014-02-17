@@ -1,5 +1,9 @@
 
 package Global;
+
+import Drawer.GraphicsLoader;
+import javax.swing.JOptionPane;
+
 /**
 *
 * @author nkostiai
@@ -11,6 +15,8 @@ package Global;
 */
 public class GlobalConstants {
     
+    //window title
+    public static final String title = "Tasoloikkapeli";
     
     //dimensions
     public static final int WINDOWWIDTH = 640;
@@ -23,8 +29,17 @@ public class GlobalConstants {
     //frames per second
     public static final int FPS = 60;
     
+    public static GraphicsLoader graphicsLoader;
     
+    public static void setUp(){
+        graphicsLoader = new GraphicsLoader();
+    }
     
+    public static void error(String text){
+    JOptionPane.showMessageDialog(null, text,
+                title, JOptionPane.ERROR_MESSAGE);
+        System.exit(1);
+    }
     
     
     

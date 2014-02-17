@@ -1,5 +1,6 @@
 package Entity;
 
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -13,16 +14,19 @@ import javax.imageio.ImageIO;
 * kiinteiden kohteiden läpi, vaan katoavat osuessaan niihin.
 *
 */
-public class Bullet extends MapObject {
+public final class Bullet extends MapObject {
 
     private boolean hasHitSomething;
     private boolean shouldBeRemoved;
-    private BufferedImage sprite;
 
     public Bullet(TileMap tm, Direction direction) {
         //set tilemap
         super(tm);
         
+        //set sprites
+        sprites = GlobalConstants.graphicsLoader.getSprites("bullet");
+        
+        //set orientation
         facesRight = true;
         
         //set vector
@@ -31,8 +35,8 @@ public class Bullet extends MapObject {
         //set dimensions
         setDimensions();
 
-        //load sprites
-        loadBulletSprite();
+        //set animation
+        setAnimation();
     }
     
     public void setMovingVector(Direction direction){
@@ -48,20 +52,9 @@ public class Bullet extends MapObject {
         collisionData.setCollisionHeight(10);
     }
     
-    public void loadBulletSprite() {
-        try {
-            sprite = ImageIO.read(getClass().getResourceAsStream("/Sprites/bullet1.gif"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        setAnimation();
-    }
-    
     private void setAnimation(){
         animation = new Animation();
-        BufferedImage[] frames = new BufferedImage[1];
-        frames[0] = sprite;
-        animation.setFrames(frames);
+        animation.setFrames(sprites.get(0));
         animation.setDelay(400);
     }
 
@@ -101,15 +94,5 @@ public class Bullet extends MapObject {
     }
     
     
-    @Override
-    public void draw(Graphics2D g) {
-        
-        //set the position
-        setMapPosition();
-        
-        //draw the bullet
-        super.draw(g);
-
-    }
 
 }

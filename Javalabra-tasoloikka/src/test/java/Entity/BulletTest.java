@@ -6,6 +6,7 @@
 
 package Entity;
 
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +25,7 @@ public class BulletTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         tilemap = new TileMap(32);
         tilemap.loadMap("/Maps/level1map.map");
         tilemap.loadTiles("/Tilesets/tileset.png");

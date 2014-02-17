@@ -35,6 +35,7 @@ public class KeyboardControllerTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
     }
     
     @After
@@ -51,7 +52,7 @@ public class KeyboardControllerTest {
     @Test
     public void enterinPainallusRekisteroityyOikein(){
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
-        assertTrue(KeyboardController.isPressed(Buttons.ENTER.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.ENTER.getIDNumber()));
     }
     @Test
     public void nuoltenPainallusRekisteroityyOikein(){
@@ -59,10 +60,10 @@ public class KeyboardControllerTest {
         asetaNappain(KeyEvent.VK_UP, true);
         asetaNappain(KeyEvent.VK_LEFT, true);
         asetaNappain(KeyEvent.VK_RIGHT, true);
-        assertTrue(KeyboardController.isPressed(Buttons.DOWN.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.UP.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.LEFT.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.RIGHT.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.DOWN.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.UP.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.LEFT.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.RIGHT.getIDNumber()));
     }
     
     @Test
@@ -71,37 +72,37 @@ public class KeyboardControllerTest {
         asetaNappain(KeyEvent.VK_D, true);
         asetaNappain(KeyEvent.VK_X, true);
         asetaNappain(KeyEvent.VK_Z, true);
-        assertTrue(KeyboardController.isPressed(Buttons.BUTTON1.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.BUTTON2.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.BUTTON3.getIDNumber()));
-        assertTrue(KeyboardController.isPressed(Buttons.BUTTON4.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON1.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON2.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON3.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON4.getIDNumber()));
     }
     
     @Test
     public void escapenPainallusRekisteroityyOikein(){
         asetaNappain(KeyEvent.VK_ESCAPE, true);
-        assertTrue(KeyboardController.isPressed(Buttons.ESCAPE.getIDNumber()));
+        assertTrue(KeyboardController.isPressed(KeyConfig.ESCAPE.getIDNumber()));
     }
     
     @Test
     public void enterinPainallusPoistuuOikein(){
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, false);
-        assertFalse(KeyboardController.isPressed(Buttons.ENTER.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.ENTER.getIDNumber()));
     }
     
     @Test
     public void nappaimetRekisteroityyMyosPreviousStateen(){
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ENTER, true);
         KeyboardController.update();
-        assertFalse(KeyboardController.isPressed(Buttons.ENTER.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.ENTER.getIDNumber()));
     }
 
     @Test
     public void escinPainallusPoistuuOikein(){
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ESCAPE, true);
         KeyboardController.setKeyPressStatus(KeyEvent.VK_ESCAPE, false);
-        assertFalse(KeyboardController.isPressed(Buttons.ESCAPE.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.ESCAPE.getIDNumber()));
     }
     
     

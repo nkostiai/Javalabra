@@ -6,7 +6,9 @@
 
 package GameState;
 
+import Global.GlobalConstants;
 import Global.KeyboardController;
+import Global.MusicPlayer;
 import java.awt.event.KeyEvent;
 import org.junit.After;
 import org.junit.Before;
@@ -22,12 +24,16 @@ public class MenuStateTest {
     
     
     public MenuStateTest() {
+        
     }
     
     @Before
     public void setUp() {
         GameStateManager gsm = new GameStateManager();
         testitaso = new MenuState(gsm);
+        MusicPlayer.mute();
+        GlobalConstants.setUp();
+        
     }
     
     @After

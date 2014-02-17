@@ -33,7 +33,7 @@ public class Animation {
 *
 * Metodi asettaa parametrinä saadun kuvataulukon animaation frameiksi.
 * 
-* @Param frames BufferedImage -taulukko, joka sisältää nykyisen animaation framet.
+* @param frames BufferedImage -taulukko, joka sisältää nykyisen animaation framet.
 *
 */
     public void setFrames(BufferedImage[] frames){

@@ -15,8 +15,8 @@ import java.awt.image.BufferedImage;
 */
 public class Tile {
     
-    private BufferedImage image;
-    private int type;
+    private final BufferedImage image;
+    private final int type;
     
     public static final int NONSOLID = 0;
     public static final int SOLID = 1;

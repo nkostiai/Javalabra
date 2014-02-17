@@ -6,6 +6,7 @@
 
 package TileMap;
 
+import Global.GlobalConstants;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,6 +35,7 @@ public class TileMapTest {
     
     @Before
     public void setUp() {
+        GlobalConstants.setUp();
         testTileMap = new TileMap(32);
         testTileMap.loadMap("/Maps/level1map.map");
         testTileMap.loadTiles("/Tilesets/tileset.png");

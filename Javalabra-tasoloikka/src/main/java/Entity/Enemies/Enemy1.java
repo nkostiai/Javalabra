@@ -6,9 +6,11 @@ import Entity.Animation;
 import Entity.Enemy;
 import Entity.Properties.LivingEntityAttributes;
 import Entity.Properties.PhysicsAttributes;
+import Global.GlobalConstants;
 import TileMap.TileMap;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -21,20 +23,15 @@ import javax.imageio.ImageIO;
 */
 public class Enemy1 extends Enemy{
     
-    private BufferedImage[] sprites;
+   
     
     public Enemy1(TileMap tm) {
         super(tm);
         
         initializeAttributes();
         
-        try{
-            BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/enemy.gif"));
-            setSpritesheet(spritesheet);
-        }
-        catch(Exception e){
-            
-        }
+        sprites  = GlobalConstants.graphicsLoader.getSprites("enemy1");
+        
         initializeAnimation();
     }
     
@@ -49,26 +46,20 @@ public class Enemy1 extends Enemy{
         damage = 1;
     }
     
-    private void setSpritesheet(BufferedImage spritesheet){
-        sprites = new BufferedImage[spritesheet.getWidth()/width];
-            for(int i = 0; i < sprites.length; i++){
-                sprites[i] = spritesheet.getSubimage(i*width, 0, width, height);
-            }
-    }
     
     private void initializeAnimation(){
         animation = new Animation();
-        animation.setFrames(sprites);
+        animation.setFrames(sprites.get(0));
         animation.setDelay(50);
-        
+        facesRight = true;
         right = true;
     }
     
     private void setDimensions(){
         width = 40;
         height = 40;
-        collisionData.setCollisionWidth(37);
-        collisionData.setCollisionHeight(39);
+        collisionData.setCollisionWidth(35);
+        collisionData.setCollisionHeight(35);
         
     }
     
@@ -76,8 +67,8 @@ public class Enemy1 extends Enemy{
         physicsAttributes = new PhysicsAttributes();
         physicsAttributes.setMovingSpeed(0.6);
         physicsAttributes.setMaximumSpeed(0.7);
-        physicsAttributes.setFallingSpeed(0.5);
-        physicsAttributes.setMaximumFallingSpeed(20.0);
+        physicsAttributes.setFallingSpeed(0.3);
+        physicsAttributes.setMaximumFallingSpeed(2.0);
     }
     
     private void setLivingAttributes(){
@@ -98,6 +89,7 @@ public class Enemy1 extends Enemy{
         }
     }
     
+    @Override
     public void update(){
         getNextPosition();
         checkTileMapCollision();
@@ -121,6 +113,7 @@ public class Enemy1 extends Enemy{
         
     }
     
+    
     private void checkFlinching(){
         if(livingAttributes.getIsFliching()){
             long elapsed = (System.nanoTime() - livingAttributes.getFlinchTime()) / 1000000;
@@ -130,16 +123,9 @@ public class Enemy1 extends Enemy{
         }
     }
     
-    @Override
-    public void draw(Graphics2D g){
-        
-        setMapPosition();
-        
-        super.draw(g);
-    }
 
     
     public BufferedImage[] getSprites(){
-        return this.sprites;
+        return this.sprites.get(0);
     }
 }
