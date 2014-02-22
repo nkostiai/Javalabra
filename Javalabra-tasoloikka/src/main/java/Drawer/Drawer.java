@@ -1,20 +1,11 @@
 package Drawer;
 
-import Entity.Bullet;
-import Entity.Enemy;
-import Entity.MapObject;
-import Entity.Player;
-import GameState.GameState;
-import GameState.GameStateManager;
-import GameState.LevelState;
-import GameState.MenuState;
+import Entity.*;
+import GameState.*;
 import Global.GlobalConstants;
 import TileMap.Background;
 import TileMap.TileMap;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,15 +13,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+/**
+ * Luokka jonka vastuualueena on pelin ja sen objektien piirtäminen käyttämällä
+ * Graphics2D:tä.
+ */
 public class Drawer {
 
+    /**
+     * Viite pelin GameStateManageriin.
+     */
     private GameStateManager gsm;
+
+    /**
+     * Graphics2D -olio jota käytetään piirtämiseen.
+     */
     private Graphics2D g;
+
+    /**
+     * Menuun piirrettävä valintaa osoittavan nuolen kuva.
+     */
     private BufferedImage arrow;
+
+    /**
+     * Onko nuolen kuva jo ladattu.
+     */
     private boolean arrowSet = false;
+
+    /**
+     * Kuva, joka näytetään kun peli loppuu pelaajan kuolemaan.
+     */
     private BufferedImage gameOverScreen;
+
+    /**
+     * Onko game over -screenin kuva jo ladattu.
+     */
     private boolean gameOverScreenSet = false;
+
+    /**
+     * Kuva, joka näytetään kun peli loppuu voittoon.
+     */
     private BufferedImage gameWonScreen;
+
+    /**
+     * Onko victoryscreen -kuva jo ladattu.
+     */
     private boolean gameWonScreenSet = false;
 
     public Drawer(Graphics2D g, GameStateManager gsm) {
@@ -38,6 +64,10 @@ public class Drawer {
         this.g = g;
     }
 
+    /**
+     * Piirretään tarvittavat objektit riippuen siitä, mikä gamestate on
+     * aktiivinen.
+     */
     public void draw() {
         GameState stateToDraw = this.gsm.getCurrentGameState();
         switch (stateToDraw.getType()) {
@@ -51,6 +81,9 @@ public class Drawer {
 
     }
 
+    /**
+     * Piirretään kaikki aloitusmenun asiat.
+     */
     private void drawMenuState(MenuState stateToDraw) {
 
         //draw background
@@ -60,7 +93,7 @@ public class Drawer {
         g.setColor(stateToDraw.getTitleColor());
         g.setFont(stateToDraw.getTitleFont());
         g.drawString("Liikkuvien puskien", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2);
-        g.drawString("hävittämissimulaattori", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2+40);
+        g.drawString("hävittämissimulaattori", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2 + 40);
 
         //draw menu options
         g.setFont(stateToDraw.getRegularFont());
@@ -68,6 +101,9 @@ public class Drawer {
         drawDisclaimer();
     }
 
+    /**
+     * Piirretään aloitusmenun valinnat.
+     */
     private void drawMenuOptions(MenuState stateToDraw) {
         initArrow();
         for (int i = 0; i < stateToDraw.getOptions().length; i++) {
@@ -80,9 +116,12 @@ public class Drawer {
             g.drawString(stateToDraw.getOptions()[i], GlobalConstants.MIDDLEX - 30, GlobalConstants.MIDDLEY + i * 30);
         }
     }
-    
-    private void initArrow(){
-        if(!arrowSet){
+
+    /**
+     * Ladataan aloitusmenun valintanuolen kuva muistiin.
+     */
+    private void initArrow() {
+        if (!arrowSet) {
             try {
                 arrow = ImageIO.read(getClass().getResourceAsStream("/Sprites/arrow.png"));
             } catch (IOException ex) {
@@ -92,13 +131,19 @@ public class Drawer {
             arrowSet = true;
         }
     }
-    
-    private void drawDisclaimer(){
+
+    /**
+     * Piirretään aloitusmenun infoteksti.
+     */
+    private void drawDisclaimer() {
         g.setColor(Color.RED);
         g.setFont(new Font("Comic Sans MS", Font.PLAIN, 10));
-        g.drawString("Game by Nikke Kostiainen, Music by Firage (Kermakastikeritari, http://http://firage.bandcamp.com/)", 8, GlobalConstants.WINDOWHEIGHT -8);
+        g.drawString("Game by Nikke Kostiainen, Music by Firage (Kermakastikeritari, http://http://firage.bandcamp.com/)", 8, GlobalConstants.WINDOWHEIGHT - 8);
     }
-    
+
+    /**
+     * Yleisfunktio taustakuva -olioiden piirtämiselle.
+     */
     private void drawBackground(Background bg) {
         BufferedImage image = bg.getImage();
         double x = bg.getX();
@@ -118,32 +163,36 @@ public class Drawer {
         }
     }
 
+    /**
+     * Yleisfunktio levelstate -muotoisten tasojen piirtämiselle.
+     */
     private void drawLevelState(LevelState stateToDraw) {
-        if(!stateToDraw.getGameOver()&&!stateToDraw.getGameWon()){
-        //draw the background
-        drawBackground(stateToDraw.getBG());
-        //draw the map
-        drawTileMap(stateToDraw.getTileMap());
-        //draw the enemies
-        drawEnemies(stateToDraw.getEnemies());
-        //draw the player
-        drawPlayer(stateToDraw.getPlayer());
-        }
-        else{
-            if(stateToDraw.getGameOver()){
-            initGameOverScreen();
-            g.drawImage(gameOverScreen, 0, 0, null);
-            }
-            else{
+        if (!stateToDraw.getGameOver() && !stateToDraw.getGameWon()) {
+            //draw the background
+            drawBackground(stateToDraw.getBG());
+            //draw the map
+            drawTileMap(stateToDraw.getTileMap());
+            //draw the enemies
+            drawEnemies(stateToDraw.getEnemies());
+            //draw the player
+            drawPlayer(stateToDraw.getPlayer());
+        } else {
+            if (stateToDraw.getGameOver()) {
+                initGameOverScreen();
+                g.drawImage(gameOverScreen, 0, 0, null);
+            } else {
                 initGameWonScreen();
-                g.drawImage(gameWonScreen,0 , 0, null);
+                g.drawImage(gameWonScreen, 0, 0, null);
             }
         }
 
     }
-    
-    private void initGameWonScreen(){
-        if(!gameWonScreenSet){
+
+    /**
+     * Lataa pelin voittokuvan muistiin.
+     */
+    private void initGameWonScreen() {
+        if (!gameWonScreenSet) {
             try {
                 gameWonScreen = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/victoryscreen.png"));
             } catch (IOException ex) {
@@ -153,10 +202,13 @@ public class Drawer {
             gameWonScreenSet = true;
         }
     }
-    
-    private void initGameOverScreen(){
 
-        if(!gameOverScreenSet){
+    /**
+     * Lataa pelin Game Over -ruudun kuvan muistiin.
+     */
+    private void initGameOverScreen() {
+
+        if (!gameOverScreenSet) {
             try {
                 gameOverScreen = ImageIO.read(getClass().getResourceAsStream("/Backgrounds/gameoverscreen.png"));
             } catch (IOException ex) {
@@ -165,9 +217,12 @@ public class Drawer {
             }
             gameOverScreenSet = true;
         }
-  
+
     }
 
+    /**
+     * Piirrä tilemap -muotoinen kenttä.
+     */
     private void drawTileMap(TileMap tm) {
         for (int row = tm.getrowOffset(); row < tm.getrowOffset() + tm.getRowsToDraw(); row++) {
             if (row >= tm.getNumberOfRows()) {
@@ -195,6 +250,9 @@ public class Drawer {
 
     }
 
+    /**
+     * Piirrä pelihahmo.
+     */
     private void drawPlayer(Player player) {
         //set position of tilemap
         player.setMapPosition();
@@ -205,17 +263,23 @@ public class Drawer {
         //draw player stats
         drawHud(player);
     }
-    
-    private void drawHud(Player player){
+
+    /**
+     * Piirrä HUD.
+     */
+    private void drawHud(Player player) {
         g.drawImage(player.getHUD().getImage(), 5, 10, null);
         g.setColor(player.getHUD().getColor());
         g.setFont(player.getHUD().getFont());
-        g.drawString(player.getHealth()+"/"+player.getMaxHealth(), 30, 24);
-        g.drawString(player.getMana()/100+"/"+player.getMaximumMana()/100, 30, 40);
+        g.drawString(player.getHealth() + "/" + player.getMaxHealth(), 30, 24);
+        g.drawString(player.getMana() / 100 + "/" + player.getMaximumMana() / 100, 30, 40);
         g.setColor(Color.red);
-        g.drawString(""+player.getCollisionDate().getcurrentRow(), 30, 55);
+        g.drawString("" + player.getCollisionDate().getcurrentRow(), 30, 55);
     }
 
+    /**
+     * Piirrä tason viholliset.
+     */
     private void drawEnemies(ArrayList<Enemy> enemies) {
         for (Enemy enemy : enemies) {
             enemy.setMapPosition();
@@ -223,6 +287,9 @@ public class Drawer {
         }
     }
 
+    /**
+     * Piirrä tason luodit.
+     */
     private void drawBullets(ArrayList<Bullet> bullets) {
         for (Bullet bullet : bullets) {
             bullet.setMapPosition();
@@ -230,16 +297,18 @@ public class Drawer {
         }
     }
 
+    /**
+     * Yleisfunktio MapObject -tyyppisten olioiden piirtämiselle.
+     */
     private void drawMapObject(MapObject objectToDraw) {
-        if(!(objectToDraw.isFlinching() && objectToDraw.getFlinchTimer() % 10 < 5)) {
+        if (!(objectToDraw.isFlinching() && objectToDraw.getFlinchTimer() % 10 < 5)) {
+            if (objectToDraw.getIfFacesRight()) {
+                g.drawImage(objectToDraw.getAnimation().getImage(), (int) (objectToDraw.getX() + objectToDraw.getTileVariables().getXMapPosition() - objectToDraw.getWidth() / 2), (int) (objectToDraw.getY() + objectToDraw.getTileVariables().getYMapPosition() - objectToDraw.getHeight() / 2), objectToDraw.getWidth(), objectToDraw.getHeight(), null);
+            } else {
+                g.drawImage(objectToDraw.getAnimation().getImage(), (int) (objectToDraw.getX() + objectToDraw.getTileVariables().getXMapPosition() - objectToDraw.getWidth() / 2 + objectToDraw.getWidth()), (int) (objectToDraw.getY() + objectToDraw.getTileVariables().getYMapPosition() - objectToDraw.getHeight() / 2), -objectToDraw.getWidth(), objectToDraw.getHeight(), null);
+            }
+        }
 
-        if (objectToDraw.getIfFacesRight()) {
-            g.drawImage(objectToDraw.getAnimation().getImage(), (int) (objectToDraw.getX() + objectToDraw.getTileVariables().getXMapPosition() - objectToDraw.getWidth() / 2), (int) (objectToDraw.getY() + objectToDraw.getTileVariables().getYMapPosition() - objectToDraw.getHeight() / 2), objectToDraw.getWidth(), objectToDraw.getHeight(), null);
-        } else {
-            g.drawImage(objectToDraw.getAnimation().getImage(), (int) (objectToDraw.getX() + objectToDraw.getTileVariables().getXMapPosition() - objectToDraw.getWidth() / 2 + objectToDraw.getWidth()), (int) (objectToDraw.getY() + objectToDraw.getTileVariables().getYMapPosition() - objectToDraw.getHeight() / 2), -objectToDraw.getWidth(), objectToDraw.getHeight(), null);
-        }
-        }
-    
     }
 
 }

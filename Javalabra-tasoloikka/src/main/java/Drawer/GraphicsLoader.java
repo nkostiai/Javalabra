@@ -5,28 +5,47 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+/**
+ * Luokka, jonka tehtävänä on ladata usein käytetyt grafiikkaresurssit muistiin heti ohjelman käynnistyksen yhteydessä.
+ */
 public class GraphicsLoader {
+    /**
+     * Pelaajan eri animaatioiden framejen määrä.
+     */
     private final int[] numFramesOfPlayer = {
         2, 8, 1, 2, 4, 2, 5
     };
+    
+    /**
+     * Vihollisen eri animaatioiden framejen määrä. 
+     */
     private final int[] numFramesOfEnemy1 = {
         4
     };
+    
+    /**
+     * Luotien eri animaatioiden framejen määrä.
+     */
     private final int[] numFramesOfBullet = {
         1
     };
-    private HashMap<String, ArrayList<BufferedImage[]>> sprites;
+    
+    /**
+     * Grafiikkaresurssien säiliö.
+     */
+    private final HashMap<String, ArrayList<BufferedImage[]>> sprites;
     
 
     public GraphicsLoader() {
         sprites = new HashMap<>();
         loadSprites();
     }
-
+    
+    /**
+     * Lataa grafiikat säiliöön.
+     */
     private void loadSprites() {
         //load player sprites
         loadPlayerSprites();
@@ -37,7 +56,9 @@ public class GraphicsLoader {
     }
     
 
-    
+    /**
+     * Lataa pelaajan grafiikat.
+     */
     private void loadPlayerSprites(){
         try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/playertileset.gif"));
@@ -47,6 +68,9 @@ public class GraphicsLoader {
         }
     }
     
+    /**
+     * Lataa vihollisten grafiikat.
+     */
     private void loadEnemy1Sprites() {
         try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/enemy.gif"));
@@ -56,6 +80,9 @@ public class GraphicsLoader {
         }
     }
     
+    /**
+     * Lataa luotien grafiikat.
+     */
     private void loadBulletSprites(){
         try {
             BufferedImage spritesheet = ImageIO.read(getClass().getResourceAsStream("/Sprites/bullet1.gif"));
@@ -64,7 +91,10 @@ public class GraphicsLoader {
             GlobalConstants.error("Failed to load bullet-sprites. Terminating.");
         }
     }
-
+    
+    /**
+     * Asetta spritesheetit.
+     */
     private ArrayList<BufferedImage[]> setSpritesheet(BufferedImage spritesheet, int width, int height, int[] numframes) {
         ArrayList<BufferedImage[]> playerSprites = new ArrayList<>();
         int amountOfActions = spritesheet.getHeight() / (height);
@@ -81,6 +111,11 @@ public class GraphicsLoader {
         return playerSprites;
     }
     
+    /**
+     * Palauttaa nimen perusteella halutut resurssit säiliöstä.
+     * @param name halutun grafiikkaresurssin nimi.
+     * @return Haluttu grafiikkaresurssi.
+     */
     public ArrayList<BufferedImage[]> getSprites(String name){
         return sprites.get(name);
     }

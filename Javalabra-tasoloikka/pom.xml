@@ -86,7 +86,7 @@
                         <includes>
                             <include>Entity/*.class</include>
                             <include>TileMap/*.class</include>
-                            <include>Global/*.class</include>
+                            <include>Global/KeyboardController.class</include>
                             <include>GameState/*.class</include>
                         </includes>
                     </instrumentation>
@@ -102,7 +102,7 @@
                     <targetClasses>
                         <param> GameState.* </param>
                         <param> TileMap.* </param>
-                        <param> Global.* </param>
+                        <param> Global.KeyboardController </param>
                         <param> Entity.* </param>
                     </targetClasses>
                     <excludedMethods>

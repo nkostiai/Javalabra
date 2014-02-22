@@ -53,7 +53,7 @@ public class PlayerTest {
     public void testaaEttaKonstruktoriLaittaaDimensiotOikein(){
         assertEquals(32, testPlayer.getWidth());
         assertEquals(64, testPlayer.getHeight());
-        assertEquals(30, testPlayer.getCollisionWidth());
+        assertEquals(20, testPlayer.getCollisionWidth());
         assertEquals(57, testPlayer.getCollisionHeight());
     }
     

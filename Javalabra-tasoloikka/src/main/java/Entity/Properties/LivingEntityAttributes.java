@@ -11,17 +11,39 @@ package Entity.Properties;
 */
 public class LivingEntityAttributes {
     
-    //health and mana
+    /**
+     * Elämäpisteet.
+     */
     private int HP;
+    
+    /**
+     * Elämäpisteiden maksimimäärä.
+     */
     private int maxHP;
+    
+    /**
+     * Magiapisteet.
+     */
     private int MP;
+    
+    /**
+     * Magiapisteiden maksimimäärä.
+     */
     private int maxMP;
     
-    //boolean for checking if entity is dead
+    /**
+     * Onko kohde kuollut.
+     */
     private boolean isDead;
     
-    //flinching attributes
+    /**
+     * Välkkyykö kohde.
+     */
     private boolean isFlinching;
+    
+    /**
+     * Montako framea kohde on välkkynyt.
+     */
     private long flinchTimer;
     
     public LivingEntityAttributes(){
@@ -74,7 +96,11 @@ public class LivingEntityAttributes {
         isFlinching = b;
     }
     
-    //misc
+    /**
+     * Lisää magiapisteitä halutun määrän verran.
+     * 
+     * @param amount määrä
+     */
     public void regenerateMP(int amount) {
         MP += amount;
         if (MP > maxMP) {
@@ -82,6 +108,11 @@ public class LivingEntityAttributes {
         }
     }
     
+    /**
+     * Lisää elämäpisteitä halutun määrän verran.
+     * 
+     * @param amount määrä
+     */
     public void regenerateHP(int amount){
         HP += amount;
         if(HP > maxHP){
@@ -89,10 +120,20 @@ public class LivingEntityAttributes {
         }
     }
     
+    /**
+     * Vähentää elämäpisteitä halutun määrän verran
+     * 
+     * @param amount määrä 
+     */
     public void depleteHP(int amount){
         HP -= amount;
     }
     
+    /**
+     * Vähentää magiapisteitä halutun määrän verran
+     * 
+     * @param amount määrä
+     */
     public void depleteMP(int amount){
         MP -= amount;
     }

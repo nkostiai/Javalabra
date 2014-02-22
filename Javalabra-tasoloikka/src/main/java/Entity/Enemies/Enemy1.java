@@ -8,10 +8,7 @@ import Entity.Properties.LivingEntityAttributes;
 import Entity.Properties.PhysicsAttributes;
 import Global.GlobalConstants;
 import TileMap.TileMap;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import javax.imageio.ImageIO;
 
 /**
 *
@@ -35,6 +32,9 @@ public class Enemy1 extends Enemy{
         initializeAnimation();
     }
     
+    /**
+     * Alustaa relevantint attribuutit.
+     */
     private void initializeAttributes(){
         
         setPhysicsAttributes();
@@ -46,7 +46,9 @@ public class Enemy1 extends Enemy{
         damage = 1;
     }
     
-    
+    /**
+     * Alustaa animaation.
+     */
     private void initializeAnimation(){
         animation = new Animation();
         animation.setFrames(sprites.get(0));
@@ -55,6 +57,9 @@ public class Enemy1 extends Enemy{
         right = true;
     }
     
+    /**
+     * Asettaa dimensiot.
+     */
     private void setDimensions(){
         width = 40;
         height = 40;
@@ -63,6 +68,9 @@ public class Enemy1 extends Enemy{
         
     }
     
+    /**
+     * Asettaa fysiikkaan liittyvät attribuutit.
+     */
     private void setPhysicsAttributes(){
         physicsAttributes = new PhysicsAttributes();
         physicsAttributes.setMovingSpeed(0.6);
@@ -71,6 +79,9 @@ public class Enemy1 extends Enemy{
         physicsAttributes.setMaximumFallingSpeed(2.0);
     }
     
+    /**
+     * Asettaa elämäattribuutit.
+     */
     private void setLivingAttributes(){
         livingAttributes = new LivingEntityAttributes();
         livingAttributes.setHP(2);
@@ -91,6 +102,7 @@ public class Enemy1 extends Enemy{
     
     @Override
     public void update(){
+        
         getNextPosition();
         checkTileMapCollision();
         setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());
@@ -107,13 +119,12 @@ public class Enemy1 extends Enemy{
             facesRight = true;
         }
         
-        animation.update();
-        
-        
-        
+        animation.update();        
     }
     
-    
+    /**
+     * Tarkistaa välkkymisen.
+     */
     private void checkFlinching(){
         if(livingAttributes.getIsFliching()){
             long elapsed = (System.nanoTime() - livingAttributes.getFlinchTime()) / 1000000;
@@ -122,8 +133,6 @@ public class Enemy1 extends Enemy{
             }
         }
     }
-    
-
     
     public BufferedImage[] getSprites(){
         return this.sprites.get(0);

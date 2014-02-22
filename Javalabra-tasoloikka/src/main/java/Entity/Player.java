@@ -2,12 +2,9 @@ package Entity;
 
 import Entity.Properties.HUD;
 import Entity.Properties.LivingEntityAttributes;
-import Entity.Properties.PhysicsAttributes;
 import Global.GlobalConstants;
 import TileMap.TileMap;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -37,18 +34,17 @@ public final class Player extends MapObject {
      * Kertoo laukooko pelaaja ammuksia parhaillaan
      */
     private boolean firing;
-    
+
     /**
      * Kertoo onko pelaaja kuollut
      */
     private boolean dead;
-    
+
     /**
      * Pelaajan luotien vaatima MP
      */
     private int bulletCost;
-    
-    
+
     /**
      * Pelaajan luodit
      */
@@ -105,12 +101,169 @@ public final class Player extends MapObject {
     }
 
     /**
+     * Tarkistaa osuvatko pelaajan luodit vihollisiin
+     *
+     * @param enemies Lista tason vihollisista.
+     */
+    public void checkBullets(ArrayList<Enemy> enemies) {
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                if (bullets.get(i).intersects(enemies.get(j))) {
+                    enemies.get(j).getsHit(bulletDamage);
+                    bullets.get(i).setHasHitSomething();
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * Simuloi pelaajan osumista johonkin vaaraan, vähentää pelaajan HP:ta
+     * annetulla arvolla ja tarkistaa kuoleeko pelaaja.
+     *
+     * @param damage Pelaajaan osuva vahinko.
+     *
+     */
+    public void getHit(int damage) {
+        if (!flinching) {
+            livingAttributes.depleteHP(damage);
+            flinching = true;
+            flinchTimer = 0;
+            if (getHealth() < 1) {
+                dead = true;
+            }
+        }
+    }
+
+    public ArrayList<BufferedImage[]> getSprites() {
+        return sprites;
+    }
+
+    public int getHealth() {
+        return livingAttributes.getHP();
+    }
+
+    public int getMaxHealth() {
+        return livingAttributes.getMaxHP();
+    }
+
+    public int getMana() {
+        return livingAttributes.getMP();
+    }
+
+    public int getMaximumMana() {
+        return livingAttributes.getMaxMP();
+    }
+
+    public void setGliding(boolean b) {
+        gliding = b;
+    }
+
+    public void setFiring() {
+        firing = true;
+    }
+
+    @Override
+    public void getNextPosition() {
+
+        // movement
+        super.getNextPosition();
+
+        // jumping
+        setJumpingMovement();
+
+        // falling
+        if (falling) {
+            setFallingAttributes();
+        }
+
+    }
+    
+    /**
+     * Päivittää pelaajan joka framella.
+     */
+    public void update() {
+
+        //update position
+        getNextPosition();
+
+        //check if we are colliding with the tilemap
+        checkTileMapCollision();
+
+        //set the new position
+        setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());
+
+        //check if we've played the firing animation once
+        checkIfFiringAnimationHasPlayed();
+
+        //regenerate mp
+        regenerateMP();
+
+        //check if we need to fire bullets
+        updateBulletFiring();
+
+        //update bullets fired by the player
+        updatePlayerBullets();
+
+        //update animations
+        setCurrentActionAnimation();
+        animation.update();
+
+        //set direction
+        setDirection();
+
+        //check flinching
+        checkFlinching();
+
+    }
+
+    /**
+     * Regeneroi MP:tä vakioarvolla 4
+     */
+    public void regenerateMP() {
+        livingAttributes.regenerateMP(4);
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public int getAnimationAction() {
+        return currentAction;
+    }
+
+    public LivingEntityAttributes getAttributes() {
+        return this.livingAttributes;
+    }
+
+    public HUD getHUD() {
+        return hud;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+    
+    /**
+     * Asettaa pelaajan animaation
+     */
+    public void setAnimation(int action, int delay, int givenwidth) {
+        if (currentAction != action) {
+            currentAction = action;
+            animation.setFrames(sprites.get(action));
+            animation.setDelay(delay);
+            width = givenwidth;
+        }
+    }
+    
+    /**
      * Asettaa pelaajan dimensiot
      */
     private void setDimensions() {
         width = 32;
         height = 64;
-        collisionData.setCollisionWidth(30);
+        collisionData.setCollisionWidth(20);
         collisionData.setCollisionHeight(57);
     }
 
@@ -157,103 +310,27 @@ public final class Player extends MapObject {
         animation.setDelay(400);
     }
 
-    public void checkBullets(ArrayList<Enemy> enemies) {
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < enemies.size(); j++) {
-                if (bullets.get(i).intersects(enemies.get(j))) {
-                    enemies.get(j).getsHit(bulletDamage);
-                    bullets.get(i).setHasHitSomething();
-                    break;
-                }
-            }
-        }
-    }
-
-    public void checkEnemyCollision(ArrayList<Enemy> enemies) {
-
-        for (int j = 0; j < enemies.size(); j++) {
-            if (intersects(enemies.get(j))){
-                
-            }
-        }
-
-    }
-    
-    public void getHit(int damage){
-        if(!flinching){
-            livingAttributes.depleteHP(damage);
-            flinching = true;
-                flinchTimer =0;
-            if(getHealth() < 1){
-                dead = true;
-            }
-        }
-    }
-    
-    public ArrayList<BufferedImage[]> getSprites() {
-        return sprites;
-    }
-
-    public int getHealth() {
-        return livingAttributes.getHP();
-    }
-
-    public int getMaxHealth() {
-        return livingAttributes.getMaxHP();
-    }
-
-    public int getMana() {
-        return livingAttributes.getMP();
-    }
-
-    public int getMaximumMana() {
-        return livingAttributes.getMaxMP();
-    }
-
-    public void setGliding(boolean b) {
-        gliding = b;
-    }
-
-    public void setFiring() {
-        firing = true;
-
-    }
-
-    @Override
-    public void getNextPosition() {
-
-        // movement
-        super.getNextPosition();
-
-        // jumping
-        getNextJumpingPosition();
-
-        // falling
-        if (falling) {
-            getNextFallingPosition();
-        }
-
-    }
-
-    private void getNextFallingPosition() {
-
-        setFallingSpeed();
-
+    /**
+     * Asettaa putoamiseen liittyvät attribuutit.
+     */
+    private void setFallingAttributes() {
+        updateFallingSpeed();
         if (dy > 0) {
             jumping = false;
         }
-
         if (dy < 0 && !jumping) {
             dy += physicsAttributes.getStopJumpingSpeed();
         }
-
         if (dy > physicsAttributes.getMaximumFallingSpeed()) {
             dy = physicsAttributes.getMaximumFallingSpeed();
         }
 
     }
 
-    private void setFallingSpeed() {
+    /**
+     * Päivittää putoamisnopeuden
+     */
+    private void updateFallingSpeed() {
         if (dy > 0 && gliding) {
             dy += physicsAttributes.getFallingSpeed() * 0.1;
         } else {
@@ -261,61 +338,20 @@ public final class Player extends MapObject {
         }
     }
 
-    private void getNextJumpingPosition() {
+    /**
+     * Asettaa liikkeen hypätessä.
+     */
+    private void setJumpingMovement() {
         if (jumping && !falling) {
             dy = physicsAttributes.getInitialJumpSpeed();
             falling = true;
         }
     }
 
-    public void update() {
-
-        //update position
-        getNextPosition();
-
-        checkTileMapCollision();
-
-        setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());
-
-        //check if we've played the firing animation once
-        checkIfFiringAnimationHasPlayed();
-
-        //regenerate mp
-        regenerateMP();
-
-        //check if we need to fire bullets
-        updateBulletFiring();
-
-        //update bullets fired by the player
-        updatePlayerBullets();
-
-        //update animations
-        setCurrentActionAnimation();
-        animation.update();
-
-        //set direction
-        setDirection();
-        
-        //check flinching
-        checkFlinching();
-        
-
-    }
-    
-
-    
-    private void checkFlinching(){
-        if(flinching){
-            flinchTimer++;
-            if (flinchTimer > 100){
-                flinching = false;
-            }
-        }
-    }
-    
-
-    
-    public void checkIfFiringAnimationHasPlayed() {
+    /**
+     * Tarkistaa onko tulitusanimaatio jo pyörähtänyt kerran
+     */
+    private void checkIfFiringAnimationHasPlayed() {
         if (currentAction == FIRING) {
             if (animation.hasPlayedOnce()) {
                 firing = false;
@@ -323,7 +359,10 @@ public final class Player extends MapObject {
         }
     }
 
-    public void setDirection() {
+    /**
+     * Asettaa orientaation riippuen siitä mihin suuntaan liikutaan
+     */
+    private void setDirection() {
         if (right) {
             facesRight = true;
         }
@@ -332,25 +371,42 @@ public final class Player extends MapObject {
         }
     }
 
-    public void regenerateMP() {
-        livingAttributes.regenerateMP(4);
-    }
-
-    public void setCurrentActionAnimation() {
-        if (firing) {
-            setAnimation(FIRING, 50, 32);
-        } else if (dy > 0) {
-            checkDownwardsMovementAction();
-        } else if (dy < 0) {
-            setAnimation(JUMPING, -1, 32);
-        } else if (left || right) {
-            setAnimation(WALKING, 150, 32);
-        } else {
-            setAnimation(IDLE, 400, 32);
+    /**
+     * Tarkistaa vieläkö jatketaan välkkymistä
+     */
+    private void checkFlinching() {
+        if (flinching) {
+            flinchTimer++;
+            if (flinchTimer > 100) {
+                flinching = false;
+            }
         }
     }
 
-    public void checkDownwardsMovementAction() {
+    /**
+     * Päivittää pelaajan nykyisen animaation
+     */
+    private void setCurrentActionAnimation() {
+        if (firing) {
+            setAnimation(FIRING, 50, 32);
+        } else if (dy > 0) {
+            setCorrectFallingAnimation();
+        } else if (dy < 0) {
+            setAnimation(JUMPING, -1, 32);
+        } else if ((left || right) && (collisionData.getBottomLeft() || collisionData.getBottomMiddle() || collisionData.getBottomRight())) {
+            setAnimation(WALKING, 150, 32);
+        } else {
+            if (collisionData.getBottomLeft() || collisionData.getBottomMiddle() || collisionData.getBottomRight()) {
+                setAnimation(IDLE, 400, 32);
+            }
+        }
+    }
+
+    /**
+     * Asettaa putoamisanimaation riippuen siitä ollaanko putoamassa vai
+     * liitämässä
+     */
+    private void setCorrectFallingAnimation() {
         if (gliding) {
             setAnimation(GLIDING, 100, 32);
         } else {
@@ -358,25 +414,37 @@ public final class Player extends MapObject {
         }
     }
 
-    public void updateBulletFiring() {
+    /**
+     * Tarkistaa tuleeko meidän ampua luoti
+     */
+    private void updateBulletFiring() {
         if (firing && currentAction != FIRING) {
             if (livingAttributes.getMP() > bulletCost) {
                 livingAttributes.depleteMP(bulletCost);
-                Bullet bullet;
-                if (facesRight) {
-                    bullet = new Bullet(tileVariables.getTileMap(), Direction.RIGHT);
+                fireBullet();
 
-                } else {
-                    bullet = new Bullet(tileVariables.getTileMap(), Direction.LEFT);
-
-                }
-                bullet.setPosition(x, y);
-                bullets.add(bullet);
             }
         }
     }
 
-    public void updatePlayerBullets() {
+    /**
+     * Ampuu luodin
+     */
+    private void fireBullet() {
+        Bullet bullet;
+        if (facesRight) {
+            bullet = new Bullet(tileVariables.getTileMap(), Direction.RIGHT);
+        } else {
+            bullet = new Bullet(tileVariables.getTileMap(), Direction.LEFT);
+        }
+        bullet.setPosition(x, y);
+        bullets.add(bullet);
+    }
+
+    /**
+     * Päivittää pelaajan ampumat luodit
+     */
+    private void updatePlayerBullets() {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).update();
             if (bullets.get(i).shouldBeRemoved()) {
@@ -386,32 +454,4 @@ public final class Player extends MapObject {
         }
     }
 
-    public ArrayList<Bullet> getBullets() {
-        return bullets;
-    }
-
-    public void setAnimation(int action, int delay, int givenwidth) {
-        if (currentAction != action) {
-            currentAction = action;
-            animation.setFrames(sprites.get(action));
-            animation.setDelay(delay);
-            width = givenwidth;
-        }
-    }
-
-    public int getAnimationAction() {
-        return currentAction;
-    }
-
-    public LivingEntityAttributes getAttributes() {
-        return this.livingAttributes;
-    }
-
-    public HUD getHUD() {
-        return hud;
-    }
-    
-    public boolean isDead(){
-        return dead;
-    }
 }

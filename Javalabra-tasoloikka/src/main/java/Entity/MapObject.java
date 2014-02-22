@@ -19,6 +19,9 @@ import java.util.ArrayList;
 */
 public abstract class MapObject {
     
+    /**
+     * Sprite -grafiikoiden säiliö.
+     */
      protected ArrayList<BufferedImage[]> sprites;
     
     /**
@@ -162,6 +165,8 @@ public abstract class MapObject {
     
     /**
      * laskee objektin kaikki yhteentörmäykset ja asettaa ne collisiondata -booleaneihin
+     * @param x X-koordinaatti.
+     * @param y Y-koordinaatti.
      */
     public void calculateCollision(double x, double y) {
 
@@ -192,12 +197,6 @@ public abstract class MapObject {
 
     }
     
-    /**
-     * objektin kuolema
-     */
-    public void death() {
-        setPosition(100, 100);
-    }
 
     /**
      * Tarkistaa yhteentörmäykset kartan kanssa ja asettaa sen mukaisesti objektin uuden sijainnin
@@ -393,6 +392,7 @@ public abstract class MapObject {
     
     /**
      * Palauttaa booleanina onko objekti ruudun ulkopuolella
+     * @return booleanina onko kyseinen objekti piirrettävällä ruudulla.
      */
     public boolean notOnScreen() {
         return x + tileVariables.getXMapPosition() + width < 0 || x + tileVariables.getXMapPosition() - width > GlobalConstants.WINDOWWIDTH || y + tileVariables.getYMapPosition() + height < 0 || y + tileVariables.getYMapPosition() - height > GlobalConstants.WINDOWHEIGHT;
@@ -415,21 +415,29 @@ public abstract class MapObject {
         }
     }
     
-   
+    /**
+     * Päivittää liikkeen positiivisen kiihtyvyyden vasempaan suuntaan.
+     */
     private void setLeftAcceleration() {
         dx -= physicsAttributes.getMovingSpeed();
         if (dx < -physicsAttributes.getMaximumSpeed()) {
             dx = -physicsAttributes.getMaximumSpeed();
         }
     }
-
+    
+    /**
+     * Päivittää liikkeen positiivisen kiihtyvyyden oikeaan suuntaan.
+     */
     private void setRightAcceleration() {
         dx += physicsAttributes.getMovingSpeed();
         if (dx > physicsAttributes.getMaximumSpeed()) {
             dx = physicsAttributes.getMaximumSpeed();
         }
     }
-
+    
+    /**
+     * Päivittää liikkeen negatiivisen kiihtyvyyden vasempaan suuntaan.
+     */
     private void setLeftDeceleration() {
         dx -= physicsAttributes.getDeceleration();
         if (dx < 0) {
@@ -437,6 +445,9 @@ public abstract class MapObject {
         }
     }
 
+    /**
+     * Päivittää liikkeeen negatiivisen kiihtyvyyden oikeaan suuntaan.
+     */
     private void setRightDeceleration() {
         dx += physicsAttributes.getDeceleration();
         if (dx > 0) {
@@ -444,7 +455,6 @@ public abstract class MapObject {
         }
     }
 
-    
     public boolean getIfFacesRight(){
         return facesRight;
     }

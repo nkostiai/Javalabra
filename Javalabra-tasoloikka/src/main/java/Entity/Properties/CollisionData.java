@@ -11,26 +11,84 @@ package Entity.Properties;
 *
 */
 public class CollisionData {
-    //collision dimensions
+    /**
+     * Collisionboksin leveys.
+     */
     private int collisionWidth;
+    
+    /**
+     * Collisionboksin korkeus.
+     */
     private int collisionHeight;
-
-    //other
+    
+    /**
+     * Nykyinen rivi.
+     */
     private int currentRow;
+    
+    /**
+     * Nykyinen sarake.
+     */
     private int currentColumn;
+    
+    /**
+     * Kohde X-koordinaatti.
+     */
     private double xDestination;
+    
+    /**
+     * Kohde Y-koordinaatti.
+     */
     private double yDestination;
+    
+    /**
+     * Väliaikainen apumuuttuja X-koordinaatille.
+     */
     private double xTemporary;
+    
+    /**
+     * Väliaikainen apumuuttuja Y-koordinaatille. 
+     */
     private double yTemporary;
     
-    //collision booleans
+    /**
+     * Kertoo osutaanko kiinteään blokkiin ylävasemmalla.
+     */
     private boolean topLeft;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin suoraan yläpuolella.
+     */
     private boolean topMiddle;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin yläoikealla.
+     */
     private boolean topRight;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin alavasemmalla.
+     */
     private boolean bottomLeft;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin suoraan alapuolella.
+     */
     private boolean bottomMiddle;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin alaoikealla.
+     */
     private boolean bottomRight;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin suoraan oikealla.
+     */
     private boolean rightMiddle;
+    
+    /**
+     * Kertoo osutaanko kiinteään blokkiin suoraan vasemmalla.
+     */
     private boolean leftMiddle;
     
     public CollisionData(){

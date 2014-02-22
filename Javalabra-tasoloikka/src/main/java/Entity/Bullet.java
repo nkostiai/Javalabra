@@ -2,9 +2,7 @@ package Entity;
 
 import Global.GlobalConstants;
 import TileMap.TileMap;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+
 /**
 *
 * @author nkostiai
@@ -15,8 +13,15 @@ import javax.imageio.ImageIO;
 *
 */
 public final class Bullet extends MapObject {
-
+    
+    /**
+     * Kertoo onko luoti osunut johonkin.
+     */
     private boolean hasHitSomething;
+    
+    /**
+     * Kertoo tulisiko luoti poistaa kentältä.
+     */
     private boolean shouldBeRemoved;
 
     public Bullet(TileMap tm, Direction direction) {
@@ -39,25 +44,38 @@ public final class Bullet extends MapObject {
         setAnimation();
     }
     
+    /**
+     * Aseta luodin liikerata.
+     * @param direction Suunta
+     */
     public void setMovingVector(Direction direction){
         physicsAttributes.setMovingSpeed(7);
         dx = direction.getdx() * physicsAttributes.getMovingSpeed();
         dy = direction.getdy() * physicsAttributes.getMovingSpeed();
     }
     
-    public void setDimensions(){
+    /**
+     * Aseta luodin dimensiot.
+     */
+    private void setDimensions(){
         width = 15;
         height = 10;
         collisionData.setCollisionWidth(10);
         collisionData.setCollisionHeight(10);
     }
     
+    /**
+     * Aseta luodin animaatio.
+     */
     private void setAnimation(){
         animation = new Animation();
         animation.setFrames(sprites.get(0));
         animation.setDelay(400);
     }
-
+    
+    /**
+     * Aseta onko luoti osunut johonkin.
+     */
     public void setHasHitSomething() {
         if (hasHitSomething) {
             return;
@@ -74,7 +92,10 @@ public final class Bullet extends MapObject {
     public boolean hasHitSomething(){
         return hasHitSomething;
     }
-
+    
+    /**
+     * Päivitä luoti.
+     */
     public void update() {
 
         checkTileMapCollision();

@@ -9,21 +9,27 @@ import TileMap.TileMap;
 *
 * @author nkostiai
 *
-* MapObject -luokan perivä pelin vihollisia kuvaava superluokka. Tästä luokasta on tarkoitus periä
+* MapObject -luokan perivä pelin vihollisia kuvaava yläluokka. Tästä luokasta on tarkoitus periä
 * kaikkien vihollisten yksittäiset luokat.
 *
 */
 public class Enemy extends MapObject{
     
+    /**
+     * Eläviin olioihin liittyvät attribuutit.
+     */
     protected LivingEntityAttributes livingAttributes;
     
-    //damage the enemy does to the player
+    /**
+     * Damage the enemy does to player on contact.
+     */
     protected int damage;
     
     
     public Enemy(TileMap tm) {
         super(tm);
     }
+    
     
     public boolean isDead(){
         return livingAttributes.getIsDead();
@@ -33,6 +39,11 @@ public class Enemy extends MapObject{
         return damage;
     }
     
+    /**
+     * Vähentää vihollisen HP:ta annetun määrän verran ja tarkastaa kuoleeko vihollinen.
+     * 
+     * @param damage Vahingon määrä.
+     */
     public void getsHit(int damage) {
         if (!(livingAttributes.getIsFliching())) {
            livingAttributes.depleteHP(damage);
