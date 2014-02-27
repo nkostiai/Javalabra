@@ -1,45 +1,12 @@
--?Aihe: Tasohyppelypeli(n demo/moottori/yms)
+Aihe: Tasohyppelypeli (Virallisemmin: LIIKKUVIEN PUSKIEN HAVITTAMISSIMULAATTORI)
 
--
+Toteutetaan simppeli tasohyppelypeli. Peli koostuu yhdesta tasosta, jossa pelihahmolla voi liikkua.
+Pelihahmo osaa ampua luoteja, liikkua, hypata seka liitaa. Pelikentalla on myos monia liikkuvia
+vihreita puskanomaisia otuksia, joita pelaaja voi luodeillaan nirhata. Pelaajalla on myos HP ja MANA. HP:ta menettaa osuessaan vihollisiin, manaa taas menettaa ampumalla luoteja. Mana kuitenkin 
+regeneroituu ajan kanssa. Peli paattyy joko pelihahmon HP:n laskiessa nolliin, tai kun tasolla ei 
+enaa ole nirhattavia vihollisia jaljella.
 
--Toteutetaan yksinkertainen kaksiulotteinen tasohyppelypeli. Pelissa on pelihahmo, pelimaailma(/kenttia)
+Peli alkaa menuruudulla, jolta voi valita pelin aloituksen tai vaihtoehtoisesti, pelaajan tullessa jarkiinsa, pelin lopettamisen.
 
--seka mahdollisesti vihollisia ja/tai esineita. Pelihahmo pystyy liikkumaan maailmassa juosten, hyppien
-
--yms. tasohyppelypeleihin perinteisesti liittyvilla tavoilla. Mahdollisia vihollisia pystyy peittoamaan ja
-
--mahdollisia esineita keraamaan.
-
--
-
--Ohjelma koostuu graafisesta alkuvalikosta, (asetusvalikosta), seka peliruudusta jossa pelitilanne kuvataan
-
--joko sprite-grafiikalla tai javan sisaanrakennetuilla piirtomenetelmilla (fillRect yms.) Ohjelmaan voi sisaltya
-
--myos tallennus- ja latausominaisuudet.
-
--
-
--Kayttajat: Pelaaja
-
--
-
--Pelaajan toiminnot:
-
--
-
--  -Pelin aloittaminen, tallentaminen seka lataaminen
-
--  -Pelihahmon liikuttelu kentalla
-
--  
-
--  
-
--Maarittely tarkentuu samalla kun projekti paasee alkuunsa ja etenee.
-
--
-
--
-
--
+Pelin kayttajia ovat lahinna Javalabran ohjaajat, mina, seka muutama onneton ystavaraukka, jolle
+pelin tuputin testattavaksi.

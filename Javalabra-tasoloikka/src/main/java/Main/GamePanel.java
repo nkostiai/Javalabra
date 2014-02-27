@@ -12,8 +12,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 
@@ -24,19 +22,39 @@ import javax.imageio.ImageIO;
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
     
-    //thread variables
+    /**
+     * Pelin threadi.
+     */
     private Thread thread;
+    
+    /**
+     * Onko peli käynnissä.
+     */
     private boolean running;
+    
+    /**
+     * Apumuuttuja FPS:n säilyttämiseksi.
+     */
     private final long targetTime = 1000 / GlobalConstants.FPS;
     
-    //image variables
+    /**
+     * Pelitilan kuva.
+     */
     private BufferedImage image;
+    
+    /**
+     * Pelin piirtävä Graphics2D -olio.
+     */
     private Graphics2D g;
     
-    //game state manager
+    /**
+     * Pelin GameStateManager.
+     */
     private GameStateManager gsm;
     
-    //drawer
+    /**
+     * Pelin piirtäjä.
+     */
     private Drawer drawer;
     
     public GamePanel(){
@@ -81,6 +99,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
        
     }
     
+    /**
+     * Pelin aluksi piirretään latausruutu.
+     */
     private void drawLoadingScreen(){
         try {
             g.drawImage(ImageIO.read(getClass().getResourceAsStream("/Backgrounds/loadingscreen.png")), 0, 0, null);
@@ -129,7 +150,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         
         
     }
-
+    
+    /**
+     * Päivitetään peli.
+     */
     private void update(){
         
         gsm.update();
@@ -138,13 +162,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         
     }
     
+    /**
+     * Piirretään peli.
+     */
     private void draw(){
         
         drawer.draw();
         
     }
     
-    //final drawing to screen
+    /**
+     * Piirretään lopullinen pelikuva ruudulle.
+     */
     private void drawToScreen(){
         
         Graphics g2 = getGraphics();

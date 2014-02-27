@@ -117,3 +117,24 @@
 tulevat esimerkiksi piirtamiseen ja suoritusaikaan liittyva koodi, jota ei ole mielekasta oikeen yksikkotestein testata. Loppua testikattavuutta tullaan sitten kompensoimaan kattavalla ihmistestaamisella.
 -Javadocia on myos nyt kunnolla aloitettu. Kaikki luokat on javadociin kuvattu ja parista luokasta on kaikki metodit dokumentoitu. Deadline iskee vastaan ennen kuin loppuja ehtii dokumentoimaan (klo. kirjoitushetkella 21:52) mutta pitaisi nyt viimeiseen valideadlineen kelvata.
 -Paivitan viela ennen pushausta hieman luokkakaaviota ja siistin samalla myos tuntikirjanpitoa!!
+
+15.2
+-2h 
+-Koodia päivitelty, testejä väsätty ja javadocia jatkettu.
+
+17.2
+8h
+-Ohjelmaa jatkettu demoamiskuntoon. Grafiikoita lisätty, piirtäminen refaktoroitu kokonaan ja kaikkea maan ja taivaan väliltä.
+
+25.2.
+2h
+-Javadoc saatettu loppuun ja testejä runnottu sisään.
+
+26.2.
+3h
+- Testejä testejä testeejä
+
+27.2.
+2h
+- Testit saatettu loppuun. Tehty muut loppupalautuksen värpeleet.
+

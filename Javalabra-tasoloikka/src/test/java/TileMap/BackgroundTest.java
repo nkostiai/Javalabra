@@ -42,6 +42,11 @@ public class BackgroundTest {
         assertEquals(10,(int) testBackground.getX());
         assertEquals(10,(int) testBackground.getY());
     }
+    
+    @Test
+    public void testaaVertikaalinenNopeus(){
+        assertEquals(10, testBackground.getYMovementSpeed(), 0);
+    }
 
 
     

@@ -30,32 +30,32 @@
     
     <build>
         <plugins>
-                <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-            <execution>
-                <phase>install</phase>
-                <goals>
-                    <goal>copy-dependencies</goal>
-                </goals>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>${mainClass}</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-            </execution>
-        </executions>
-    </plugin>
-    <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-            <archive>
-                <manifest>
-                    <addClasspath>true</addClasspath>
-                    <classpathPrefix>lib/</classpathPrefix>
-                    <mainClass>${mainClass}</mainClass>
-                </manifest>
-            </archive>
-        </configuration>
-    </plugin>
+            </plugin>
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -112,6 +112,11 @@
                     </excludedMethods>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin> 
         </plugins>
     </build>
 </project>

@@ -245,6 +245,10 @@ public final class Player extends MapObject {
         return dead;
     }
     
+    public boolean isFiring(){
+        return firing;
+    }
+     
     /**
      * Asettaa pelaajan animaation
      */

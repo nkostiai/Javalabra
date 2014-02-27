@@ -47,6 +47,14 @@ public class AnimationTest {
     }
     
     @Test
+    public void setFramesAsettaaOikeanFramenKunMennaanVahanPieleen(){
+        testAnimation.setFrame(-1);
+        assertEquals(0, testAnimation.getFrame());
+        testAnimation.setFrame(5);
+        assertEquals(4, testAnimation.getFrame());
+    }
+    
+    @Test
     public void setFrameEiAnnaMennaRajojenUlkopuolelle(){
         testAnimation.setFrame(56);
         assertEquals(4, testAnimation.getFrame());
@@ -64,6 +72,31 @@ public class AnimationTest {
     public void setDelayEiAsetaMitaanJosTuleePienempiKuinMiinusYksi(){
         testAnimation.setDelay(-4000);
         assertEquals(0, testAnimation.getDelay());
+    }
+    
+    @Test
+    public void setDelayEiAsetaMitaanJosTuleeTasanMiinusYksi(){
+        testAnimation.setDelay(-1);
+        assertEquals(0, testAnimation.getDelay());
+    }
+    
+    @Test
+    public void setDelayAsettaaNollatOikein(){
+        testAnimation.setDelay(30);
+        assertEquals(30, testAnimation.getDelay());
+        testAnimation.setDelay(0);
+        assertEquals(0, testAnimation.getDelay());
+    }
+    
+    @Test
+    public void updateCurrentFrameToimiiJotenkin(){
+       testAnimation.setDelay(0);
+       testAnimation.updateCurrentFrame();
+       assertEquals(1, testAnimation.getFrame());
+       testAnimation.setFrame(4);
+       testAnimation.updateCurrentFrame();
+       assertEquals(0, testAnimation.getFrame());
+       
     }
     
 

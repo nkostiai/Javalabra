@@ -3,11 +3,9 @@ package GameState;
 
 import Global.KeyConfig;
 import Global.KeyboardController;
-import Global.MusicPlayer;
 import TileMap.Background;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 /**
 *
 * @author nkostiai
@@ -19,16 +17,36 @@ import java.awt.GraphicsEnvironment;
 */
 public class MenuState extends GameState {
     
+    /**
+     * Viite taustakuvaan.
+     */
     private Background bg;          
     
+    /**
+     * Nykyinen valinta.
+     */
     private int currentChoice;
+    
+    /**
+     * Mahdolliset valinnat.
+     */
     private final String[] options = {"Start", "Quit"};
-
+    
+    /**
+     * Otsikon tekstin väri.
+     */
     private Color titleColor;
+    
+    /**
+     * Otsikon tekstin fontti.
+     */
     private Font titleFont;
-
+    
+    /**
+     * Valintojen fontti.
+     */
     private Font regularFont;
-
+    
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
         type = StateType.MENUSTATE;
@@ -41,7 +59,10 @@ public class MenuState extends GameState {
         
         init();
     }
-
+    
+    /**
+     * Suorita valinta.
+     */
     public void select() {
         if(currentChoice == 0){
             this.gsm.setState(1);
@@ -59,8 +80,6 @@ public class MenuState extends GameState {
         titleColor = Color.BLACK;
         titleFont = new Font("Impact", Font.PLAIN, 40);
         regularFont = new Font("Comic Sans MS", Font.PLAIN, 30);
-        MusicPlayer.load("/Music/menumusic.mp3", "menu");
-	MusicPlayer.loop("menu", 600, MusicPlayer.getFrames("menu") - 2200);
     }
     
 

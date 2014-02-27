@@ -22,12 +22,12 @@ public class Drawer {
     /**
      * Viite pelin GameStateManageriin.
      */
-    private GameStateManager gsm;
+    private final GameStateManager gsm;
 
     /**
      * Graphics2D -olio jota käytetään piirtämiseen.
      */
-    private Graphics2D g;
+    private final Graphics2D g;
 
     /**
      * Menuun piirrettävä valintaa osoittavan nuolen kuva.
@@ -89,23 +89,32 @@ public class Drawer {
         //draw background
         drawBackground(stateToDraw.getBG());
 
-        //draw the title text
+        drawMenuTitle(stateToDraw);
+
+        //draw menu options
+        drawMenuOptions(stateToDraw);
+        drawDisclaimer();
+    }
+    
+    /**
+     * Piirretään aloitusmenun otsikko
+     * @param stateToDraw Aloitusmenun 
+     */
+    private void drawMenuTitle(MenuState stateToDraw){
+         //draw the title text
         g.setColor(stateToDraw.getTitleColor());
         g.setFont(stateToDraw.getTitleFont());
         g.drawString("Liikkuvien puskien", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2);
         g.drawString("hävittämissimulaattori", GlobalConstants.MIDDLEX - 170, GlobalConstants.MIDDLEY / 2 + 40);
-
-        //draw menu options
-        g.setFont(stateToDraw.getRegularFont());
-        drawMenuOptions(stateToDraw);
-        drawDisclaimer();
     }
 
     /**
      * Piirretään aloitusmenun valinnat.
      */
     private void drawMenuOptions(MenuState stateToDraw) {
+        
         initArrow();
+        g.setFont(stateToDraw.getRegularFont());
         for (int i = 0; i < stateToDraw.getOptions().length; i++) {
             if (i == stateToDraw.getCurrentChoice()) {
                 g.setColor(Color.RED);

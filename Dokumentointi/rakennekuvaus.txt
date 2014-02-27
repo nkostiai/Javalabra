@@ -1,0 +1,17 @@
+Peli koostuu erilaisista pelitiloista. Toteutettuja pelitilatyyppeja on kahdenlaisia: 
+Menutila seka pelitila.
+
+Menutilassa pelissa on vain taustakuva, seka menuun liittyva teksti. Menussa voidaan liikkua
+valikossa ja valikolla on taustakuva. Kayttajan valitessa menusta "Start" siirrytaan pelitilaan.
+
+Pelitila koostuu kartoista ja kartan objekteista. Pelitilalla on myos tietty pelaajaobjekti.
+
+MapObjecteilla on paljon attribuutteja. Nama attribuutit on kapseloitu omiin luokkiinsa, ja niihin
+liittyy muunmuassa objektin sijainti kartalla, dimensiotiedot, fysiikkaan liittyvat vakiot ynna muuta.
+
+Peli kulkee niin, etta GameStateManager kutsuu metodia update() talla hetkella aktiivisena olevalta
+pelitilalta. Pelitila taas vastaavasti kutsuu updatea kaikilta omilta osasiltaan, seka KeyBoardControllerilta, joka hoitaa nappainpainallusten rekisteroinnin.
+
+Kun kaikki asiat on paivitetty, kutsutaan piirtoluokkaa drawer, joka piirtaa nykyisen pelitilan,
+seka kaikki sen objektit.
+

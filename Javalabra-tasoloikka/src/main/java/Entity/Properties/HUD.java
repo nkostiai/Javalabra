@@ -10,7 +10,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-
+/**
+ * 
+ * @author nkostiai
+ * 
+ * Luokka, joka toimii pelitasojen Heads Up Displayna. Näyttää pelihahmon HP:n ja MP:n
+ * 
+ * 
+ */
 public class HUD {
     /**
      * Viite hudin kuvaamaan pelaajaan.

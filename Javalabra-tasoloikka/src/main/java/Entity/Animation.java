@@ -64,7 +64,7 @@ public class Animation {
      * @param delay Animaation framejen delay millisekunneissa.
      */
     public void setDelay(long delay) {
-        if (delay >= -1) {
+        if (delay > -1) {
             this.delay = delay;
         }
     }
@@ -98,7 +98,7 @@ public class Animation {
      */
     public void updateCurrentFrame() {
         long elapsed = (System.nanoTime() - startTime) / 1000000;
-        if (elapsed > delay) {
+        if (elapsed >= delay) {
             currentFrame++;
             startTime = System.nanoTime();
         }

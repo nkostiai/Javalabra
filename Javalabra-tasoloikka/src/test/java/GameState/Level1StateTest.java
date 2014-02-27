@@ -6,9 +6,10 @@
 
 package GameState;
 
+import Entity.Enemy;
+import static GameState.StateType.LEVELSTATE;
 import Global.GlobalConstants;
 import Global.KeyboardController;
-import Global.MusicPlayer;
 import java.awt.event.KeyEvent;
 import org.junit.After;
 import org.junit.Before;
@@ -20,7 +21,6 @@ public class Level1StateTest {
     GameStateManager gsm;
     
     public Level1StateTest() {
-        MusicPlayer.mute();
         GlobalConstants.setUp();
         gsm = new GameStateManager();
         testileveli = new Level1State(gsm);
@@ -73,4 +73,64 @@ public class Level1StateTest {
         assertTrue(testileveli.getPlayer().getJumping());
     }
     
+    @Test
+    public void testaaVihulaisLista(){
+        assertNotNull(testileveli.getEnemies());
+    }
+    
+    @Test
+    public void testaaPelinLoppuminen(){
+        assertFalse(testileveli.getGameOver());
+    }
+    @Test
+    public void testaaPelinVoittaminen(){
+        assertFalse(testileveli.getGameWon());
+    }
+    @Test
+    public void testaaTaustakuvanVektori(){
+        assertEquals(0.4, testileveli.getBG().getXMovementSpeed(), 0);
+    }
+    
+    @Test
+    public void testaaPelaajanPaikka(){
+        assertEquals(300, testileveli.getPlayer().getX());
+        assertEquals(300, testileveli.getPlayer().getX());
+    }
+    
+    @Test
+    public void testaaGetType(){
+        assertEquals(LEVELSTATE, testileveli.getType());
+    }
+    
+    @Test
+    public void testaaVihollistenMaara(){
+        assertEquals(20, testileveli.getEnemies().size());
+    }
+    
+    @Test
+    public void testaaTileMapinPositio(){
+        assertEquals(0, testileveli.getTileMap().getx());
+        assertEquals(0, testileveli.getTileMap().gety());
+    }
+    
+    @Test
+    public void testaaPelaajanKuolema(){
+        testileveli.getPlayer().getHit(50);
+        testileveli.update();
+        testileveli.update();
+        testileveli.update();
+        assertTrue(testileveli.getGameOver());
+    }
+    
+    @Test
+    public void testaaPelinVoitto(){
+        for(Enemy enemy: testileveli.getEnemies()){
+            enemy.getsHit(50);
+        }
+        testileveli.update();
+        testileveli.update();
+        assertTrue(testileveli.getGameWon());
+    }
 }
+
+

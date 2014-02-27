@@ -13,11 +13,32 @@ import java.awt.Graphics2D;
 */
 public abstract class GameState {
     
+    /**
+     * Viite gamestatemanageriin.
+     */
     protected GameStateManager gsm;
+    
+    /**
+     * Tämänhetkinen pelitilan tyyppi.
+     */
     protected StateType type;
+    
+    /**
+     * Initialisoi GameStaten tilan.
+     */
     public abstract void init();
+    
+    /**
+     * Päivittää GameStaten tilan.
+     */
     public abstract void update();
+    
+    /**
+     * Käsittelee näppäinpainallukset.
+     */
     public abstract void handleInput();
+    
+    
     public StateType getType(){
         return this.type;
     }

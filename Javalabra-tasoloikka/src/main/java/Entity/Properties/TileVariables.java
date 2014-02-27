@@ -13,9 +13,25 @@ import TileMap.TileMap;
 *
 */
 public class TileVariables {
+    
+    /**
+     * Viite karttaan
+     */
     private TileMap tileMap;
+    
+    /**
+     * Tilejen sivun pituus
+     */
     private int tileSize;
+    
+    /**
+     * X-koordinaatti kartalla
+     */
     private double xMapPosition;
+    
+    /**
+     * Y-koordinaatti kartalla
+     */
     private double yMapPosition;
     
     public TileVariables(){

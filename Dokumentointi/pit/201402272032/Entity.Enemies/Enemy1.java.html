@@ -1,0 +1,1837 @@
+<html>
+<head>
+<style type='text/css'>
+html, body, div, span, p, blockquote, pre {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+body{
+	line-height: 1;
+	color: black;
+	background: white;
+	margin-left: 20px;
+}
+
+.src { 
+border: 1px solid #dddddd;
+padding-top: 10px;
+padding-right: 5px;
+padding-left: 5px;
+}
+
+
+.covered {background-color: #ddffdd}
+.uncovered {background-color: #ffdddd}
+.killed {background-color: #aaffaa}
+.survived {background-color: #ffaaaa}
+.uncertain {background-color: #dde7ef}
+.run_error {background-color: #dde7ef}
+.na {background-color: #eeeeee}
+.timed_out {background-color: #dde7ef}
+.non_viable {background-color: #aaffaa}
+.memory_error {background-color: #dde7ef}
+.not_started {background-color: #dde7ef; color : red}
+.no_coverage {background-color: #ffaaaa}
+
+</style>
+
+</head>
+<body>
+
+
+<h1>Enemy1.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_1'/>
+1
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_1'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_2'/>
+2
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_2'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_3'/>
+3
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_3'></a>
+</td>
+<td class=''><pre><span  class=''>package Entity.Enemies;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_4'/>
+4
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_4'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_5'/>
+5
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_5'></a>
+</td>
+<td class=''><pre><span  class=''>import Entity.Animation;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_6'/>
+6
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_6'></a>
+</td>
+<td class=''><pre><span  class=''>import Entity.Enemy;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_7'/>
+7
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_7'></a>
+</td>
+<td class=''><pre><span  class=''>import Entity.Properties.LivingEntityAttributes;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_8'/>
+8
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_8'></a>
+</td>
+<td class=''><pre><span  class=''>import Entity.Properties.PhysicsAttributes;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_9'/>
+9
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_9'></a>
+</td>
+<td class=''><pre><span  class=''>import Global.GlobalConstants;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_10'/>
+10
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_10'></a>
+</td>
+<td class=''><pre><span  class=''>import TileMap.TileMap;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_11'/>
+11
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_11'></a>
+</td>
+<td class=''><pre><span  class=''>import java.awt.image.BufferedImage;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_12'/>
+12
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_12'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_13'/>
+13
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_13'></a>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_14'/>
+14
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_14'></a>
+</td>
+<td class=''><pre><span  class=''>*</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_15'/>
+15
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_15'></a>
+</td>
+<td class=''><pre><span  class=''>* @author nkostiai</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_16'/>
+16
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_16'></a>
+</td>
+<td class=''><pre><span  class=''>*</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_17'/>
+17
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_17'></a>
+</td>
+<td class=''><pre><span  class=''>* Enemy -luokan yht&#65411;&#65380; vihollistyyppi&#65411;&#65380; kuvaava luokka.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_18'/>
+18
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_18'></a>
+</td>
+<td class=''><pre><span  class=''>* Luokka lataa viholliskohtaisen sprite -grafiikan ja m&#65411;&#65380;&#65411;&#65380;ritt&#65411;&#65380;&#65411;&#65380; viholliskohtaiset attribuutit joka instanssille.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_19'/>
+19
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_19'></a>
+</td>
+<td class=''><pre><span  class=''>*</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_20'/>
+20
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_20'></a>
+</td>
+<td class=''><pre><span  class=''>*/</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_21'/>
+21
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_21'></a>
+</td>
+<td class=''><pre><span  class=''>public class Enemy1 extends Enemy{</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_22'/>
+22
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_22'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_23'/>
+23
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_23'></a>
+</td>
+<td class=''><pre><span  class=''>   </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_24'/>
+24
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_24'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_25'/>
+25
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_25'></a>
+</td>
+<td class=''><pre><span  class=''>    public Enemy1(TileMap tm) {</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_26'/>
+26
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_26'></a>
+</td>
+<td class='covered'><pre><span  class=''>        super(tm);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_27'/>
+27
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_27'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_28'/>
+28
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_28'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        initializeAttributes();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_29'/>
+29
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_29'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_30'/>
+30
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_30'></a>
+</td>
+<td class='covered'><pre><span  class=''>        sprites  = GlobalConstants.graphicsLoader.getSprites(&#34;enemy1&#34;);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_31'/>
+31
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_31'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_32'/>
+32
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_32'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        initializeAnimation();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_33'/>
+33
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_33'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_34'/>
+34
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_34'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_35'/>
+35
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_35'></a>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_36'/>
+36
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_36'></a>
+</td>
+<td class=''><pre><span  class=''>     * Alustaa relevantint attribuutit.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_37'/>
+37
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_37'></a>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_38'/>
+38
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_38'></a>
+</td>
+<td class=''><pre><span  class=''>    private void initializeAttributes(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_39'/>
+39
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_39'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_40'/>
+40
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_40'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        setPhysicsAttributes();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_41'/>
+41
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_41'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_42'/>
+42
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_42'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        setDimensions();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_43'/>
+43
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_43'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_44'/>
+44
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_44'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        setLivingAttributes();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_45'/>
+45
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_45'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_46'/>
+46
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_46'></a>
+</td>
+<td class='covered'><pre><span  class=''>        damage = 1;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_47'/>
+47
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_47'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_48'/>
+48
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_48'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_49'/>
+49
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_49'></a>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_50'/>
+50
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_50'></a>
+</td>
+<td class=''><pre><span  class=''>     * Alustaa animaation.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_51'/>
+51
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_51'></a>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_52'/>
+52
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_52'></a>
+</td>
+<td class=''><pre><span  class=''>    private void initializeAnimation(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_53'/>
+53
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_53'></a>
+</td>
+<td class='covered'><pre><span  class=''>        animation = new Animation();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_54'/>
+54
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_54'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        animation.setFrames(sprites.get(0));</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_55'/>
+55
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_55'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        animation.setDelay(50);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_56'/>
+56
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_56'></a>
+</td>
+<td class='covered'><pre><span  class=''>        facesRight = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_57'/>
+57
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_57'></a>
+</td>
+<td class='covered'><pre><span  class=''>        right = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_58'/>
+58
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_58'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_59'/>
+59
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_59'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_60'/>
+60
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_60'></a>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_61'/>
+61
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_61'></a>
+</td>
+<td class=''><pre><span  class=''>     * Asettaa dimensiot.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_62'/>
+62
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_62'></a>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_63'/>
+63
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_63'></a>
+</td>
+<td class=''><pre><span  class=''>    private void setDimensions(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_64'/>
+64
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_64'></a>
+</td>
+<td class='covered'><pre><span  class=''>        width = 40;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_65'/>
+65
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_65'></a>
+</td>
+<td class='covered'><pre><span  class=''>        height = 40;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_66'/>
+66
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_66'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        collisionData.setCollisionWidth(35);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_67'/>
+67
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_67'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        collisionData.setCollisionHeight(35);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_68'/>
+68
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_68'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_69'/>
+69
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_69'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_70'/>
+70
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_70'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_71'/>
+71
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_71'></a>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_72'/>
+72
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_72'></a>
+</td>
+<td class=''><pre><span  class=''>     * Asettaa fysiikkaan liittyv&#65411;&#65380;t attribuutit.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_73'/>
+73
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_73'></a>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_74'/>
+74
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_74'></a>
+</td>
+<td class=''><pre><span  class=''>    private void setPhysicsAttributes(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_75'/>
+75
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_75'></a>
+</td>
+<td class='covered'><pre><span  class=''>        physicsAttributes = new PhysicsAttributes();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_76'/>
+76
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_76'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        physicsAttributes.setMovingSpeed(0.6);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_77'/>
+77
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_77'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        physicsAttributes.setMaximumSpeed(0.7);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_78'/>
+78
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_78'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        physicsAttributes.setFallingSpeed(0.3);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_79'/>
+79
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_79'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        physicsAttributes.setMaximumFallingSpeed(2.0);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_80'/>
+80
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_80'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_81'/>
+81
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_81'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_82'/>
+82
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_82'></a>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_83'/>
+83
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_83'></a>
+</td>
+<td class=''><pre><span  class=''>     * Asettaa el&#65411;&#65380;m&#65411;&#65380;attribuutit.</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_84'/>
+84
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_84'></a>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_85'/>
+85
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_85'></a>
+</td>
+<td class=''><pre><span  class=''>    private void setLivingAttributes(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_86'/>
+86
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_86'></a>
+</td>
+<td class='covered'><pre><span  class=''>        livingAttributes = new LivingEntityAttributes();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_87'/>
+87
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_87'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        livingAttributes.setHP(2);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_88'/>
+88
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_88'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        livingAttributes.setMaxHP(2);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_89'/>
+89
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_89'></a>
+</td>
+<td class='covered'><pre><span  class=''>        damage = 1;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_90'/>
+90
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_90'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_91'/>
+91
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_91'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_92'/>
+92
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_92'></a>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_93'/>
+93
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_93'></a>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_94'/>
+94
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_94'></a>
+</td>
+<td class=''><pre><span  class=''>    public void getNextPosition(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_95'/>
+95
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_95'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_96'/>
+96
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_96'>1</a>
+</td>
+<td class='covered'><pre><span  class='survived'>        super.getNextPosition();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_97'/>
+97
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_97'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_98'/>
+98
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_98'>1</a>
+</td>
+<td class='covered'><pre><span  class='survived'>        if(falling){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_99'/>
+99
+</td>
+<td class='survived'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_99'>1</a>
+</td>
+<td class='covered'><pre><span  class='survived'>            dy += physicsAttributes.getFallingSpeed();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_100'/>
+100
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_100'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_101'/>
+101
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_101'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_102'/>
+102
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_102'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_103'/>
+103
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_103'></a>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_104'/>
+104
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_104'></a>
+</td>
+<td class=''><pre><span  class=''>    public void update(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_105'/>
+105
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_105'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_106'/>
+106
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_106'></a>
+</td>
+<td class='covered'><pre><span  class=''>        getNextPosition();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_107'/>
+107
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_107'></a>
+</td>
+<td class='covered'><pre><span  class=''>        checkTileMapCollision();</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_108'/>
+108
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_108'></a>
+</td>
+<td class='covered'><pre><span  class=''>        setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_109'/>
+109
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_109'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_110'/>
+110
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_110'></a>
+</td>
+<td class='covered'><pre><span  class=''>        if(right &#38;&#38; dx == 0){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_111'/>
+111
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_111'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            right = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_112'/>
+112
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_112'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            left = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_113'/>
+113
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_113'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            facesRight = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_114'/>
+114
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_114'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_115'/>
+115
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_115'></a>
+</td>
+<td class='covered'><pre><span  class=''>        else if(left &#38;&#38; dx == 0){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_116'/>
+116
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_116'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            left = false;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_117'/>
+117
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_117'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            right = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_118'/>
+118
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_118'></a>
+</td>
+<td class='uncovered'><pre><span  class=''>            facesRight = true;</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_119'/>
+119
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_119'></a>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_120'/>
+120
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_120'></a>
+</td>
+<td class=''><pre><span  class=''>        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_121'/>
+121
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_121'></a>
+</td>
+<td class='covered'><pre><span  class=''>        animation.update();        </span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_122'/>
+122
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_122'></a>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_123'/>
+123
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_123'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_124'/>
+124
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_124'></a>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_125'/>
+125
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_125'></a>
+</td>
+<td class=''><pre><span  class=''>    public BufferedImage[] getSprites(){</span></pre></td></tr>
+
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_126'/>
+126
+</td>
+<td class='killed'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_126'>1</a>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.sprites.get(0);</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_127'/>
+127
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_127'></a>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@526cbe2d_128'/>
+128
+</td>
+<td class=''>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_128'></a>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_28'>28</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_28'/> 
+
+<p class='KILLED'>removed call to Entity/Enemies/Enemy1::initializeAttributes : KILLED -> Entity.Enemies.Enemy1Test.testaaHP(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_32'/> 
+
+<p class='KILLED'>removed call to Entity/Enemies/Enemy1::initializeAnimation : KILLED -> Entity.Enemies.Enemy1Test.testaaAnimationDelay(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_40'>40</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_40'/> 
+
+<p class='KILLED'>removed call to Entity/Enemies/Enemy1::setPhysicsAttributes : KILLED -> Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_42'/> 
+
+<p class='KILLED'>removed call to Entity/Enemies/Enemy1::setDimensions : KILLED -> Entity.Enemies.Enemy1Test.testaaCollisionDatanInitialisaatio(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_44'>44</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_44'/> 
+
+<p class='KILLED'>removed call to Entity/Enemies/Enemy1::setLivingAttributes : KILLED -> Entity.Enemies.Enemy1Test.testaaHP(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_54'>54</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_54'/> 
+
+<p class='KILLED'>removed call to Entity/Animation::setFrames : KILLED -> GameState.Level1StateTest.testaaPelinVoitto(GameState.Level1StateTest)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_55'/> 
+
+<p class='KILLED'>removed call to Entity/Animation::setDelay : KILLED -> Entity.Enemies.Enemy1Test.testaaAnimationDelay(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_66'>66</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_66'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/CollisionData::setCollisionWidth : KILLED -> Entity.Enemies.Enemy1Test.testaaCollisionDatanInitialisaatio(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_67'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/CollisionData::setCollisionHeight : KILLED -> Entity.Enemies.Enemy1Test.testaaCollisionDatanInitialisaatio(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_76'>76</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_76'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/PhysicsAttributes::setMovingSpeed : KILLED -> Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_77'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/PhysicsAttributes::setMaximumSpeed : KILLED -> Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_78'>78</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_78'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/PhysicsAttributes::setFallingSpeed : KILLED -> Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_79'>79</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_79'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/PhysicsAttributes::setMaximumFallingSpeed : KILLED -> Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_87'>87</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_87'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/LivingEntityAttributes::setHP : KILLED -> Entity.Enemies.Enemy1Test.testaaHP(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_88'>88</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_88'/> 
+
+<p class='KILLED'>removed call to Entity/Properties/LivingEntityAttributes::setMaxHP : KILLED -> Entity.Enemies.Enemy1Test.testaaHP(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_96'>96</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_96'/> 
+
+<p class='SURVIVED'>removed call to Entity/Enemy::getNextPosition : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_98'>98</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_98'/> 
+
+<p class='SURVIVED'>negated conditional : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_99'>99</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_99'/> 
+
+<p class='SURVIVED'>Replaced double addition with subtraction : SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@526cbe2d_126'>126</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@526cbe2d_126'/> 
+
+<p class='KILLED'>mutated return of Object value for Entity/Enemies/Enemy1::getSprites to ( if (x != null) null else throw new RuntimeException ) : KILLED -> Entity.Enemies.Enemy1Test.testaaSpriteSheetinKoko(Entity.Enemies.Enemy1Test)</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+
+<li class='mutator'>RETURN_VALS_MUTATOR</li>
+
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+
+<li class='mutator'>MATH_MUTATOR</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>Entity.EnemyTest.testaaGetsHitKunFlinchaa(Entity.EnemyTest) (13 ms)</li><li>GameState.MenuStateTest.konstruktoriAsettaaTaustaKuvan(GameState.MenuStateTest) (137 ms)</li><li>Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutinGenerointi(Entity.Enemies.Enemy1Test) (15 ms)</li><li>GameState.MenuStateTest.valintaVaihtuuKunNappaintaPainetaan(GameState.MenuStateTest) (141 ms)</li><li>Entity.Enemies.Enemy1Test.testaaHP(Entity.Enemies.Enemy1Test) (13 ms)</li><li>Entity.EnemyTest.testaaGetHitKahdellaDamagella(Entity.EnemyTest) (14 ms)</li><li>GameState.Level1StateTest.testaaPelinLoppuminen(GameState.Level1StateTest) (160 ms)</li><li>GameState.GameStateManagerTest.toimiikoSetteriOikeallaSyotteella(GameState.GameStateManagerTest) (156 ms)</li><li>Entity.EnemyTest.testaaEttaKonstruktoriLuoAttribuutit(Entity.EnemyTest) (13 ms)</li><li>GameState.MenuStateTest.konstruktoriAsettaaGameStateManagerin(GameState.MenuStateTest) (141 ms)</li><li>GameState.Level1StateTest.testaaPelaajanKuolema(GameState.Level1StateTest) (155 ms)</li><li>Entity.EnemyTest.testaaGetHitYhdellaDamagella(Entity.EnemyTest) (13 ms)</li><li>GameState.MenuStateTest.valintaVaihtuuTakaisinKunNappaintaPainetaanYliAyraiden(GameState.MenuStateTest) (144 ms)</li><li>Entity.EnemyTest.testaaDamage(Entity.EnemyTest) (13 ms)</li><li>Entity.Enemies.Enemy1Test.testaaCollisionDatanInitialisaatio(Entity.Enemies.Enemy1Test) (16 ms)</li><li>GameState.MenuStateTest.testaaSelectKunValintaEka(GameState.MenuStateTest) (187 ms)</li><li>GameState.Level1StateTest.testaaPelinVoittaminen(GameState.Level1StateTest) (155 ms)</li><li>GameState.Level1StateTest.testaaPelaajanPaikka(GameState.Level1StateTest) (148 ms)</li><li>Entity.EnemyTest.testaaEtteiOleKuollutLuodessa(Entity.EnemyTest) (13 ms)</li><li>GameState.MenuStateTest.testaagetTitleColor(GameState.MenuStateTest) (161 ms)</li><li>Entity.Enemies.Enemy1Test.testaaEttaKonstruktoriAsettaaSpritet(Entity.Enemies.Enemy1Test) (19 ms)</li><li>GameState.MenuStateTest.testaaGetOptions(GameState.MenuStateTest) (136 ms)</li><li>GameState.Level1StateTest.testaaEttaKonstruktoriAsettaaTileMapin(GameState.Level1StateTest) (175 ms)</li><li>GameState.Level1StateTest.testaaVihollistenMaara(GameState.Level1StateTest) (149 ms)</li><li>GameState.MenuStateTest.testaaGetTitleFont(GameState.MenuStateTest) (139 ms)</li><li>Entity.Enemies.Enemy1Test.testaaSpriteSheetinKoko(Entity.Enemies.Enemy1Test) (14 ms)</li><li>GameState.Level1StateTest.testaaPelinVoitto(GameState.Level1StateTest) (146 ms)</li><li>GameState.MenuStateTest.valintaVaihtuuTakaisinKunNappaintaPainetaanYliAyraidenToiseenSuuntaan(GameState.MenuStateTest) (136 ms)</li><li>GameState.Level1StateTest.testaaHandleInput(GameState.Level1StateTest) (156 ms)</li><li>GameState.GameStateManagerTest.testaaEttaKonstruktoriPelaa(GameState.GameStateManagerTest) (110 ms)</li><li>GameState.Level1StateTest.testaaTaustakuvanVektori(GameState.Level1StateTest) (144 ms)</li><li>Entity.Enemies.Enemy1Test.testaaFlinching(Entity.Enemies.Enemy1Test) (14 ms)</li><li>GameState.GameStateManagerTest.setteriEiTeeMitaanVaarillaSyotteilla(GameState.GameStateManagerTest) (224 ms)</li><li>GameState.Level1StateTest.testaaGetType(GameState.Level1StateTest) (146 ms)</li><li>GameState.Level1StateTest.testaaTileMapinPositio(GameState.Level1StateTest) (201 ms)</li><li>GameState.Level1StateTest.testaaEttaKonstruktoriAsettaaTaustan(GameState.Level1StateTest) (198 ms)</li><li>GameState.Level1StateTest.testaaEttaKonstruktoriLuoPelaajan(GameState.Level1StateTest) (188 ms)</li><li>GameState.MenuStateTest.konstruktoriAsettaaOikeanValinnan(GameState.MenuStateTest) (139 ms)</li><li>Entity.Enemies.Enemy1Test.testaaFysiikkaAttribuutteja(Entity.Enemies.Enemy1Test) (14 ms)</li><li>Entity.Enemies.Enemy1Test.testaaAnimationDelay(Entity.Enemies.Enemy1Test) (16 ms)</li><li>GameState.Level1StateTest.testaaVihulaisLista(GameState.Level1StateTest) (145 ms)</li><li>Entity.Enemies.Enemy1Test.testaaSetMapPosition(Entity.Enemies.Enemy1Test) (13 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 0.30
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+Tasoloikkapelin luonteen vuoksi monien asioiden automaattinen testaus ei ole hirvean mielekasta.
+Naihin kuuluu mm. pelihahmojen pidempikestoinen liikkuminen, monipuolinen yhteentormaystestaus, piirtamiseen liittyvat asiat. yms.
+
+Naiden asioiden testaus on siis suoritettu karusti kasin pelaamalla. Kasin testaten on myos hiottu erilaiset pelifysiikkaan liittyvat arvot
+seka pelihahmojen kokoluokat. Myos kaikki piirtaminen on testattu kasin ajamalla pelia. 
+
+
+
+
+KNOWN BUGS:
+
+Pelihahmon tormatessa kattoon tormaystunnistus tyontaa pelaajan joskus vahan turhan kauaksi katosta.
+
+Pelitilassa taustakuva resetoituu vaarin tietyssa kohdassa kenttaa.

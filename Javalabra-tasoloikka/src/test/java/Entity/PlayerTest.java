@@ -126,7 +126,7 @@ public class PlayerTest {
     }
     
     @Test
-    public void testaaSetVector(){
+    public void testaaSetVectorOikealle(){
         testPlayer.setVector(50, 50);
         testPlayer.setPosition(100, 100);
         testPlayer.update();
@@ -184,5 +184,73 @@ public class PlayerTest {
             testPlayer.update();
         }
         assertTrue(testPlayer.dy >-1);
+    }
+    
+    @Test
+    public void testaaGetFlinching(){
+        assertFalse(testPlayer.isFlinching());
+        testPlayer.getHit(2);
+        assertTrue(testPlayer.isFlinching());
+    }
+    
+    @Test
+    public void testaaEttaValkkyminenEtenee(){
+        assertEquals(0, testPlayer.getFlinchTimer());
+        testPlayer.getHit(2);
+        testPlayer.update();
+        testPlayer.update();
+        assertEquals(2, testPlayer.getFlinchTimer());
+    }
+    
+    @Test
+    public void testaaOrientaatio(){
+        assertTrue(testPlayer.getIfFacesRight());
+    }
+    
+    @Test
+    public void testaaEttaOtetaanDamagea(){
+        testPlayer.getAttributes().regenerateHP(5);
+        testPlayer.getHit(1);
+        assertEquals(4, testPlayer.getAttributes().getHP());
+        testPlayer.flinching = false;
+        testPlayer.getHit(5);
+        assertTrue(testPlayer.isDead());
+        
+    }
+    
+    @Test
+    public void testaaEtteiKuolla1HPlla(){
+        testPlayer.getAttributes().regenerateHP(5);
+        testPlayer.getHit(4);
+        assertFalse(testPlayer.isDead());
+    }
+    
+    @Test
+    public void testaaMPnRegenerointi(){
+        testPlayer.getAttributes().depleteMP(5);
+        assertEquals(2995, testPlayer.getAttributes().getMP());
+        testPlayer.regenerateMP();
+        assertEquals(2999, testPlayer.getAttributes().getMP());
+    }
+    
+    @Test
+    public void testaaGetHud(){
+        assertNotNull(testPlayer.getHUD());
+    }
+    
+    @Test
+    public void testaaEttaFysiikkaAttribuutitOnLaitettuOikein(){
+        assertEquals(1.2, testPlayer.getPhysicsAttributes().getMovingSpeed(),2);
+        assertEquals(3.0, testPlayer.getPhysicsAttributes().getMaximumSpeed(), 2);
+        assertEquals(0.5, testPlayer.getPhysicsAttributes().getFallingSpeed(), 2);
+        assertEquals(8.0, testPlayer.getPhysicsAttributes().getMaximumFallingSpeed(),2);
+        assertEquals(0.5, testPlayer.getPhysicsAttributes().getStopJumpingSpeed(), 2);
+    }
+    
+    @Test
+    public void testaasetFiring(){
+        assertFalse(testPlayer.isFiring());
+        testPlayer.setFiring();
+        assertTrue(testPlayer.isFiring());
     }
 }

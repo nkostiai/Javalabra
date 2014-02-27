@@ -4,6 +4,7 @@ package TileMap;
 import Global.GlobalConstants;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 /**
 *
@@ -15,22 +16,45 @@ import javax.imageio.ImageIO;
 */
 public class Background {
     
-    //the background image
+    /**
+     * Taustakuvan kuva.
+     */
     private BufferedImage image;
    
     
-    //coordinates
+    /**
+     * Taustakuvan X-koordinaatti.
+     */
     private double x;
+    
+    /**
+     * Taustakuvan Y-koordinaatti.
+     */
     private double y;
     
-    //movement speed
+    /**
+     * Taustakuvan X-suuntainen liikkumisnopeus.
+     */
     private double xMovementSpeed;
+    
+    /**
+     * Taustakuvan Y-suuntainen liikkumisnopeus.
+     */
     private double yMovementSpeed;
     
-    private double moveScale;
+    /**
+     * Skaala, jolla saadaan aikaan parallax scrolling -efekti.
+     */
+    private final double moveScale;
     
-    //image dimensions
+    /**
+     * Taustakuvan leveys.
+     */
     private int width;
+    
+    /**
+     * Taustakuvan korkeus.
+     */
     private int height;
     
     public Background(String pathToImage, double ms){
@@ -45,8 +69,8 @@ public class Background {
             width = image.getWidth();
             height = image.getHeight();
         }
-        catch(Exception e){
-            
+        catch(IOException e){
+            GlobalConstants.error("Error while loading background image.");
         }
         
         //set movescale
@@ -54,21 +78,38 @@ public class Background {
         
     }
     
+    /**
+     * Aseta taustakuvan koordinaatit.
+     * @param x X-koordinaatti.
+     * @param y Y-koordinaatti.
+     */
     public void setPosition(double x, double y){
         this.x = (x*moveScale) % GlobalConstants.WINDOWWIDTH;
         this.y = (y*moveScale) % GlobalConstants.WINDOWHEIGHT;
     }
     
+    /**
+     * Aseta taustakuvan liikevektori.
+     * 
+     * @param dx Liikkeen nopeus X-suunnassa.
+     * @param dy Liikkeen nopeus Y-suunnassa.
+     */
     public void setVector(double dx, double dy){
         this.xMovementSpeed = dx;
         this.yMovementSpeed = dy;
     }
     
+    /**
+     * Päivitä taustakuva.
+     */
     public void update() {
          moveVertically();
          moveHorizontally(); 
     }
     
+    /**
+     * Liikuta taustakuvaa pystysuunnassa.
+     */
     private void moveVertically(){
         x += xMovementSpeed;
         while (x <= -width) {
@@ -79,6 +120,9 @@ public class Background {
         }
     }
     
+    /**
+     * Liikuta taustakuvaa vaakasuunnassa.
+     */
     private void moveHorizontally(){
         y += yMovementSpeed;
         while (y <= -height) {

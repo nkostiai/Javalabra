@@ -29,6 +29,7 @@ public class BulletTest {
         tilemap = new TileMap(32);
         tilemap.loadMap("/Maps/level1map.map");
         tilemap.loadTiles("/Tilesets/tileset.png");
+ 
     }
     
     @After
@@ -42,6 +43,8 @@ public class BulletTest {
         assertEquals(10, testbullet.height, 0);
         assertEquals(0, testbullet.dy, 0);
         assertEquals(7, testbullet.dx, 0);
+        assertEquals(10, testbullet.collisionData.getCollisionHeight());
+        assertEquals(10, testbullet.collisionData.getCollisionWidth());
     }
     
     @Test
@@ -81,5 +84,11 @@ public class BulletTest {
         testbullet.setMovingVector(Direction.NULL);
         testbullet.update();
         assertTrue(testbullet.shouldBeRemoved());
+    }
+    
+    @Test
+    public void testaaEttaAnimaationDelayOnOikein(){
+        testbullet = new Bullet(tilemap, Direction.LEFT);
+        assertEquals(400, testbullet.animation.getDelay());
     }
 }

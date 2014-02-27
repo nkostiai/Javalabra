@@ -8,7 +8,7 @@ package GameState;
 
 import Global.GlobalConstants;
 import Global.KeyboardController;
-import Global.MusicPlayer;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,6 @@ public class MenuStateTest {
     public void setUp() {
         GameStateManager gsm = new GameStateManager();
         testitaso = new MenuState(gsm);
-        MusicPlayer.mute();
         GlobalConstants.setUp();
         
     }
@@ -39,6 +38,7 @@ public class MenuStateTest {
     @After
     public void tearDown() {
         KeyboardController.setKeyPressStatus(KeyEvent.VK_DOWN, false);
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_UP, false);
     }
 
     @Test
@@ -57,12 +57,25 @@ public class MenuStateTest {
     public void valintaVaihtuuTakaisinKunNappaintaPainetaanYliAyraiden(){
         KeyboardController.setKeyPressStatus(KeyEvent.VK_DOWN, true);
         testitaso.update();
+        assertEquals(1, testitaso.getCurrentChoice());
         KeyboardController.setKeyPressStatus(KeyEvent.VK_DOWN, false);
         testitaso.update();
         KeyboardController.setKeyPressStatus(KeyEvent.VK_DOWN, true);
         testitaso.update();
         assertEquals(0, testitaso.getCurrentChoice());
     }
+    @Test
+    public void valintaVaihtuuTakaisinKunNappaintaPainetaanYliAyraidenToiseenSuuntaan(){
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_UP, true);
+        testitaso.update();
+        assertEquals(1, testitaso.getCurrentChoice());
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_UP, false);
+        testitaso.update();
+        KeyboardController.setKeyPressStatus(KeyEvent.VK_UP, true);
+        testitaso.update();
+        assertEquals(0, testitaso.getCurrentChoice());
+    }
+    
     
     @Test
     public void konstruktoriAsettaaTaustaKuvan(){
@@ -78,6 +91,22 @@ public class MenuStateTest {
     public void testaaSelectKunValintaEka(){
         testitaso.select();
         assertEquals(1, testitaso.gsm.getCurrentStateNumber());
+    }
+    
+    @Test
+    public void testaagetTitleColor(){
+        assertEquals(Color.BLACK, testitaso.getTitleColor());
+        
+    }
+    
+    @Test
+    public void testaaGetTitleFont(){
+        assertNotNull(testitaso.getTitleFont());
+    }
+    
+    @Test
+    public void testaaGetOptions(){
+        assertNotNull(testitaso.getOptions());
     }
     
     

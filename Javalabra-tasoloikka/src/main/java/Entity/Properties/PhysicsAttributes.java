@@ -12,12 +12,39 @@ package Entity.Properties;
 *
 */
 public class PhysicsAttributes {
+    /**
+     * Liikkeen nopeus
+     */
     private double movingSpeed;
+    
+    /**
+     * Liikkeen maksiminopeus
+     */
     private double maximumSpeed;
+    
+    /**
+     * Liikkeen hidastumisnopeus
+     */
     private double deceleration;
+    
+    /**
+     * Putoamisen nopeus
+     */
     private double fallingSpeed;
+    
+    /**
+     * Putoamisnopeuden maksimi
+     */
     private double maximumFallingSpeed;
+    
+    /**
+     * Hypyn aloitusnopeus
+     */
     private double initialJumpSpeed;
+    
+    /**
+     * Hypyn lopetuksessa hidastumisen nopeus
+     */
     private double stopJumpingSpeed;
     
     public PhysicsAttributes(){

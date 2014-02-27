@@ -1,0 +1,10 @@
+Kaynnista peli Jar -tiedosta. Muista varmistaa etta kansio lib on jar-tiedoston kanssa samassa hakemistossa.
+
+Valitse aloitusvalikosta haluamasi vaihtoehto nuolinappaimilla ja ENTERilla
+
+Pelitilan kontrollit:
+
+Liikkuminen: Nuolinappaimet.
+Hyppy: C
+Liito: D
+Ampuminen: Z

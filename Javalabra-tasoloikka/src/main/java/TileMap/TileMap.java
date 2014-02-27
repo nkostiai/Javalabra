@@ -15,38 +15,100 @@ import javax.imageio.ImageIO;
 */
 public class TileMap {
 
-    // coordinates
+    /**
+     * X-koordinaatti.
+     */
     private double x;
+    
+    /**
+     * Y-koordinaatti.
+     */
     private double y;
 
-    //bounds
+    /**
+     * Minimi X-koordinaatti.
+     */
     private int xmin;
+    
+    /**
+     * Minimi Y-koordinaatti.
+     */
     private int ymin;
+    
+    /**
+     * Maksimi X-koordinaatti.
+     */
     private int xmax;
+    
+    /**
+     * Maksimi Y-koordinaatti.
+     */
     private int ymax;
 
-    //the map
+    /**
+     * Kartta kaksiulotteisena kokonaislukutaulukkona.
+     */
     private int[][] map;
-    //size of an individual tile
+    
+    /**
+     * Tiilien sivun pituus. 
+     */
     private final int tileSize;
-    //number of tilerows in the map
+    
+    /**
+     * Kuinka monta tiiliä kartalle mahtuu pystysuuntaan.
+     */
     private int numberOfRows;
-    //number of tilecolumns in the map
+    
+    
+    /**
+     * Kuinka monta tiiliä kartalle mahtuu vaakasuuntaan.
+     */
     private int numberofColumns;
-    //width of the map in pixels
+    
+    /**
+     * Kartan leveys pikseleissä.
+     */
     private int width;
-    //height of the map in pixels
+    
+    /**
+     * Kartan korkeus pikseleissä.
+     */
     private int height;
 
-    //tileset
+    /**
+     * Kartan tileset -kuva.
+     */
     private BufferedImage tileset;
+    
+    /**
+     * Montako tiiliä tileset -kuvassa on rivissä.
+     */
     private int numberOfTilesPerRow;
+    
+    /**
+     * Kartta kaksiulotteisena tiilitaulukkona.
+     */
     private Tile[][] tiles;
 
-    //drawing
+    /**
+     * Kuinka paljon ollaan pystysuunnassa.
+     */
     private int rowOffset;
+    
+    /**
+     * Kuinka paljon ollaan vaakasuunnassa.
+     */
     private int columnOffset;
+    
+    /**
+     * Montako riviä piirretään.
+     */
     private final int numberOfRowsToDraw;
+    
+    /**
+     * Montako saraketta piirretään.
+     */
     private final int numberOfColumnsToDraw;
 
     public TileMap(int tileSize) {
@@ -54,7 +116,10 @@ public class TileMap {
         numberOfRowsToDraw = GlobalConstants.WINDOWHEIGHT / tileSize + 4;
         numberOfColumnsToDraw = GlobalConstants.WINDOWWIDTH / tileSize + 4;
     }
-
+    
+    /**
+     * Lataa tiilit kartalta muistiin.
+     */
     public void loadTiles(String s) {
         try {
             tileset = ImageIO.read(getClass().getResourceAsStream(s));
@@ -66,7 +131,11 @@ public class TileMap {
             GlobalConstants.error("An error occured while trying to load tiles. Teminating");
         }
     }
-
+    
+    
+    /**
+     * Asettaa tiilit tiilitaulukkoon.
+     */
     private void setTiles() {
         BufferedImage subimage;
         for (int col = 0; col < numberOfTilesPerRow; col++) {
@@ -76,7 +145,10 @@ public class TileMap {
             tiles[1][col] = new Tile(subimage, Tile.SOLID);
         }
     }
-
+    
+    /**
+     * Lataa karttatiedoston muistiin.
+     */
     public void loadMap(String s) {
         try {
             InputStream in = getClass().getResourceAsStream(s);
@@ -91,6 +163,9 @@ public class TileMap {
         }
     }
     
+    /**
+     * Parseaa karttatiedoston ja asettaa numerot taulukkoon.
+     */
     private void setUpMap(BufferedReader br) throws IOException{
         String regex = "\\s+";
             for (int row = 0; row < numberOfRows; row++) {
@@ -101,7 +176,10 @@ public class TileMap {
                 }
             }
     }
-
+    
+    /**
+     * Asettaa kartan attribuutit.
+     */
     private void setMapAttributes() {
         map = new int[numberOfRows][numberofColumns];
         width = numberofColumns * tileSize;
@@ -176,7 +254,14 @@ public class TileMap {
     public Tile[][] getTiles() {
         return tiles;
     }
-
+    
+    /**
+     * Palauttaa kysytyn tiilin tyypin.
+     * 
+     * @param row Halutun tiilin rivi.
+     * @param col Halutun tiilin sarake.
+     * @return  Tiilin tyyppinumero.
+     */
     public int getType(int row, int col) {
         if (row < 0 || col < 0 || row >= map.length || col >= map[0].length) {
             return Tile.NONSOLID;
@@ -190,7 +275,10 @@ public class TileMap {
             return tiles[r][c].getType();
         }
     }
-
+    
+    /**
+     * Asettaa kartan sijainnin.
+     */
     public void setPosition(double x, double y) {
         this.x = x;
         this.y = y;
@@ -200,7 +288,10 @@ public class TileMap {
         columnOffset = (int) -this.x / tileSize;
         rowOffset = (int) -this.y / tileSize;
     }
-
+    
+    /**
+     * Korjaa sijainnin jos mennyt rajojen ulkopuolelle.
+     */
     private void fixBounds() {
         if (x < xmin) {
             x = xmin;

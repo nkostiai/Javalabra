@@ -68,6 +68,7 @@ public class KeyboardControllerTest {
     
     @Test
     public void kirjaintenPainallusRekisteroityyOikein(){
+        KeyboardController.update();
         asetaNappain(KeyEvent.VK_C, true);
         asetaNappain(KeyEvent.VK_D, true);
         asetaNappain(KeyEvent.VK_X, true);
@@ -76,6 +77,16 @@ public class KeyboardControllerTest {
         assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON2.getIDNumber()));
         assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON3.getIDNumber()));
         assertTrue(KeyboardController.isPressed(KeyConfig.BUTTON4.getIDNumber()));
+        KeyboardController.update();
+        asetaNappain(KeyEvent.VK_C, false);
+        asetaNappain(KeyEvent.VK_D, false);
+        asetaNappain(KeyEvent.VK_X, false);
+        asetaNappain(KeyEvent.VK_Z, false);
+        assertFalse(KeyboardController.isPressed(KeyConfig.BUTTON1.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.BUTTON2.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.BUTTON3.getIDNumber()));
+        assertFalse(KeyboardController.isPressed(KeyConfig.BUTTON4.getIDNumber()));
+        KeyboardController.update();
     }
     
     @Test
@@ -105,8 +116,12 @@ public class KeyboardControllerTest {
         assertFalse(KeyboardController.isPressed(KeyConfig.ESCAPE.getIDNumber()));
     }
     
-    
     public void asetaNappain(int nappain, boolean paalle){
         KeyboardController.setKeyPressStatus(nappain, paalle);
+    }
+    
+    @Test
+    public void testaaNumberOfKeys(){
+        assertEquals(10, KeyboardController.numberOfKeys());
     }
 }

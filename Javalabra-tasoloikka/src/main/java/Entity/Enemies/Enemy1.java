@@ -106,7 +106,6 @@ public class Enemy1 extends Enemy{
         getNextPosition();
         checkTileMapCollision();
         setPosition(collisionData.getxTemporary(), collisionData.getyTemporary());
-        checkFlinching();
         
         if(right && dx == 0){
             right = false;
@@ -122,17 +121,6 @@ public class Enemy1 extends Enemy{
         animation.update();        
     }
     
-    /**
-     * Tarkistaa välkkymisen.
-     */
-    private void checkFlinching(){
-        if(livingAttributes.getIsFliching()){
-            long elapsed = (System.nanoTime() - livingAttributes.getFlinchTime()) / 1000000;
-            if(elapsed > 400){
-                livingAttributes.setFlinching(false);
-            }
-        }
-    }
     
     public BufferedImage[] getSprites(){
         return this.sprites.get(0);

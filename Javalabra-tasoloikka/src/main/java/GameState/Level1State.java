@@ -22,12 +22,11 @@ import java.util.Random;
 *
  */
 public class Level1State extends LevelState {
-    
 
     public Level1State(GameStateManager gsm) {
         super();
         this.gsm = gsm;
-        
+
         init();
     }
 
@@ -41,29 +40,38 @@ public class Level1State extends LevelState {
         initializeBackground();
 
         initializePlayer();
-        
+
         initializeEnemies();
     }
-    
-    public void initializeEnemies(){
+
+    /**
+     * Asettaa kaikki viholliset kentälle.
+     */
+    public void initializeEnemies() {
         enemies = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-        Enemy1 s = new Enemy1(this.tileMap);
-        s.setPosition(random.nextInt(2500)+100, 150);
-        enemies.add(s);
+        for (int i = 0; i < 10; i++) {
+            Enemy1 s = new Enemy1(this.tileMap);
+            s.setPosition(random.nextInt(2500) + 100, 150);
+            enemies.add(s);
         }
-        for(int i = 0; i < 10; i++){
-        Enemy1 s = new Enemy1(this.tileMap);
-        s.setPosition(random.nextInt(2500)+100, 680);
-        enemies.add(s);
+        for (int i = 0; i < 10; i++) {
+            Enemy1 s = new Enemy1(this.tileMap);
+            s.setPosition(random.nextInt(2500) + 100, 680);
+            enemies.add(s);
         }
     }
 
+    /**
+     * Initialisoi taustakuvan.
+     */
     public void initializeBackground() {
         bg = new Background("/Backgrounds/menubackground.PNG", 0.5);
         bg.setVector(0.4, 0);
     }
 
+    /**
+     * Initialisoi kartan.
+     */
     public void initializeTileMap() {
         tileMap = new TileMap(32);
         tileMap.loadTiles("/Tilesets/tileset2.png");
@@ -71,6 +79,9 @@ public class Level1State extends LevelState {
         tileMap.setPosition(10, 10);
     }
 
+    /**
+     * Initialisoi pelaajan.
+     */
     public void initializePlayer() {
         player = new Player(tileMap);
         player.setPosition(300, 100);
@@ -79,69 +90,80 @@ public class Level1State extends LevelState {
     @Override
     public void update() {
         super.update();
-        if(!gameOver && !gameWon){
-        //handle input    
-        handleInput();
+        if (!gameOver && !gameWon) {
+            //handle input    
+            handleInput();
 
-        //update player
-        player.update();
+            //update player
+            player.update();
 
-        //set and update background
-        bg.setPosition(tileMap.getx(), tileMap.gety());
-        bg.update();
-        
+            //set and update background
+            bg.setPosition(tileMap.getx(), tileMap.gety());
+            bg.update();
 
-        //set tilemap position
-        tileMap.setPosition(GlobalConstants.MIDDLEX - player.getX(), GlobalConstants.MIDDLEY - player.getY());
-        
-        //check if bullets hit enemies
-        player.checkBullets(enemies);
-        
-        //update all the enemies
-        updateEnemies();
-        checkEnemyAndPlayerCollision();
-        
+            //set tilemap position
+            tileMap.setPosition(GlobalConstants.MIDDLEX - player.getX(), GlobalConstants.MIDDLEY - player.getY());
+
+            //check if bullets hit enemies
+            player.checkBullets(enemies);
+
+            //update all the enemies
+            updateEnemies();
+            checkEnemyAndPlayerCollision();
+
+        } else {
+            checkGameOverOrGameWon();
         }
-        else{
-            if(gameOver)
+    }
+    
+    /**
+     * Tarkistaa onko peli ohi.
+     */
+    private void checkGameOverOrGameWon() {
+        if (gameOver) {
             gameOverCounter++;
-            if(gameOverCounter > 200){
+            if (gameOverCounter > 200) {
                 gameOverCounter = 0;
                 gameOver = false;
                 gsm.setState(State.MENUSTATE.getStateNumber());
             }
-            else if(gameWon){
-                gameWonCounter++;
-                if(gameWonCounter > 200){
-                    gameWonCounter = 0;
-                    gameWon = false;
-                    gsm.setState(State.MENUSTATE.getStateNumber());
-                }
+
+        } else if (gameWon) {
+            gameWonCounter++;
+            if (gameWonCounter > 200) {
+                gameWonCounter = 0;
+                gameWon = false;
+                gsm.setState(State.MENUSTATE.getStateNumber());
             }
         }
     }
     
-    
-    private void checkEnemyAndPlayerCollision(){
-        for(int i = 0; i < enemies.size(); i++){
+    /**
+     * Tarkistaa osuuko pelihahmo johonkin viholliseen.
+     */
+    private void checkEnemyAndPlayerCollision() {
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
-            if(enemies.get(i).intersects(player)){
+            if (enemies.get(i).intersects(player)) {
                 player.getHit(enemies.get(i).getDamage());
                 break;
             }
         }
     }
     
-    private void updateEnemies(){
-        for(int i = 0; i < enemies.size(); i++){
+    /**
+     * Päivittää kentän viholliset.
+     */
+    private void updateEnemies() {
+        for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).update();
-            if(enemies.get(i).isDead()){
+            if (enemies.get(i).isDead()) {
                 enemies.remove(i);
                 i--;
             }
         }
     }
-    
+
     @Override
     public void handleInput() {
 
@@ -156,9 +178,5 @@ public class Level1State extends LevelState {
         }
 
     }
-
-
-    
-    
 
 }

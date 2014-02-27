@@ -12,10 +12,20 @@ import java.awt.event.KeyEvent;
 *
 */
 public class KeyboardController {
-
+    
+    /**
+     * Pelin käytössä olevien näppäinten määrä.
+     */
     public static final int NumberOfKeys = 10;
-
+    
+    /**
+     * Näppäinpainallusten tilanteet tällä framella.
+     */
     public static boolean[] keyState = new boolean[NumberOfKeys];
+    
+    /**
+     * Näppäinpainallusten tilanteet edellisellä framella.
+     */
     public static boolean[] prevKeyState = new boolean[NumberOfKeys];
     
 
@@ -42,13 +52,20 @@ public class KeyboardController {
             keyState[KeyConfig.ESCAPE.getIDNumber()] = b;
         }
     }
-
+    
+    /**
+     * Päivitä näppäinpainallukset taulukkoon.
+     */
     public static void update() {
-        for (int i = 0; i < NumberOfKeys; i++) {
-            prevKeyState[i] = keyState[i];
-        }
+        System.arraycopy(keyState, 0, prevKeyState, 0, NumberOfKeys);
     }
-
+    
+    /**
+     * Onko näppäin koodilla i painettu.
+     * 
+     * @param i näppäimen koodi.
+     * @return Onko näppäin painettuna.
+     */
     public static boolean isPressed(int i) {
         return keyState[i] && !prevKeyState[i];
     }

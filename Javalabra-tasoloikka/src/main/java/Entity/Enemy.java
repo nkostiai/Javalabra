@@ -52,7 +52,6 @@ public class Enemy extends MapObject{
            }
            else{
                livingAttributes.setFlinching(true);
-               livingAttributes.setFlinchTimer(System.nanoTime());
            }
         }
 

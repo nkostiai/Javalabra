@@ -15,26 +15,54 @@ import javax.swing.JOptionPane;
 */
 public class GlobalConstants {
     
-    //window title
+    /**
+     * Peli-ikkunan otsikko.
+     */
     public static final String title = "Tasoloikkapeli";
     
-    //dimensions
+    /**
+     * Peli-ikkunan leveys.
+     */
     public static final int WINDOWWIDTH = 640;
+    
+    /**
+     * Peli-ikkunan korkeus.
+     */
     public static final int WINDOWHEIGHT = 480;
     
-    //middlepoints
+    /**
+     * Puolet peli-ikkunan korkeudesta.
+     */
     public static final int MIDDLEY = WINDOWHEIGHT/2;
+    
+    /**
+     * Puolet peli-ikkunan leveydestä.
+     */
     public static final int MIDDLEX = WINDOWWIDTH/2;
     
-    //frames per second
+    /**
+     * FPS johon tähdätään.
+     */
     public static final int FPS = 60;
     
+    /**
+     * Grafiikoiden lataaja.
+     */
     public static GraphicsLoader graphicsLoader;
     
+    /**
+     * Ladataan grafiikat pelin aluksi.
+     */
     public static void setUp(){
         graphicsLoader = new GraphicsLoader();
     }
     
+    /**
+     * Metodi, jota kutsutaan virhetilanteen sattuessa.
+     * Printtaa viestin ja keskeyttä ohjelman.
+     * 
+     * @param text Viesti joka näytetään käyttäjälle.
+     */
     public static void error(String text){
     JOptionPane.showMessageDialog(null, text,
                 title, JOptionPane.ERROR_MESSAGE);

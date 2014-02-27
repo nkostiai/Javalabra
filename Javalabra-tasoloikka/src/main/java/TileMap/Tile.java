@@ -15,10 +15,24 @@ import java.awt.image.BufferedImage;
 */
 public class Tile {
     
+    /**
+     * Tilen piirrettävä kuva.
+     */
     private final BufferedImage image;
+    
+    /**
+     * Tiilin tyyppi.
+     */
     private final int type;
     
+    /**
+     * Ei-kiinteiden tiilien tyyppinumero.
+     */
     public static final int NONSOLID = 0;
+    
+    /**
+     * Kiinteiden tiilien tyyppinumero.
+     */
     public static final int SOLID = 1;
     
     
