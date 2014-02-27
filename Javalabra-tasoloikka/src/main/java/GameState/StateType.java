@@ -9,6 +9,8 @@ package GameState;
 /**
  *
  * @author Admin
+ * Enum, joka kuvaa eri gamestatetyyppejä.
+ * 
  */
 public enum StateType {
     MENUSTATE, LEVELSTATE;
