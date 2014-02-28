@@ -282,8 +282,6 @@ public class Drawer {
         g.setFont(player.getHUD().getFont());
         g.drawString(player.getHealth() + "/" + player.getMaxHealth(), 30, 24);
         g.drawString(player.getMana() / 100 + "/" + player.getMaximumMana() / 100, 30, 40);
-        g.setColor(Color.red);
-        g.drawString("" + player.getCollisionDate().getcurrentRow(), 30, 55);
     }
 
     /**
